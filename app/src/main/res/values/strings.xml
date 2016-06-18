@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Mr Whemps</string>
+    <string name="action_settings">Settings</string>
+    <string name="quitting_warning">Press back again to exit</string>
+    <string name="x2_coin_desription">Multiplies the number of coins earned in a level by two. Stacks with other multipliers.</string>
+    <string name="x3_coin_desription">Multiplies the number of coins earned in a level by three. Stacks with other multipliers.</string>
+    <string name="x4_coin_desription">Multiplies the number of coins earned in a level by four. Stacks with other multipliers.</string>
+    <string name="x5_coin_desription">Multiplies the number of coins earned in a level by five. Stacks with other multipliers.</string>
+    <string name="x6_coin_desription">Multiplies the number of coins earned in a level by six. Stacks with other multipliers.</string>
+    <string name="x8_coin_desription">Multiplies the number of coins earned in a level by eight. Stacks with other multipliers.</string>
+    <string name="x10_coin_desription">Multiplies the number of coins earned in a level by ten. Stacks with other multipliers.</string>
+    <string name="x20_coin_desription">Multiplies the number of coins earned in a level by twenty. Stacks with other multipliers.</string>
+    <string name="x50_coin_desription">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
+    <string name="facial_hair_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
+    <string name="newspaper_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
+    <string name="black_tie_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
+    <string name="x2_coin_cost">5</string>
+    <string name="x3_coin_cost">5</string>
+    <string name="x4_coin_cost">5</string>
+    <string name="x5_coin_cost">5</string>
+    <string name="x6_coin_cost">5</string>
+    <string name="x8_coin_cost">5</string>
+    <string name="x10_coin_cost">5</string>
+    <string name="x20_coin_cost">5</string>
+    <string name="x50_coin_cost">5</string>
+    <string name="facial_hair_cost">5</string>
+    <string name="newspaper_cost">5</string>
+    <string name="black_tie_cost">5</string>
+</resources>
