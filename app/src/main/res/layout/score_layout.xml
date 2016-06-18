@@ -33,53 +33,6 @@
             android:id="@+id/mainlayoutscorescreen"
             android:background="@color/aquamarine">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/scoreScreen1"
-                android:gravity="center"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/scoreScreen2"
-                android:gravity="center"
-                android:textColor="@color/black"
-                 />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/scoreScreen3"
-                android:gravity="center"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/scoreScreen4"
-                android:gravity="center"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/scoreScreen5"
-                android:gravity="center"
-                android:textColor="@color/black"
-                />
-
-
-
         </LinearLayout>
 
         <RelativeLayout

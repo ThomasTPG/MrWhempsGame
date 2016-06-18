@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.math.BigInteger;
+import java.util.logging.Level;
 
 /**
  * Created by Thomas on 24/02/2016.
@@ -26,6 +29,10 @@ public class ScoreScreen extends Activity {
     TextView textview3;
     TextView textview4;
     TextView textview5;
+    TextView textview6;
+    TextView textview7;
+    TextView textview8;
+    TextView textview9;
     LinearLayout ll;
     int completedLevel;
     boolean bonusLvl;
@@ -33,20 +40,16 @@ public class ScoreScreen extends Activity {
     String coindatafilename = "Coin_data.txt";
     String coindatafilePath;
     int multiplier;
+    LevelSpecifics data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_layout);
         mode = getIntent().getIntExtra("Mode", 0);
-        textview1 = (TextView) findViewById(R.id.scoreScreen1);
-        textview2 = (TextView) findViewById(R.id.scoreScreen2);
-        textview3 = (TextView) findViewById(R.id.scoreScreen3);
-        textview4 = (TextView) findViewById(R.id.scoreScreen4);
-        textview5 = (TextView) findViewById(R.id.scoreScreen5);
         ll = (LinearLayout) findViewById(R.id.mainlayoutscorescreen);
         completedLevel = getIntent().getIntExtra("CompletedLevel",1);
-        LevelSpecifics data = new LevelSpecifics(completedLevel);
+        data = new LevelSpecifics(completedLevel);
         data2 = new LevelTimer(completedLevel);
         bonusLvl = data.isBonusLevel();
         coindatafilePath = getFilesDir() + "/" + coindatafilename;
@@ -71,26 +74,46 @@ public class ScoreScreen extends Activity {
     }
 
     private void writeMainScoreScreen() {
+        LinearLayout mainScoreScreen = (LinearLayout) findViewById(R.id.mainlayoutscorescreen);
+
+        //Add level header
+
+        TextView level = new TextView(this);
+        level.setGravity(Gravity.CENTER);
+        level.setTextColor(ContextCompat.getColor(this, R.color.black));
+        level.setText("Level " + completedLevel);
+        mainScoreScreen.addView(level);
+
+        //Add status header
+
+        TextView status = new TextView(this);
+        status.setGravity(Gravity.CENTER);
+        status.setTextColor(ContextCompat.getColor(this, R.color.black));
         switch (win) {
             case (1):
-                textview1.setText("You have won!");
+                status.setText("You have won!");
                 break;
             case (0):
-                textview1.setText("You lose!");
                 if(!bonusLvl){
-                    textview2.setText("Time remaining: " + timeRemaining);
+                    status.setText("You lose!\nTime remaining: " + timeRemaining);
                 }
                 else{
-                    textview2.setText("You needed to collect " + data2.getScoreLimit() + " coins.");
+                    status.setText("You lose!\nYou needed to collect " + data2.getScoreLimit() + " coins.");
                 }
                 break;
         }
-        textview3.setText("Score: " + coinsCollected);
-        textview4.setText("Multiplier: x" + multiplier);
+        mainScoreScreen.addView(status);
+
+        //Add coin header
+
+        TextView coinHeader = new TextView(this);
+        coinHeader.setGravity(Gravity.CENTER);
+        coinHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
         BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
         BigInteger Bscore = BigInteger.valueOf(coinsCollected);
         Bscore = Bmultiplier.multiply(Bscore);
-        textview5.setText("Coins collected: " + Bscore);
+        coinHeader.setText("\nCoins\nCoins collected: " + coinsCollected + "\nMultiplier: x" + multiplier + "\nMultiplied Coins: " + Bscore);
+        mainScoreScreen.addView(coinHeader);
 
         addRetryButton();
 
@@ -108,18 +131,64 @@ public class ScoreScreen extends Activity {
     }
 
     private void writeInfiniteScoreScreen() {
+        LinearLayout mainScoreScreen = (LinearLayout) findViewById(R.id.mainlayoutscorescreen);
+
+        //Add level header
+
+        TextView level = new TextView(this);
+        level.setGravity(Gravity.CENTER);
+        level.setTextColor(ContextCompat.getColor(this, R.color.black));
+        level.setText("Level " + completedLevel);
+        mainScoreScreen.addView(level);
+
+        //Add hiscore header
+        TextView hiscoreHeader = new TextView(this);
+        hiscoreHeader.setGravity(Gravity.CENTER);
+        hiscoreHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
+
         if (score > previousScore) {
-            textview1.setText("You beat your old highscore!");
+            hiscoreHeader.setText("You beat your old highscore!");
         } else {
-            textview1.setText("You didn't beat your old highscore.");
+            hiscoreHeader.setText("You didn't beat your old highscore.");
         }
-        textview2.setText("Your score: " + score);
-        textview3.setText("Your old highscore: " + previousScore);
-        textview4.setText("Multiplier: x" + multiplier);
+        mainScoreScreen.addView(hiscoreHeader);
+
+        //Display the scores
+        TextView scores = new TextView(this);
+        scores.setGravity(Gravity.CENTER);
+        scores.setTextColor(ContextCompat.getColor(this, R.color.black));
+        scores.setText("Your score: " + score + "\nYour old highscore: " + previousScore);
+        mainScoreScreen.addView(scores);
+
+        //Add coin header
+
+        TextView coinHeader = new TextView(this);
+        coinHeader.setGravity(Gravity.CENTER);
+        coinHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
         BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
-        BigInteger Bscore = BigInteger.valueOf(score);
+        BigInteger Bscore = BigInteger.valueOf(coinsCollected);
         Bscore = Bmultiplier.multiply(Bscore);
-        textview5.setText("Coins collected: " + Bscore);
+        coinHeader.setText("\nCoins\nCoins collected: " + score + "\nMultiplier: x" + multiplier + "\nMultiplied Coins: " + Bscore);
+        mainScoreScreen.addView(coinHeader);
+
+        //Add medal data
+        TextView medalHeader = new TextView(this);
+        medalHeader.setGravity(Gravity.CENTER);
+        medalHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
+
+        if (previousScore >= data.challengeScoreHard()){
+            medalHeader.setText("\nMedal: Gold");
+        }
+        else if (previousScore >= data.challengeScoreMedium()){
+            medalHeader.setText("Medal: Silver\nNext medal at score: " + data.challengeScoreHard());
+        }
+        else if (previousScore > 0){
+            medalHeader.setText("Medal: Bronze\nNext medal at score: " + data.challengeScoreMedium());
+        } else{
+            medalHeader.setText("Medal: None\nNext medal at score: 1");
+        }
+        mainScoreScreen.addView(medalHeader);
+
 
         addRetryButton();
 

@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -33,6 +36,9 @@ public class InfiniteLevelSelect extends Activity {
     String coindatafilePath;
     String leveldatafilePath;
     int levelsUnlocked;
+    int goldCount = 0;
+    int silverCount = 0;
+    int bronzeCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +48,8 @@ public class InfiniteLevelSelect extends Activity {
         setUpFiles();
         levelsUnlocked = readLevelFromFile();
         int previousLevel = getIntent().getIntExtra("Level",0);
-        int score = 0;
-        int multiplier = 1;
+        int score;
+        int multiplier;
         if (previousLevel > 0){
             score = getIntent().getIntExtra("Score",0);
             multiplier = FileTools.readMultiplierFromFile(coindatafilePath);
@@ -54,7 +60,7 @@ public class InfiniteLevelSelect extends Activity {
             int previousScore = readScoreFromFile(previousLevel);
             if (score>previousScore){
                 writeScoresFileData(previousLevel, score);
-            };
+            }
             final Intent scoreIntent = new Intent("thomas.SCORESCREEN");
             scoreIntent.putExtra("Score",score);
             scoreIntent.putExtra("Mode",1);
@@ -87,6 +93,8 @@ public class InfiniteLevelSelect extends Activity {
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
 
+        //Add the back button
+
         Button backToMenu = new Button(this);
         backToMenu.setText("Back");
         backToMenu.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +104,33 @@ public class InfiniteLevelSelect extends Activity {
             }
         });
         ll.addView(backToMenu);
+
+        //Add the medal table to the top of the screen
+
+        LinearLayout medalTable = new LinearLayout(this);
+        medalTable.setOrientation(LinearLayout.HORIZONTAL);
+        medalTable.setWeightSum(3);
+        TextView bronzeMedals = new TextView(this);
+        TextView silverMedals = new TextView(this);
+        TextView goldMedals   = new TextView(this);
+        bronzeMedals.setGravity(Gravity.CENTER_HORIZONTAL);
+        silverMedals.setGravity(Gravity.CENTER_HORIZONTAL);
+        goldMedals.setGravity(Gravity.CENTER_HORIZONTAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1.0f);
+        bronzeMedals.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
+        bronzeMedals.setLayoutParams(params);
+        silverMedals.setLayoutParams(params);
+        goldMedals.setLayoutParams(params);
+        silverMedals.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
+        goldMedals.setBackgroundColor(ContextCompat.getColor(this, R.color.gold));
+        medalTable.addView(bronzeMedals);
+        medalTable.addView(silverMedals);
+        medalTable.addView(goldMedals);
+        ll.addView(medalTable);
+
+        //Add the levels, level headers etc
 
         for (int ii = 1; ii< levelsUnlocked; ii++){
             TextView levelHeader = new TextView(this);
@@ -156,10 +191,13 @@ public class InfiniteLevelSelect extends Activity {
             LevelSpecifics challengeScores = new LevelSpecifics(ii);
             if (readScoreFromFile(ii) >= challengeScores.challengeScoreHard()){
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.gold));
+                goldCount++;
             } else if (readScoreFromFile(ii) >= challengeScores.challengeScoreMedium()){
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
+                silverCount++;
             } else if (readScoreFromFile(ii) > 0){
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
+                bronzeCount++;
             } else{
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
             }
@@ -172,6 +210,10 @@ public class InfiniteLevelSelect extends Activity {
 
         // Add the LinearLayout element to the ScrollView
         sv.addView(ll);
+
+        bronzeMedals.setText("Bronze: " + bronzeCount);
+        silverMedals.setText("Silver: " + silverCount);
+        goldMedals.setText("Gold: " + goldCount);
 
         // Display the view
         setContentView(v);
