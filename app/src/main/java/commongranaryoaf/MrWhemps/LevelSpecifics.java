@@ -54,6 +54,8 @@ public class LevelSpecifics {
                 return 950;
             case(12):
                 return 600;
+            case(13):
+                return 400;
             default:
                 return 100;
         }
@@ -85,6 +87,8 @@ public class LevelSpecifics {
                 return 1900;
             case(12):
                 return 1200;
+            case(13):
+                return 800;
             default:
                 return 100;
         }
