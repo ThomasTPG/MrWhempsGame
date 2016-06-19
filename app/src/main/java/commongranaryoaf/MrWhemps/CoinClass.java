@@ -31,11 +31,13 @@ public class CoinClass {
     int coinType;
     int iteration = 0;
     Bitmap coinSheet;
+    Context ctx;
 
 
-    public CoinClass(Canvas c, int spriteDim, int coinType, Context ctx){
+    public CoinClass(Canvas c, int spriteDim, int coinType, Context context){
         this.coinType = coinType;
         score = 0;
+        ctx = context;
         spriteDimension = spriteDim;
         canvas = c;
         canvasWidth = c.getWidth();
@@ -44,7 +46,7 @@ public class CoinClass {
         ySpacing = (canvasHeight-4*coinRadius)/coinsPerRow;
         switch (this.coinType){
             case(CoinType.NORMAL):
-                coinSheet = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.coinsheetgold);
+                coinSheet = produceScaledImage(R.drawable.coinsheetgold);
                 int x = (int) Math.floor(Math.random()*10);
                 int y = (int) Math.floor(Math.random()*10);
                 for (int ii = 0; ii < 10; ii++){
@@ -55,7 +57,7 @@ public class CoinClass {
                 coinArray[x][y] = 10;
                 break;
             case(CoinType.EVERYWHERE):
-                coinSheet = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.coinsheetbronze);
+                coinSheet = produceScaledImage(R.drawable.coinsheetbronze);
                 for (int ii = 0; ii < 10; ii++){
                     for (int jj = 0; jj < 10; jj++){
                         coinArray[ii][jj] = 1;
@@ -63,7 +65,7 @@ public class CoinClass {
                 }
                 break;
             case(CoinType.TUTORIAL):
-                coinSheet = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.coinsheetgold);
+                coinSheet = produceScaledImage(R.drawable.coinsheetgold);
                 break;
         }
 
@@ -115,6 +117,23 @@ public class CoinClass {
 
     public int getScore(){
         return score;
+    }
+
+    public Bitmap produceScaledImage(int id){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds= true;
+        BitmapFactory.decodeResource(ctx.getResources(),id,options);
+
+        int sampleSize = 1;
+        int height = options.outHeight;
+        while (height > 4 * coinRadius){
+            sampleSize *=2;
+            height /=2;
+        }
+
+        options.inSampleSize = sampleSize;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(ctx.getResources(),id,options);
     }
 
     public void replenishCoins(){

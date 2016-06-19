@@ -100,6 +100,11 @@ public class MainMenu extends Activity {
                 startActivity(shopIntent);
                 finish();
                 break;
+            case (R.id.achievementmenu):
+                final Intent achievementIntent = new Intent("thomas.ACHIEVEMENTS");
+                startActivity(achievementIntent);
+                finish();
+                break;
         }
 
     }
