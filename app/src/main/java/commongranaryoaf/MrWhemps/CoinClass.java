@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -169,5 +171,32 @@ public class CoinClass {
         }
         coinArray[x][y] = 10;
     }
+
+    public boolean level8achievement(){
+        if (coinArray[0][0] == 0){
+            if (coinArray[9][9] == 0){
+                if (coinArray[6][3] == 1){
+                    if (coinArray[3][6] == 1){
+                        int[][] testArray = {{0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0}};
+                        if (Arrays.deepEquals(testArray,coinArray)){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 
 }

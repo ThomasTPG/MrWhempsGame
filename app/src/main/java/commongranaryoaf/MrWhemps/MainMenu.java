@@ -19,9 +19,11 @@ import java.io.InputStreamReader;
 public class MainMenu extends Activity {
 
     String coindatafilename = "Coin_data.txt";
+    String achievementfilename = "Achievement_data.txt";
     File coindatafile;
+    File achievementdatafile;
     String coindatafilePath;
-    int purchasables = 50;
+    String achievementdatafilePath;
     float startTime = 0;
     float timeElapsed = 0;
 
@@ -39,42 +41,27 @@ public class MainMenu extends Activity {
 
     private void setUpFiles(){
         coindatafilePath = getFilesDir() + "/" + coindatafilename;
+        achievementdatafilePath = getFilesDir() + "/" + achievementfilename;
         coindatafile = new File(coindatafilePath);
+        achievementdatafile = new File(achievementdatafilePath);
         checkFileExists();
     }
-
 
     public void checkFileExists(){
         if (!coindatafile.exists()){
             System.out.println("newfile");
-            createDefaultFile();
+            FileTools.createDefaultCoinFile(coindatafile);
 
         }else{
             System.out.println("File Exists");
         }
-    }
+        if (!achievementdatafile.exists()){
+            System.out.println("newfile");
+            FileTools.createDefaultAchFile(achievementdatafile);
 
-    public void createDefaultFile(){
-        System.out.println("Create new file");
-        String defaultFileContent = "000000000000=";
-        for (int ii = 0; ii< purchasables; ii ++){
-            defaultFileContent = defaultFileContent + "0-";
+        }else{
+            System.out.println("File Exists");
         }
-        System.out.println(defaultFileContent);
-        writeToFile(defaultFileContent);
-    }
-
-    public void writeToFile(String string){
-        try {
-            FileWriter fileWriter = new FileWriter(coindatafile);
-            BufferedWriter out = new BufferedWriter(fileWriter);
-            out.write(string);
-            out.close();
-            fileWriter.close();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 
     public void onClick(View v){

@@ -14,6 +14,7 @@ import java.math.BigInteger;
  */
 public class FileTools {
 
+    static int achievements = 50;
     static int purchasables = 50;
     static String maxCoins = "999999999999";
 
@@ -133,6 +134,65 @@ public class FileTools {
             }
         }
         return coins;
+    }
+
+    static public void createDefaultCoinFile(File coindatafile){
+        System.out.println("Create new file");
+        String defaultFileContent = "000000000000=";
+        for (int ii = 0; ii< purchasables; ii ++){
+            defaultFileContent = defaultFileContent + "0-";
+        }
+        FileTools.writeToFile(defaultFileContent, coindatafile);
+    }
+
+    static public void createDefaultAchFile(File achievementdatafile){
+        System.out.println("Create new file");
+        String defaultFileContent = "";
+        for (int ii = 0; ii< achievements; ii ++){
+            defaultFileContent = defaultFileContent + "0-";
+        }
+        FileTools.writeToFile(defaultFileContent, achievementdatafile);
+    }
+
+    static public String readAchievementsFromFile(String filePath){
+        String fileStored;
+        try {
+            FileInputStream ourFile = new FileInputStream(new File(filePath));
+            InputStreamReader reader = new InputStreamReader(ourFile);
+            char[] buffer = new char[2*achievements];
+            reader.read(buffer);
+            fileStored = new String(buffer);
+        } catch (Exception e){
+            e.printStackTrace();
+            fileStored = "Error";
+        }
+        return fileStored;
+    }
+
+    static public boolean readSpecificAchievementFromFile(int specifiedAchievement, String filePath){
+        String fileStored = readAchievementsFromFile(filePath);
+        String[] achievementArray = fileStored.split("-");
+        if (achievementArray[specifiedAchievement].equals("0")){
+            return false;
+        }
+        return true;
+    }
+
+    static public void writeAchievementToFile(int specifiedAchievement, String filePath, File file){
+        String fileStored = readAchievementsFromFile(filePath);
+        String achData = "";
+        String[] data;
+        if (!fileStored.equals("Error")){
+            data = fileStored.split("-");
+            for (int ii = 0; ii < specifiedAchievement; ii++){
+                achData = achData + data[ii] + "-";
+            }
+            achData = achData + "1-";
+            for (int ii = specifiedAchievement + 1; ii< achievements; ii++){
+                achData = achData + data[ii] + "-";
+            }
+            writeToFile(achData,file);
+        }
     }
 
 }
