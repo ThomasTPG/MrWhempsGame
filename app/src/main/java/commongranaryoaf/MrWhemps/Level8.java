@@ -50,7 +50,7 @@ public class Level8 extends Sprite{
         if(!achievementUnlocked){
             if(Coins.level8achievement()){
                 FileTools.writeAchievementToFile(9,achievementdatafilePath,achievementdatafile);
-                
+
             }
         };
         super.drawLowerBoundary(c);
