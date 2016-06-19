@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <Button
+        android:id="@+id/backfromshop"
+        android:text="BACK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="6">
+
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:id="@+id/imageViewBound"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView1"
+                android:adjustViewBounds="true"
+                android:layout_alignParentLeft="true"
+                android:onClick="onClick"
+                android:layout_gravity="left"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView2"
+                android:layout_centerHorizontal="true"
+                android:onClick="onClick"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView3"
+                android:adjustViewBounds="true"
+                android:layout_alignParentRight="true"
+                android:onClick="onClick"
+                android:layout_gravity="end"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView4"
+                android:adjustViewBounds="true"
+                android:layout_alignParentLeft="true"
+                android:onClick="onClick"
+                android:layout_gravity="left"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView5"
+                android:layout_centerHorizontal="true"
+                android:onClick="onClick"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView6"
+                android:adjustViewBounds="true"
+                android:layout_alignParentRight="true"
+                android:onClick="onClick"
+                android:layout_gravity="end"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView7"
+                android:adjustViewBounds="true"
+                android:layout_alignParentLeft="true"
+                android:onClick="onClick"
+                android:layout_gravity="left"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView8"
+                android:layout_centerHorizontal="true"
+                android:onClick="onClick"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView9"
+                android:adjustViewBounds="true"
+                android:layout_alignParentRight="true"
+                android:onClick="onClick"
+                android:layout_gravity="end"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView10"
+                android:adjustViewBounds="true"
+                android:layout_alignParentLeft="true"
+                android:onClick="onClick"
+                android:layout_gravity="left"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView11"
+                android:layout_centerHorizontal="true"
+                android:onClick="onClick"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/achievementView12"
+                android:adjustViewBounds="true"
+                android:layout_alignParentRight="true"
+                android:onClick="onClick"
+                android:layout_gravity="end"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next page"
+                android:id="@+id/nextpagebutton"
+                android:onClick="onClick"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Previous page"
+                android:id="@+id/preivouspagebutton"
+                android:onClick="onClick"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

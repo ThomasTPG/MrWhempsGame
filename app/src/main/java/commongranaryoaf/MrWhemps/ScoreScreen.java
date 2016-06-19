@@ -24,15 +24,6 @@ public class ScoreScreen extends Activity {
     int coinsCollected;
     int score;
     int previousScore;
-    TextView textview1;
-    TextView textview2;
-    TextView textview3;
-    TextView textview4;
-    TextView textview5;
-    TextView textview6;
-    TextView textview7;
-    TextView textview8;
-    TextView textview9;
     LinearLayout ll;
     int completedLevel;
     boolean bonusLvl;
@@ -166,7 +157,7 @@ public class ScoreScreen extends Activity {
         coinHeader.setGravity(Gravity.CENTER);
         coinHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
         BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
-        BigInteger Bscore = BigInteger.valueOf(coinsCollected);
+        BigInteger Bscore = BigInteger.valueOf(score);
         Bscore = Bmultiplier.multiply(Bscore);
         coinHeader.setText("\nCoins\nCoins collected: " + score + "\nMultiplier: x" + multiplier + "\nMultiplied Coins: " + Bscore);
         mainScoreScreen.addView(coinHeader);
@@ -180,12 +171,12 @@ public class ScoreScreen extends Activity {
             medalHeader.setText("\nMedal: Gold");
         }
         else if (previousScore >= data.challengeScoreMedium()){
-            medalHeader.setText("Medal: Silver\nNext medal at score: " + data.challengeScoreHard());
+            medalHeader.setText("\nMedal: Silver\nNext medal at score: " + data.challengeScoreHard());
         }
         else if (previousScore > 0){
-            medalHeader.setText("Medal: Bronze\nNext medal at score: " + data.challengeScoreMedium());
+            medalHeader.setText("\nMedal: Bronze\nNext medal at score: " + data.challengeScoreMedium());
         } else{
-            medalHeader.setText("Medal: None\nNext medal at score: 1");
+            medalHeader.setText("\nMedal: None\nNext medal at score: 1");
         }
         mainScoreScreen.addView(medalHeader);
 

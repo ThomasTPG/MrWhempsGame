@@ -26,7 +26,6 @@ import java.math.BigInteger;
  * Created by Thomas on 07/02/2016.
  */
 public class InfiniteLevelSelect extends Activity {
-    int purchasables = 50;
     String leveldatafilename = "Level_data.txt";
     Context context;
     int lengthStoredScore = 4;

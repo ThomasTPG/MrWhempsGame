@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -31,11 +33,13 @@ public class CoinClass {
     int coinType;
     int iteration = 0;
     Bitmap coinSheet;
+    Context ctx;
 
 
-    public CoinClass(Canvas c, int spriteDim, int coinType, Context ctx){
+    public CoinClass(Canvas c, int spriteDim, int coinType, Context context){
         this.coinType = coinType;
         score = 0;
+        ctx = context;
         spriteDimension = spriteDim;
         canvas = c;
         canvasWidth = c.getWidth();
@@ -44,7 +48,7 @@ public class CoinClass {
         ySpacing = (canvasHeight-4*coinRadius)/coinsPerRow;
         switch (this.coinType){
             case(CoinType.NORMAL):
-                coinSheet = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.coinsheetgold);
+                coinSheet = produceScaledImage(R.drawable.coinsheetgold);
                 int x = (int) Math.floor(Math.random()*10);
                 int y = (int) Math.floor(Math.random()*10);
                 for (int ii = 0; ii < 10; ii++){
@@ -55,7 +59,7 @@ public class CoinClass {
                 coinArray[x][y] = 10;
                 break;
             case(CoinType.EVERYWHERE):
-                coinSheet = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.coinsheetbronze);
+                coinSheet = produceScaledImage(R.drawable.coinsheetbronze);
                 for (int ii = 0; ii < 10; ii++){
                     for (int jj = 0; jj < 10; jj++){
                         coinArray[ii][jj] = 1;
@@ -63,7 +67,7 @@ public class CoinClass {
                 }
                 break;
             case(CoinType.TUTORIAL):
-                coinSheet = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.coinsheetgold);
+                coinSheet = produceScaledImage(R.drawable.coinsheetgold);
                 break;
         }
 
@@ -117,6 +121,23 @@ public class CoinClass {
         return score;
     }
 
+    public Bitmap produceScaledImage(int id){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds= true;
+        BitmapFactory.decodeResource(ctx.getResources(),id,options);
+
+        int sampleSize = 1;
+        int height = options.outHeight;
+        while (height > 4 * coinRadius){
+            sampleSize *=2;
+            height /=2;
+        }
+
+        options.inSampleSize = sampleSize;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(ctx.getResources(),id,options);
+    }
+
     public void replenishCoins(){
         switch (coinType){
             case(CoinType.NORMAL):
@@ -150,5 +171,32 @@ public class CoinClass {
         }
         coinArray[x][y] = 10;
     }
+
+    public boolean level8achievement(){
+        if (coinArray[0][0] == 0){
+            if (coinArray[9][9] == 0){
+                if (coinArray[6][3] == 1){
+                    if (coinArray[3][6] == 1){
+                        int[][] testArray = {{0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0}};
+                        if (Arrays.deepEquals(testArray,coinArray)){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 
 }
