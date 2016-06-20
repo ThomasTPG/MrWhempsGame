@@ -49,8 +49,10 @@ public class InfiniteLevelSelect extends Activity {
         int previousLevel = getIntent().getIntExtra("Level",0);
         int score;
         int multiplier;
+        int achievement;
         if (previousLevel > 0){
             score = getIntent().getIntExtra("Score",0);
+            achievement = getIntent().getIntExtra("Achievement",-1);
             multiplier = FileTools.readMultiplierFromFile(coindatafilePath);
             BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
             BigInteger Bscore = BigInteger.valueOf(score);
@@ -65,6 +67,7 @@ public class InfiniteLevelSelect extends Activity {
             scoreIntent.putExtra("Mode",1);
             scoreIntent.putExtra("PreviousScore",previousScore);
             scoreIntent.putExtra("CompletedLevel",previousLevel);
+            scoreIntent.putExtra("Achievement",achievement);
             startActivity(scoreIntent);
 
         }

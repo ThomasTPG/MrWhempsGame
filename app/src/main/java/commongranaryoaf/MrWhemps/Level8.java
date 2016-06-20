@@ -2,6 +2,7 @@ package commongranaryoaf.MrWhemps;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -17,12 +18,13 @@ public class Level8 extends Sprite{
     File achievementdatafile;
     String achievementdatafilePath;
     boolean achievementUnlocked;
+    boolean announceAchievement = false;
 
     public Level8(Context c, int level){
         super(c, level);
+        context = c;
         achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
         achievementdatafile = new File(achievementdatafilePath);
-        context = c;
     }
 
     public void onDraw(Canvas c, float x){
@@ -50,7 +52,8 @@ public class Level8 extends Sprite{
         if(!achievementUnlocked){
             if(Coins.level8achievement()){
                 FileTools.writeAchievementToFile(9,achievementdatafilePath,achievementdatafile);
-
+                achievementUnlocked = true;
+                announceAchievement = true;
             }
         };
         super.drawLowerBoundary(c);
@@ -70,6 +73,13 @@ public class Level8 extends Sprite{
 
     public boolean getLose(){
         return super.getLose();
+    }
+
+    public int getAchievement(){
+        if (announceAchievement){
+            return 9;
+        }
+        return -1;
     }
 
     public int getScore(){

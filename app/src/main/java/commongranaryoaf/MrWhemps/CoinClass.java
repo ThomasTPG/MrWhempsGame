@@ -198,5 +198,58 @@ public class CoinClass {
         return false;
     }
 
+    public boolean level17achievement(){
+        if (coinArray[1][1] == 0){
+            if (coinArray[0][0] == 1){
+                if (coinArray[8][8] == 0){
+                    if (coinArray[9][9] == 1){
+                        int[][] testArray = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+                        if (Arrays.deepEquals(testArray,coinArray)){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean level23achievement(){
+        if (coinArray[6][0] == 0){
+            if (coinArray[7][0] == 1){
+                if (coinArray[4][0] == 0){
+                    if (coinArray[3][0] == 1){
+                        int[][] testArray = {{1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
+                                             {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
+                                             {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
+                                             {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
+                                             {1, 1, 1, 0, 0, 0, 0, 1, 1, 1}};
+                        if (Arrays.deepEquals(testArray,coinArray)){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
 
 }

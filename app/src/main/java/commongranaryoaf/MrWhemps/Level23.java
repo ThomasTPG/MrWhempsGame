@@ -3,6 +3,8 @@ package commongranaryoaf.MrWhemps;
 import android.content.Context;
 import android.graphics.Canvas;
 
+import java.io.File;
+
 /**
  * Created by Thomas on 06/02/2016.
  */
@@ -12,10 +14,17 @@ public class Level23 extends Sprite{
     Walls walls;
     Context context;
     Drone drone1;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
+    boolean achievementUnlocked;
+    boolean announceAchievement = false;
 
     public Level23(Context c, int level){
         super(c,level);
         context = c;
+        achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
+        achievementdatafile = new File(achievementdatafilePath);
     }
 
     public void onDraw(Canvas c, float x){
@@ -26,6 +35,7 @@ public class Level23 extends Sprite{
             super.createLevel(c);
             Coins = new CoinClass(c, spriteDimensions, CoinType.EVERYWHERE, context);
             drone1 = new Drone(cWidth,cHeight,context, spriteDimensions,1);
+            achievementUnlocked = FileTools.readSpecificAchievementFromFile(11,achievementdatafilePath);
 
         }
         Coins.onDraw();
@@ -42,6 +52,13 @@ public class Level23 extends Sprite{
         Coins.checkCoins(spriteX, spriteY);
         super.drawLowerBoundary(c);
         drone1.onDraw(c, spriteX, spriteY);
+        if(!achievementUnlocked){
+            if(Coins.level23achievement()){
+                FileTools.writeAchievementToFile(11,achievementdatafilePath,achievementdatafile);
+                achievementUnlocked = true;
+                announceAchievement = true;
+            }
+        };
     }
 
     public void checkOrdinaryWalls(){
@@ -66,6 +83,13 @@ public class Level23 extends Sprite{
 
     public int getScore(){
         return Coins.getScore();
+    }
+
+    public int getAchievement(){
+        if (announceAchievement){
+            return 9;
+        }
+        return -1;
     }
 
     public float getSpeed() { return walls.wallSpeed; }

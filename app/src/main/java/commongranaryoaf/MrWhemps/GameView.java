@@ -40,6 +40,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
     Bitmap background3;
     Bitmap space;
     Bitmap[] backgroundList = new Bitmap[numberOfBackgrounds];
+    int achievement = -1;
 
     public GameView(Context context) {
         super(context);
@@ -134,6 +135,10 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
         return score;
     }
 
+    public int getAchievement(){
+        return achievement;
+    }
+
     public boolean getLose(){
         return lose;
     }
@@ -179,6 +184,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
             Method getScoreMethod;
             Method getLoseMethod;
             Method getSpeedMethod;
+            Method getAchievementMethod;
             Rect positionTop;
             Rect whichImageTop;
             Rect positionBottom;
@@ -237,10 +243,12 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
 
                     onDrawMethod.invoke(ourLevel, c, spriteX);
-                    //ourSprite.onDraw(c, spriteX);
                     score = (int) getScoreMethod.invoke(ourLevel);
                     speed = (float) getSpeedMethod.invoke(ourLevel);
-                    //score = ourSprite.getScore();
+                    if (level == 8 || level == 17 || level == 23){
+                        getAchievementMethod = ourLevelClass.getDeclaredMethod("getAchievement");
+                        achievement = (int) getAchievementMethod.invoke(ourLevel);
+                    }
                     holder.unlockCanvasAndPost(c);
                     if ( (boolean) getLoseMethod.invoke(ourLevel)){
                         running = false;

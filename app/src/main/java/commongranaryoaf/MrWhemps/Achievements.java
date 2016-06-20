@@ -155,10 +155,23 @@ public class Achievements extends Activity{
             image10.setImageBitmap(locked);
         }
 
+        //Art2 Achievement
         ImageView image11 = (ImageView) findViewById(R.id.achievementView11);
-        image11.setImageBitmap(locked);
+        if (FileTools.readSpecificAchievementFromFile(10,achievementdatafilePath)){
+            Bitmap art2 = produceScaledImage(R.drawable.achievementart2);
+            image11.setImageBitmap(art2);
+        } else{
+            image11.setImageBitmap(locked);
+        }
+
+        //Art3 Achievement
         ImageView image12 = (ImageView) findViewById(R.id.achievementView12);
-        image12.setImageBitmap(locked);
+        if (FileTools.readSpecificAchievementFromFile(11,achievementdatafilePath)){
+            Bitmap art3 = produceScaledImage(R.drawable.achievementart3);
+            image12.setImageBitmap(art3);
+        } else{
+            image12.setImageBitmap(locked);
+        }
     }
 
     public void loadPage1(){
@@ -192,7 +205,7 @@ public class Achievements extends Activity{
     }
 
     public void onClick(View v){
-        final Intent details = new Intent("thomas.SHOPDETAILS");
+        final Intent details = new Intent("thomas.ACHIEVEMENTDETAILS");
         switch (v.getId()){
 
             case (R.id.backfromshop):
@@ -211,48 +224,52 @@ public class Achievements extends Activity{
                 setImageButtons();
                 break;
 
-            case(R.id.imageView1):
+            case(R.id.achievementView1):
                 details.putExtra("Image",1);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView2):
+            case(R.id.achievementView2):
                 details.putExtra("Image", 2);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView3):
+            case(R.id.achievementView3):
                 details.putExtra("Image",3);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView4):
+            case(R.id.achievementView4):
                 details.putExtra("Image",4);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView5):
+            case(R.id.achievementView5):
                 details.putExtra("Image",5);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView6):
+            case(R.id.achievementView6):
                 details.putExtra("Image",6);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView7):
+            case(R.id.achievementView7):
                 details.putExtra("Image",7);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView8):
+            case(R.id.achievementView8):
                 details.putExtra("Image",8);
                 openDetails(details);
                 break;
 
-            case(R.id.imageView9):
+            case(R.id.achievementView9):
                 details.putExtra("Image",9);
+                openDetails(details);
+                break;
+            case(R.id.achievementView10):
+                details.putExtra("Image", 10);
                 openDetails(details);
                 break;
         }

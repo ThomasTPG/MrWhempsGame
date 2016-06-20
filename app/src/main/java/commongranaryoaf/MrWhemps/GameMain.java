@@ -27,6 +27,7 @@ public class GameMain extends Activity implements View.OnTouchListener{
     int win = 0;
     //A boolean which checks if we are on a bonus level
     boolean bonusLevel;
+    int achievement = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,10 @@ public class GameMain extends Activity implements View.OnTouchListener{
         scoreboard.setText("Score: " + score + "   Level: " + level);
     }
 
+    public void getAchievement(){
+        achievement = gameView.getAchievement();
+    }
+
     public void updateTimer(){
         timeRemaining = lvlTimer.getTimeRemaining();
         if (timeRemaining < 0){
@@ -158,6 +163,7 @@ public class GameMain extends Activity implements View.OnTouchListener{
 
         }
         menuIntent.putExtra("Score", score);
+        menuIntent.putExtra("Achievement", achievement);
 
         gameView.onPause();
         running = false;

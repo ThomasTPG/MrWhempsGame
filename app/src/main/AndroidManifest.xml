@@ -115,6 +115,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="commongranaryoaf.MrWhemps.AchievementDetails"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.PopupMenus">
+            <intent-filter>
+                <action android:name="thomas.ACHIEVEMENTDETAILS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

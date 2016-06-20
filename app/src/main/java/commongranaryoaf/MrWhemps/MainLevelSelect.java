@@ -35,13 +35,14 @@ public class MainLevelSelect extends Activity {
     String coindatafilePath;
     int score;
     int multiplier;
+    int achievement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
         setUpFiles();
-
+        int achievement = getIntent().getIntExtra("Achievement",-1);
         int previousLevel = getIntent().getIntExtra("Level",0);
         int win = getIntent().getIntExtra("Win",0);
         levelsUnlocked = readLevelFromFile();
@@ -63,6 +64,7 @@ public class MainLevelSelect extends Activity {
             scoreIntent.putExtra("Mode", 0);
             scoreIntent.putExtra("TimeRemaining",timeRemaining);
             scoreIntent.putExtra("CompletedLevel",previousLevel);
+            scoreIntent.putExtra("Achievement",achievement);
             scoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(scoreIntent);
         }
