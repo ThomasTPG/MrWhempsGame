@@ -222,27 +222,35 @@ public class ShopDetails extends Activity {
         switch (checkItemBought()){
             case 0:
                 if (IntyourCoins.compareTo(IntCost) != -1){
-                    newValue = "1";
+                    writeNewItem("1");
                     BigInteger minus1 = BigInteger.valueOf(-1);
                     FileTools.writeCoinsToFile(IntCost.multiply(minus1), coindatafilePath, coindatafile);
                 } else{
-                    newValue = "0";
+                    writeNewItem("0");
                 }
                 break;
             case 1:
                 //Need to also set every other value (for skins at least) to 1 here.
                 if (page == 1){
-
+                    writeNewItemUpdateOld("2");
+                }else{
+                    writeNewItem("2");
                 }
-                newValue = "2";
                 break;
             case 2:
-                newValue = "1";
+                writeNewItem("1");
                 break;
             default:
-                newValue = "0";
+                writeNewItem("0");
                 break;
         }
+        setImage();
+
+
+
+    }
+
+    public void writeNewItem(String newValue){
         String coinData = FileTools.readCoinsFromFile(coindatafilePath);
         String[] allData = coinData.split("=");
         String[] itemData = allData[1].split("-");
@@ -251,16 +259,43 @@ public class ShopDetails extends Activity {
             replacementString = replacementString + itemData[ii] + "-";
         }
         replacementString = replacementString + newValue + "-";
-        for (int ii = index + 1; ii < purchasables; ii ++){
+        for (int jj = index + 1; jj < purchasables; jj ++){
+            replacementString = replacementString + itemData[jj] + "-";
+        }
+        replacementString = allData[0] + "=" + replacementString;
+        FileTools.writeToFile(replacementString, coindatafile);
+        FileTools.getYourCoins(coindatafilePath);
+    }
+
+    public void writeNewItemUpdateOld(String newValue){
+        String coinData = FileTools.readCoinsFromFile(coindatafilePath);
+        String[] allData = coinData.split("=");
+        String[] itemData = allData[1].split("-");
+        String replacementString = "";
+        for (int ii = 0; ii < 12; ii ++){
+            replacementString = replacementString + itemData[ii] + "-";
+        }
+        for (int ii = 12; ii < index; ii ++){
+            String oldValue = itemData[ii];
+            if (oldValue.contains("2")){
+                oldValue = "1";
+            }
+            replacementString = replacementString + oldValue + "-";
+        }
+        replacementString = replacementString + newValue + "-";
+        for (int ii = index + 1; ii < 24; ii ++){
+            String oldValue = itemData[ii];
+            if (oldValue.contains("2")){
+                oldValue = "1";
+            }
+            replacementString = replacementString + oldValue + "-";
+        }
+        for (int ii = 24; ii < purchasables; ii ++){
             replacementString = replacementString + itemData[ii] + "-";
         }
         replacementString = allData[0] + "=" + replacementString;
         FileTools.writeToFile(replacementString,coindatafile);
         FileTools.getYourCoins(coindatafilePath);
-        setImage();
-
-
-
     }
 
 

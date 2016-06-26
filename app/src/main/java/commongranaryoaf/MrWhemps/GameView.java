@@ -245,7 +245,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
                     onDrawMethod.invoke(ourLevel, c, spriteX);
                     score = (int) getScoreMethod.invoke(ourLevel);
                     speed = (float) getSpeedMethod.invoke(ourLevel);
-                    if (level == 8 || level == 17 || level == 23){
+                    if (level == 8 || level == 16 || level == 17 || level == 23){
                         getAchievementMethod = ourLevelClass.getDeclaredMethod("getAchievement");
                         achievement = (int) getAchievementMethod.invoke(ourLevel);
                     }

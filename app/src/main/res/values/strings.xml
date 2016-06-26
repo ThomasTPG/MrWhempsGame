@@ -39,4 +39,7 @@
     <string name="art1_description">On level 8 collect all the coins apart from a 4x4 square in both the top right and botton left corners.</string>
     <string name="art2_description">On level 17 collect all the coins apart from a 1 coin thick edge surrounding the screen.</string>
     <string name="art3_description">On level 23 collect all the coins apart from a 3x3 square in each corner.</string>
+    <string name="under_hard_platform_description">On level 16 headbutt the underside of 6 consecutive platforms.</string>
+
+    <string name="achievement_announcement">Achievement unlocked!</string>
 </resources>

@@ -176,19 +176,14 @@ public class AchievementDetails extends Activity {
             case(1):
                 switch (item){
                     case(1):
-                        Bitmap facialhair = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_moustache_button);
-                        achievementImage.setImageBitmap(facialhair);
-                        description.setText(this.getString(R.string.facial_hair_description));
-                        break;
-                    case(2):
-                        Bitmap newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_newspaper_button);
-                        achievementImage.setImageBitmap(newspaper);
-                        description.setText(this.getString(R.string.newspaper_description));
-                        break;
-                    case(3):
-                        Bitmap blacktie = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_blacktie_button);
-                        achievementImage.setImageBitmap(blacktie);
-                        description.setText(this.getString(R.string.black_tie_description));
+                        Bitmap underCoverPlatforms;
+                        if(FileTools.readSpecificAchievementFromFile(12,achievementdatafilePath)){
+                            underCoverPlatforms = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementplatforms16);
+                        } else{
+                            underCoverPlatforms = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(underCoverPlatforms);
+                        description.setText(this.getString(R.string.under_hard_platform_description));
                         break;
 
                 }

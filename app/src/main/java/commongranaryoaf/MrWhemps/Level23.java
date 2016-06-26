@@ -87,7 +87,7 @@ public class Level23 extends Sprite{
 
     public int getAchievement(){
         if (announceAchievement){
-            return 9;
+            return 11;
         }
         return -1;
     }

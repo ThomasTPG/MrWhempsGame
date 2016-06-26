@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.util.logging.Level;
@@ -32,6 +33,7 @@ public class ScoreScreen extends Activity {
     String coindatafilePath;
     int multiplier;
     LevelSpecifics data;
+    int achievements;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class ScoreScreen extends Activity {
         mode = getIntent().getIntExtra("Mode", 0);
         ll = (LinearLayout) findViewById(R.id.mainlayoutscorescreen);
         completedLevel = getIntent().getIntExtra("CompletedLevel",1);
+        achievements = getIntent().getIntExtra("Achievement",-1);
         data = new LevelSpecifics(completedLevel);
         data2 = new LevelTimer(completedLevel);
         bonusLvl = data.isBonusLevel();
@@ -61,6 +64,10 @@ public class ScoreScreen extends Activity {
             score = getIntent().getIntExtra("Score", 0);
             previousScore = getIntent().getIntExtra("PreviousScore", 0);
             writeInfiniteScoreScreen();
+        }
+        if (achievements >= 0){
+            System.out.println("ACHIEVEMENT UNLOCKED!!!!!!!!!");
+            Toast.makeText(this, getResources().getString(R.string.achievement_announcement), Toast.LENGTH_LONG).show();
         }
     }
 

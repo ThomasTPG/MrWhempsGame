@@ -14,6 +14,9 @@ public class Settings extends Activity {
     String filenameLevel = "Coin_data.txt";
     File fileLevel;
     String fileLevelPath;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class Settings extends Activity {
         //File file = getBaseContext().getFileStreamPath(filename);
         fileLevelPath = getFilesDir() + "/" + filenameLevel;
         fileLevel = new File(fileLevelPath);
+        achievementdatafilePath = getFilesDir() + "/" + achievementfilename;
+        achievementdatafile = new File(achievementdatafilePath);
     }
 
     @Override
@@ -39,6 +44,7 @@ public class Settings extends Activity {
             case (R.id.deletelevels):
                 if (checkFileExists()){
                     fileLevel.delete();
+                    achievementdatafile.delete();
                     System.out.println("File Deleted");
                 }
                 break;

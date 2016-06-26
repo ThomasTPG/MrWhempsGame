@@ -70,7 +70,7 @@ public class Level17 extends Sprite{
 
     public int getAchievement(){
         if (announceAchievement){
-            return 9;
+            return 10;
         }
         return -1;
     }

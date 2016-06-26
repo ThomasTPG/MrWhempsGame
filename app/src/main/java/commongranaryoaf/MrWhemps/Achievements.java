@@ -175,33 +175,16 @@ public class Achievements extends Activity{
     }
 
     public void loadPage1(){
-        Bitmap moustache = produceScaledImage(R.drawable.costume_moustache_button);
-        Bitmap newspaper = produceScaledImage(R.drawable.costume_newspaper_button);
-        Bitmap blacktie = produceScaledImage(R.drawable.costume_blacktie_button);
-        Bitmap coinx5 = produceScaledImage(R.drawable.coin5xbutton);
-        Bitmap coinx6 = produceScaledImage(R.drawable.coin6xbutton);
-        Bitmap coinx8 = produceScaledImage(R.drawable.coin8xbutton);
-        Bitmap coinx10 = produceScaledImage(R.drawable.coin10xbutton);
-        Bitmap coinx20 = produceScaledImage(R.drawable.coin20xbutton);
-        Bitmap coinx50 = produceScaledImage(R.drawable.coin50xbutton);
-        ImageView image1 = (ImageView) findViewById(R.id.imageView1);
-        image1.setImageBitmap(moustache);
-        ImageView image2 = (ImageView) findViewById(R.id.imageView2);
-        image2.setImageBitmap(newspaper);
-        ImageView image3 = (ImageView) findViewById(R.id.imageView3);
-        image3.setImageBitmap(blacktie);
-        ImageView image4 = (ImageView) findViewById(R.id.imageView4);
-        image4.setImageBitmap(coinx5);
-        ImageView image5 = (ImageView) findViewById(R.id.imageView5);
-        image5.setImageBitmap(coinx6);
-        ImageView image6 = (ImageView) findViewById(R.id.imageView6);
-        image6.setImageBitmap(coinx8);
-        ImageView image7 = (ImageView) findViewById(R.id.imageView7);
-        image7.setImageBitmap(coinx10);
-        ImageView image8 = (ImageView) findViewById(R.id.imageView8);
-        image8.setImageBitmap(coinx20);
-        ImageView image9 = (ImageView) findViewById(R.id.imageView9);
-        image9.setImageBitmap(coinx50);
+        Bitmap locked = produceScaledImage(R.drawable.lockedachievement);
+
+        //Lvl16 platforms Achievement
+        ImageView image1 = (ImageView) findViewById(R.id.achievementView1);
+        if (FileTools.readSpecificAchievementFromFile(12,achievementdatafilePath)){
+            Bitmap undercoverPlatforms = produceScaledImage(R.drawable.achievementplatforms16);
+            image1.setImageBitmap(undercoverPlatforms);
+        } else{
+            image1.setImageBitmap(locked);
+        }
     }
 
     public void onClick(View v){
@@ -270,6 +253,14 @@ public class Achievements extends Activity{
                 break;
             case(R.id.achievementView10):
                 details.putExtra("Image", 10);
+                openDetails(details);
+                break;
+            case(R.id.achievementView11):
+                details.putExtra("Image", 11);
+                openDetails(details);
+                break;
+            case(R.id.achievementView12):
+                details.putExtra("Image", 12);
                 openDetails(details);
                 break;
         }

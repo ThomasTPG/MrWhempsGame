@@ -224,7 +224,6 @@ public class InfiniteLevelSelect extends Activity {
     public int readLevelFromFile(){
         String fileStored = readDataFromFile();
         String[] data;
-        System.out.println(fileStored);
 
         if (fileStored != "Error"){
             data = fileStored.split("=");
@@ -282,7 +281,6 @@ public class InfiniteLevelSelect extends Activity {
         String[] scores;
         String[] data;
         if (fileStored != "Error"){
-            System.out.println(fileStored);
             data = fileStored.split("=");
             scores = data[1].split("-");
             return Integer.parseInt(scores[level -1]);
@@ -322,7 +320,6 @@ public class InfiniteLevelSelect extends Activity {
         //for (int i = 0; i<numberOfLevels; i++){
           //  defaultFileContent = defaultFileContent + "0000-";
         //}
-        System.out.println(defaultFileContent);
         FileTools.writeToFile(defaultFileContent, leveldatafile);
 
     }

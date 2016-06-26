@@ -55,7 +55,7 @@ public class Level8 extends Sprite{
                 achievementUnlocked = true;
                 announceAchievement = true;
             }
-        };
+        }
         super.drawLowerBoundary(c);
     }
 

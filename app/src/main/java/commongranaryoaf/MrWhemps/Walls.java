@@ -50,6 +50,7 @@ public class Walls {
     int wallSpeedType;
     double wallXSpeed;
     int switchColours = 0;
+    int wallNumber = 0;
 
 
     public Walls(Canvas c, int ourlevel, Context context) {
@@ -78,7 +79,6 @@ public class Walls {
 
     public void setSpeedMultiplier(double sMult){
         speedMultiplier = sMult;
-        System.out.println(speedMultiplier);
     }
 
     public void setWallSpeedType(int type){
@@ -277,6 +277,9 @@ public class Walls {
             yArray[0][2] = (int) randX;
             yArray[0][3] = (int) randX + movingHardWidth;
             yArray[0][4] = 2 * ((int) Math.round(randomVariable)) - 1;
+            //We store how many hard partial walls have passed here (for the acheivement in level 16)
+            yArray[0][5] = wallNumber;
+            wallNumber = wallNumber + 1;
         } else if (randomVariable < (double) ( staticSandGPercentage + movingHardWallPercentage + hardWallPartialPercentage + movingNormalWallPercentage + hardWallCompletePercentage + partialNormalWallPercentage)/100) {
             yArray[0][1] = WallTypes.STOPANDGOSTATIONARY;
             double randX = Math.random() * (100 - staticSandGWidth);

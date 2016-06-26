@@ -227,8 +227,8 @@ public class CoinClass {
     public boolean level23achievement(){
         if (coinArray[6][0] == 0){
             if (coinArray[7][0] == 1){
-                if (coinArray[4][0] == 0){
-                    if (coinArray[3][0] == 1){
+                if (coinArray[3][0] == 0){
+                    if (coinArray[2][0] == 1){
                         int[][] testArray = {{1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
                                              {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
                                              {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
