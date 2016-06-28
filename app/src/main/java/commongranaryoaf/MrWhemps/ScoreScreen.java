@@ -66,7 +66,6 @@ public class ScoreScreen extends Activity {
             writeInfiniteScoreScreen();
         }
         if (achievements >= 0){
-            System.out.println("ACHIEVEMENT UNLOCKED!!!!!!!!!");
             Toast.makeText(this, getResources().getString(R.string.achievement_announcement), Toast.LENGTH_LONG).show();
         }
     }

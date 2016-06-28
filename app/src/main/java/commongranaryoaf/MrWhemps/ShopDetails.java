@@ -52,10 +52,12 @@ public class ShopDetails extends Activity {
         TextView description = (TextView) findViewById(R.id.description);
         TextView cost = (TextView) findViewById(R.id.cost);
         TextView yourcoins = (TextView) findViewById(R.id.yourcoins);
+        TextView requirements = (TextView) findViewById(R.id.requirement);
         yourcoins.setText("Your coins: " + FileTools.getYourCoins(coindatafilePath));
 
         switch (page){
             case (0):
+                requirements.setText(this.getString(R.string.no_requirements));
                 switch (item){
                     case(1):
                         Bitmap coinx2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.coin2xbutton);
@@ -127,6 +129,7 @@ public class ShopDetails extends Activity {
                         Bitmap newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_newspaper_button);
                         imageToBuy.setImageBitmap(newspaper);
                         description.setText(this.getString(R.string.newspaper_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.under_hard_platform_title));
                         StrCost = this.getString(R.string.newspaper_cost);
                         break;
                     case(3):

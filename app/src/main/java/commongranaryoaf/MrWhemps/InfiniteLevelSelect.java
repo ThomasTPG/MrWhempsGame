@@ -38,13 +38,19 @@ public class InfiniteLevelSelect extends Activity {
     int goldCount = 0;
     int silverCount = 0;
     int bronzeCount = 0;
+    boolean achievementMaxCoinsUnlocked;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         context = getApplicationContext();
         setUpFiles();
+        achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
+        achievementdatafile = new File(achievementdatafilePath);
+        achievementMaxCoinsUnlocked = FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath);
         levelsUnlocked = readLevelFromFile();
         int previousLevel = getIntent().getIntExtra("Level",0);
         int score;
@@ -57,7 +63,13 @@ public class InfiniteLevelSelect extends Activity {
             BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
             BigInteger Bscore = BigInteger.valueOf(score);
             Bscore = Bmultiplier.multiply(Bscore);
-            FileTools.writeCoinsToFile(Bscore,coindatafilePath,coindatafile);
+            FileTools.writeCoinsToFile(Bscore, coindatafilePath, coindatafile);
+            if (!achievementMaxCoinsUnlocked){
+                if(FileTools.getYourCoins(coindatafilePath).equals(FileTools.getMaxCoins())){
+                    FileTools.writeAchievementToFile(14,achievementdatafilePath,achievementdatafile);
+                    achievement = 14;
+                }
+            }
             int previousScore = readScoreFromFile(previousLevel);
             if (score>previousScore){
                 writeScoresFileData(previousLevel, score);
@@ -67,7 +79,7 @@ public class InfiniteLevelSelect extends Activity {
             scoreIntent.putExtra("Mode",1);
             scoreIntent.putExtra("PreviousScore",previousScore);
             scoreIntent.putExtra("CompletedLevel",previousLevel);
-            scoreIntent.putExtra("Achievement",achievement);
+            scoreIntent.putExtra("Achievement", achievement);
             startActivity(scoreIntent);
 
         }
@@ -197,7 +209,7 @@ public class InfiniteLevelSelect extends Activity {
             } else if (readScoreFromFile(ii) >= challengeScores.challengeScoreMedium()){
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
                 silverCount++;
-            } else if (readScoreFromFile(ii) > 0){
+            } else if (readScoreFromFile(ii) > challengeScores.challengeScoreEasy()){
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
                 bronzeCount++;
             } else{

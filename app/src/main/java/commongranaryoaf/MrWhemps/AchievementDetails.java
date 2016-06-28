@@ -44,6 +44,7 @@ public class AchievementDetails extends Activity {
 
     public void setImage(){
         ImageView achievementImage = (ImageView) findViewById(R.id.achievementIcon);
+        TextView title = (TextView) findViewById(R.id.title);
         TextView description = (TextView) findViewById(R.id.description);
 
         switch (page){
@@ -57,6 +58,7 @@ public class AchievementDetails extends Activity {
                             bronze1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(bronze1);
+                        title.setText(this.getString(R.string.bronze1_title));
                         description.setText(this.getString(R.string.bronze1_description));
                         break;
                     case(2):
@@ -67,6 +69,7 @@ public class AchievementDetails extends Activity {
                             bronze2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(bronze2);
+                        title.setText(this.getString(R.string.bronze2_title));
                         description.setText(this.getString(R.string.bronze2_description));
                         break;
                     case(3):
@@ -77,6 +80,7 @@ public class AchievementDetails extends Activity {
                             bronze3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(bronze3);
+                        title.setText(this.getString(R.string.bronze3_title));
                         description.setText(this.getString(R.string.bronze3_description));
                         break;
                     case(4):
@@ -87,6 +91,7 @@ public class AchievementDetails extends Activity {
                             silver1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(silver1);
+                        title.setText(this.getString(R.string.silver1_title));
                         description.setText(this.getString(R.string.silver1_description));
                         break;
                     case(5):
@@ -97,6 +102,7 @@ public class AchievementDetails extends Activity {
                             silver2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(silver2);
+                        title.setText(this.getString(R.string.silver2_title));
                         description.setText(this.getString(R.string.silver2_description));
                         break;
                     case(6):
@@ -107,6 +113,7 @@ public class AchievementDetails extends Activity {
                             silver3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(silver3);
+                        title.setText(this.getString(R.string.silver3_title));
                         description.setText(this.getString(R.string.silver3_description));
                         break;
                     case(7):
@@ -117,6 +124,7 @@ public class AchievementDetails extends Activity {
                             gold1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(gold1);
+                        title.setText(this.getString(R.string.gold1_title));
                         description.setText(this.getString(R.string.gold1_description));
                         break;
                     case(8):
@@ -127,6 +135,7 @@ public class AchievementDetails extends Activity {
                             gold2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(gold2);
+                        title.setText(this.getString(R.string.gold2_title));
                         description.setText(this.getString(R.string.gold2_description));
                         break;
                     case(9):
@@ -137,6 +146,7 @@ public class AchievementDetails extends Activity {
                             gold3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(gold3);
+                        title.setText(this.getString(R.string.gold3_title));
                         description.setText(this.getString(R.string.gold3_description));
                         break;
                     case(10):
@@ -147,6 +157,7 @@ public class AchievementDetails extends Activity {
                             art1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(art1);
+                        title.setText(this.getString(R.string.art1_title));
                         description.setText(this.getString(R.string.art1_description));
                         break;
                     case(11):
@@ -157,6 +168,7 @@ public class AchievementDetails extends Activity {
                             art2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(art2);
+                        title.setText(this.getString(R.string.art2_title));
                         description.setText(this.getString(R.string.art2_description));
                         break;
                     case(12):
@@ -167,6 +179,7 @@ public class AchievementDetails extends Activity {
                             art3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(art3);
+                        title.setText(this.getString(R.string.art3_title));
                         description.setText(this.getString(R.string.art3_description));
                         break;
 
@@ -183,7 +196,30 @@ public class AchievementDetails extends Activity {
                             underCoverPlatforms = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(underCoverPlatforms);
+                        title.setText(this.getString(R.string.under_hard_platform_title));
                         description.setText(this.getString(R.string.under_hard_platform_description));
+                        break;
+                    case(2):
+                        Bitmap droneCollision;
+                        if(FileTools.readSpecificAchievementFromFile(13,achievementdatafilePath)){
+                            droneCollision = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementdrones22);
+                        } else{
+                            droneCollision = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(droneCollision);
+                        title.setText(this.getString(R.string.drone_collision_title));
+                        description.setText(this.getString(R.string.drone_collision_description));
+                        break;
+                    case(3):
+                        Bitmap maxCoins;
+                        if(FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
+                            maxCoins = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementmaxcoins);
+                        } else{
+                            maxCoins = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(maxCoins);
+                        title.setText(this.getString(R.string.max_currency_title));
+                        description.setText(this.getString(R.string.max_currency_description));
                         break;
 
                 }

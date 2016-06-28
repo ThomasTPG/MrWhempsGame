@@ -185,6 +185,24 @@ public class Achievements extends Activity{
         } else{
             image1.setImageBitmap(locked);
         }
+
+        //Lvl22 platforms Achievement
+        ImageView image2 = (ImageView) findViewById(R.id.achievementView2);
+        if (FileTools.readSpecificAchievementFromFile(13,achievementdatafilePath)){
+            Bitmap droneCollision = produceScaledImage(R.drawable.achievementdrones22);
+            image2.setImageBitmap(droneCollision);
+        } else{
+            image2.setImageBitmap(locked);
+        }
+
+        //Max coins Achievement
+        ImageView image3 = (ImageView) findViewById(R.id.achievementView3);
+        if (FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
+            Bitmap maxCoins = produceScaledImage(R.drawable.achievementmaxcoins);
+            image3.setImageBitmap(maxCoins);
+        } else{
+            image3.setImageBitmap(locked);
+        }
     }
 
     public void onClick(View v){

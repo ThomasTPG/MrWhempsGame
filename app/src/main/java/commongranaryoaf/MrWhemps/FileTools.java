@@ -218,4 +218,8 @@ public class FileTools {
         }
     }
 
+    static public String getMaxCoins(){
+        return maxCoins;
+    }
+
 }
