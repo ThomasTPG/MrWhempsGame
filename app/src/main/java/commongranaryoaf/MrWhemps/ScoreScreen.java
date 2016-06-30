@@ -172,17 +172,18 @@ public class ScoreScreen extends Activity {
         TextView medalHeader = new TextView(this);
         medalHeader.setGravity(Gravity.CENTER);
         medalHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
+        int maxScore = Math.max(score, previousScore);
 
-        if (previousScore >= data.challengeScoreHard()){
+        if (maxScore >= data.challengeScoreHard()){
             medalHeader.setText("\nMedal: Gold");
         }
-        else if (previousScore >= data.challengeScoreMedium()){
+        else if (maxScore >= data.challengeScoreMedium()){
             medalHeader.setText("\nMedal: Silver\nNext medal at score: " + data.challengeScoreHard());
         }
-        else if (previousScore > 0){
+        else if (maxScore > data.challengeScoreEasy()){
             medalHeader.setText("\nMedal: Bronze\nNext medal at score: " + data.challengeScoreMedium());
         } else{
-            medalHeader.setText("\nMedal: None\nNext medal at score: 1");
+            medalHeader.setText("\nMedal: None\nNext medal at score: " + data.challengeScoreEasy());
         }
         mainScoreScreen.addView(medalHeader);
 

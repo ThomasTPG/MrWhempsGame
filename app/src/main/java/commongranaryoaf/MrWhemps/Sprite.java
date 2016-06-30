@@ -238,7 +238,6 @@ public class Sprite{
 
 
     public void checkHardWalls(Walls walls, int wallHeight){
-        System.out.println("Consecutive = " + lvl16AchCount);
         if (ySpeed > 0){
             int[][] wallArray = walls.getWallArray();
             for (int ii = 0; ii<wallArray.length; ii++){

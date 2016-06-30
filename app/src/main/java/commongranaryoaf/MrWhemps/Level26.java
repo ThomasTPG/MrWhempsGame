@@ -8,14 +8,14 @@ import java.io.File;
 /**
  * Created by Thomas on 06/02/2016.
  */
-public class Level24 extends Sprite{
+public class Level26 extends Sprite{
 
     CoinClass Coins;
     Walls walls;
     Context context;
     LaserGates laserGate;
 
-    public Level24(Context c, int level){
+    public Level26(Context c, int level){
         super(c,level);
         context = c;
     }
@@ -28,7 +28,7 @@ public class Level24 extends Sprite{
             super.createLevel(c);
             Coins = new CoinClass(c, spriteDimensions, CoinType.NORMAL, context);
             laserGate = new LaserGates(c,context, spriteDimensions);
-            laserGate.initializeLaserGate(30,60,30);
+            laserGate.initializeLaserGate(100,20,10);
         }
         Coins.onDraw();
         super.move(x);

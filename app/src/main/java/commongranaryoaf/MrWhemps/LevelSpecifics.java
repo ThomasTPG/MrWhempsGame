@@ -23,6 +23,10 @@ public class  LevelSpecifics {
                 return true;
             case (23):
                 return true;
+            case (28):
+                return true;
+            case(30):
+                return true;
             default:
                 return false;
         }

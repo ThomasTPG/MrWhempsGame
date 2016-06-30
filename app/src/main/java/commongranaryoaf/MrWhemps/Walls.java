@@ -14,7 +14,8 @@ import android.graphics.Rect;
 public class Walls {
 
 
-    int wallHeight = 25;
+    int wallHeight;
+    double wallHeightFactor = 24.5;
     int walls = 4;
     // In each row of the wall array, we store the y value, the type of wall, the start and end x value, the movement direction, extra details column
     int wallAttributes = 6;
@@ -25,7 +26,6 @@ public class Walls {
     long startTime;
     long timeNow;
     Canvas canvas;
-    int level;
     double YdistanceDifference = 0;
     double XdistanceDifference = 0;
     int howManyTypes = 1;
@@ -54,10 +54,10 @@ public class Walls {
 
 
     public Walls(Canvas c, int ourlevel, Context context) {
-        level = ourlevel;
         canvas = c;
         screenWidth = canvas.getWidth();
         screenHeight = canvas.getHeight();
+        wallHeight = (int) (screenHeight / wallHeightFactor);
         normalWallBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.normalwall);
         hardWallBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.hardwall);
         stopAndGoBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.stopandgosheet);
@@ -224,7 +224,6 @@ public class Walls {
                 break;
             case(WallTypes.SQUAREROOTSPEED):
                 wallSpeed = (float) (speedMultiplier * (1 + ( 0.4*Math.sqrt(timeElapsed / 100000000))));
-                System.out.println(wallSpeed);
                 break;
             default:
                 wallSpeed = (float) (1 + (0.4*Math.cbrt(timeElapsed / 100000000)));

@@ -270,7 +270,6 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
             timeNow = System.nanoTime();
             difference = timeNow-timeBefore;
 
-
             if (difference/1000000 - 1000/fps < 0){
                 try{
                     Thread.sleep(1000/fps - difference/1000000);

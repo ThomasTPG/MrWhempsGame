@@ -203,6 +203,15 @@ public class Achievements extends Activity{
         } else{
             image3.setImageBitmap(locked);
         }
+
+        //Max coins Achievement
+        ImageView image4 = (ImageView) findViewById(R.id.achievementView3);
+        if (FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
+            Bitmap maxCoins = produceScaledImage(R.drawable.achievementmaxcoins);
+            image3.setImageBitmap(maxCoins);
+        } else{
+            image3.setImageBitmap(locked);
+        }
     }
 
     public void onClick(View v){

@@ -196,20 +196,26 @@ public class Drone {
 
     public void huntPlayer(){
         if (Math.abs(spriteX-droneX)<droneDimension){
+            //Check if we are above/below the drone
             hunting = true;
             if (spriteY > droneY){
+                //If we are below, move down
                 droneDirection = 3;
             }
             else{
+                //If we are above, move the drone up
                 droneDirection = 1;
             }
         }
         if (Math.abs(spriteY-droneY)<droneDimension){
+            //Check if we are to the left or right of the drone
             hunting = true;
             if (spriteX > droneX){
+                //Move right
                 droneDirection = 2;
             }
             else{
+                //Move left
                 droneDirection = 4;
             }
         }
@@ -270,6 +276,7 @@ public class Drone {
         int xDistance = Math.abs(droneX-spriteX);
         int yDistance = Math.abs(droneY-spriteY);
         return (Math.pow(xDistance,2) + Math.pow(yDistance,2) < Math.pow(droneDimension/2 + spriteDimension/2,2));
+
     }
 
     public int getDroneX(){

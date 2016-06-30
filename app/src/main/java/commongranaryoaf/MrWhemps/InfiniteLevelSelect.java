@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -42,6 +43,7 @@ public class InfiniteLevelSelect extends Activity {
     String achievementfilename = "Achievement_data.txt";
     File achievementdatafile;
     String achievementdatafilePath;
+    boolean achievementAnnounce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,6 +233,71 @@ public class InfiniteLevelSelect extends Activity {
 
         // Display the view
         setContentView(v);
+        checkAchievements();
+    }
+
+    public void checkAchievements(){
+
+        //Check bronze achievements
+        if(!FileTools.readSpecificAchievementFromFile(0,achievementdatafilePath)){
+            if (bronzeCount + silverCount + goldCount >= 10){
+                FileTools.writeAchievementToFile(0,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(1,achievementdatafilePath)){
+            if (bronzeCount + silverCount + goldCount>= 20){
+                FileTools.writeAchievementToFile(1,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(2,achievementdatafilePath)){
+            if (bronzeCount +silverCount+goldCount>= 30){
+                FileTools.writeAchievementToFile(2,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        //Check silver achievements
+        if(!FileTools.readSpecificAchievementFromFile(3,achievementdatafilePath)){
+            if (silverCount +goldCount>= 10){
+                FileTools.writeAchievementToFile(3,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(4,achievementdatafilePath)){
+            if (silverCount+goldCount >= 20){
+                FileTools.writeAchievementToFile(4,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(5,achievementdatafilePath)){
+            if (silverCount +goldCount>= 30){
+                FileTools.writeAchievementToFile(5,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        //Check gold achievements
+        if(!FileTools.readSpecificAchievementFromFile(6,achievementdatafilePath)){
+            if (goldCount >= 10){
+                FileTools.writeAchievementToFile(6,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(7,achievementdatafilePath)){
+            if (goldCount >= 20){
+                FileTools.writeAchievementToFile(7,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(8,achievementdatafilePath)){
+            if (goldCount >= 30){
+                FileTools.writeAchievementToFile(8,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if (achievementAnnounce){
+            Toast.makeText(this, getResources().getString(R.string.achievement_announcement), Toast.LENGTH_LONG).show();
+        }
     }
 
     public int readLevelFromFile(){

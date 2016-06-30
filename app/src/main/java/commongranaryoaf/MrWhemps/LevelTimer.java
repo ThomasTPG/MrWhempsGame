@@ -70,6 +70,12 @@ public class LevelTimer {
                 return 300;
             case(17):
                 return 400;
+            case(23):
+                return 400;
+            case(28):
+                return 400;
+            case(30):
+                return 400;
             default:
                 return 0;
 

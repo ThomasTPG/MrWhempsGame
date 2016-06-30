@@ -25,7 +25,7 @@ public class MainLevelSelect extends Activity {
     int purchasables = 50;
     String leveldatafilename = "Level_data.txt";
     Context context;
-    int numberOfLevels = 24;
+    int numberOfLevels = 30;
     int levelsUnlocked;
     int lengthStoredScore = 4;
     File leveldatafile;

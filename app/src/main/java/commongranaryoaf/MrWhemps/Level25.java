@@ -8,14 +8,14 @@ import java.io.File;
 /**
  * Created by Thomas on 06/02/2016.
  */
-public class Level24 extends Sprite{
+public class Level25 extends Sprite{
 
     CoinClass Coins;
     Walls walls;
     Context context;
     LaserGates laserGate;
 
-    public Level24(Context c, int level){
+    public Level25(Context c, int level){
         super(c,level);
         context = c;
     }
@@ -23,7 +23,8 @@ public class Level24 extends Sprite{
     public void onDraw(Canvas c, float x){
         if(!levelCreated){
             walls = new Walls(c, level, context);
-            walls.initializeNormalMovingWall(100,30,0.2);
+            walls.initializeNormalMovingWall(50,40,0.2);
+            walls.initializeHardMovingWall(50,20,0.2);
             walls.setWallSpeedType(WallTypes.CUBEROOTSPEED);
             super.createLevel(c);
             Coins = new CoinClass(c, spriteDimensions, CoinType.NORMAL, context);
@@ -39,6 +40,7 @@ public class Level24 extends Sprite{
         checkSides();
         checkOrdinaryWalls();
         super.checkOrdinaryPartialWalls(walls);
+        super.checkHardWalls(walls,walls.getWallHeight());
         super.onDraw(c, x);
         Coins.onDraw();
         Coins.checkMultiplier(walls.getSpeedMultiplier());
