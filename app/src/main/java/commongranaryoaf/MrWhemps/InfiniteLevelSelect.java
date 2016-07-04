@@ -52,7 +52,7 @@ public class InfiniteLevelSelect extends Activity {
         setUpFiles();
         achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
         achievementdatafile = new File(achievementdatafilePath);
-        achievementMaxCoinsUnlocked = FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath);
+        achievementMaxCoinsUnlocked = FileTools.readSpecificAchievementFromFile(20,achievementdatafilePath);
         levelsUnlocked = readLevelFromFile();
         int previousLevel = getIntent().getIntExtra("Level",0);
         int score;
@@ -68,8 +68,8 @@ public class InfiniteLevelSelect extends Activity {
             FileTools.writeCoinsToFile(Bscore, coindatafilePath, coindatafile);
             if (!achievementMaxCoinsUnlocked){
                 if(FileTools.getYourCoins(coindatafilePath).equals(FileTools.getMaxCoins())){
-                    FileTools.writeAchievementToFile(14,achievementdatafilePath,achievementdatafile);
-                    achievement = 14;
+                    FileTools.writeAchievementToFile(20,achievementdatafilePath,achievementdatafile);
+                    achievement = 20;
                 }
             }
             int previousScore = readScoreFromFile(previousLevel);

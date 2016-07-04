@@ -36,7 +36,7 @@ public class Level17 extends Sprite{
             walls.setSpeedMultiplier(0.8);
             super.createLevel(c);
             Coins = new CoinClass(c, spriteDimensions,CoinType.EVERYWHERE, context);
-            achievementUnlocked = FileTools.readSpecificAchievementFromFile(10,achievementdatafilePath);
+            achievementUnlocked = FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath);
         }
         Coins.onDraw();
         super.move(x);
@@ -52,7 +52,7 @@ public class Level17 extends Sprite{
         super.drawLowerBoundary(c);
         if(!achievementUnlocked){
             if(Coins.level17achievement()){
-                FileTools.writeAchievementToFile(10,achievementdatafilePath,achievementdatafile);
+                FileTools.writeAchievementToFile(14,achievementdatafilePath,achievementdatafile);
                 achievementUnlocked = true;
                 announceAchievement = true;
             }

@@ -145,72 +145,90 @@ public class Achievements extends Activity{
         } else{
             image9.setImageBitmap(locked);
         }
-
-        //Art1 Achievement
-        ImageView image10 = (ImageView) findViewById(R.id.achievementView10);
-        if (FileTools.readSpecificAchievementFromFile(9,achievementdatafilePath)){
-            Bitmap art1 = produceScaledImage(R.drawable.achievementart1);
-            image10.setImageBitmap(art1);
-        } else{
-            image10.setImageBitmap(locked);
-        }
-
-        //Art2 Achievement
-        ImageView image11 = (ImageView) findViewById(R.id.achievementView11);
-        if (FileTools.readSpecificAchievementFromFile(10,achievementdatafilePath)){
-            Bitmap art2 = produceScaledImage(R.drawable.achievementart2);
-            image11.setImageBitmap(art2);
-        } else{
-            image11.setImageBitmap(locked);
-        }
-
-        //Art3 Achievement
-        ImageView image12 = (ImageView) findViewById(R.id.achievementView12);
-        if (FileTools.readSpecificAchievementFromFile(11,achievementdatafilePath)){
-            Bitmap art3 = produceScaledImage(R.drawable.achievementart3);
-            image12.setImageBitmap(art3);
-        } else{
-            image12.setImageBitmap(locked);
-        }
     }
 
     public void loadPage1(){
         Bitmap locked = produceScaledImage(R.drawable.lockedachievement);
 
-        //Lvl16 platforms Achievement
+        //Art1 Achievement (lvl 8)
         ImageView image1 = (ImageView) findViewById(R.id.achievementView1);
         if (FileTools.readSpecificAchievementFromFile(12,achievementdatafilePath)){
-            Bitmap undercoverPlatforms = produceScaledImage(R.drawable.achievementplatforms16);
-            image1.setImageBitmap(undercoverPlatforms);
+            Bitmap art1 = produceScaledImage(R.drawable.achievementart1);
+            image1.setImageBitmap(art1);
         } else{
             image1.setImageBitmap(locked);
         }
 
-        //Lvl22 platforms Achievement
+        //Art2 Achievement (lvl 11)
         ImageView image2 = (ImageView) findViewById(R.id.achievementView2);
         if (FileTools.readSpecificAchievementFromFile(13,achievementdatafilePath)){
-            Bitmap droneCollision = produceScaledImage(R.drawable.achievementdrones22);
-            image2.setImageBitmap(droneCollision);
+            Bitmap art2 = produceScaledImage(R.drawable.achievementart2);
+            image2.setImageBitmap(art2);
         } else{
             image2.setImageBitmap(locked);
         }
 
-        //Max coins Achievement
+        //Art3 Achievement (lvl 17)
         ImageView image3 = (ImageView) findViewById(R.id.achievementView3);
         if (FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
-            Bitmap maxCoins = produceScaledImage(R.drawable.achievementmaxcoins);
-            image3.setImageBitmap(maxCoins);
+            Bitmap art3 = produceScaledImage(R.drawable.achievementart3);
+            image3.setImageBitmap(art3);
         } else{
             image3.setImageBitmap(locked);
         }
 
-        //Max coins Achievement
-        ImageView image4 = (ImageView) findViewById(R.id.achievementView3);
-        if (FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
-            Bitmap maxCoins = produceScaledImage(R.drawable.achievementmaxcoins);
-            image3.setImageBitmap(maxCoins);
+        //Art4 Achievement (lvl 23)
+        ImageView image4 = (ImageView) findViewById(R.id.achievementView4);
+        if (FileTools.readSpecificAchievementFromFile(15,achievementdatafilePath)){
+            Bitmap art4 = produceScaledImage(R.drawable.achievementart4);
+            image4.setImageBitmap(art4);
         } else{
-            image3.setImageBitmap(locked);
+            image4.setImageBitmap(locked);
+        }
+
+        //Art5 Achievement (lvl 28)
+        ImageView image5 = (ImageView) findViewById(R.id.achievementView5);
+        if (FileTools.readSpecificAchievementFromFile(16,achievementdatafilePath)){
+            Bitmap art5 = produceScaledImage(R.drawable.achievementart5);
+            image5.setImageBitmap(art5);
+        } else{
+            image5.setImageBitmap(locked);
+        }
+
+        //Art6 Achievement (lvl 30)
+        ImageView image6 = (ImageView) findViewById(R.id.achievementView6);
+        if (FileTools.readSpecificAchievementFromFile(17,achievementdatafilePath)){
+            Bitmap art6 = produceScaledImage(R.drawable.achievementart6);
+            image6.setImageBitmap(art6);
+        } else{
+            image6.setImageBitmap(locked);
+        }
+
+        //Lvl16 platforms Achievement
+        ImageView image7 = (ImageView) findViewById(R.id.achievementView7);
+        if (FileTools.readSpecificAchievementFromFile(18,achievementdatafilePath)){
+            Bitmap undercoverPlatforms = produceScaledImage(R.drawable.achievementplatforms16);
+            image7.setImageBitmap(undercoverPlatforms);
+        } else{
+            image7.setImageBitmap(locked);
+        }
+
+        //Lvl22 platforms Achievement
+        ImageView image8 = (ImageView) findViewById(R.id.achievementView8);
+        if (FileTools.readSpecificAchievementFromFile(19,achievementdatafilePath)){
+            Bitmap droneCollision = produceScaledImage(R.drawable.achievementdrones22);
+            image8.setImageBitmap(droneCollision);
+        } else{
+            image8.setImageBitmap(locked);
+        }
+
+        //Max coins Achievement
+        ImageView image9 = (ImageView) findViewById(R.id.achievementView9);
+        if (FileTools.readSpecificAchievementFromFile(20,achievementdatafilePath)){
+            Bitmap maxCoins = produceScaledImage(R.drawable.achievementmaxcoins);
+            image9.setImageBitmap(maxCoins);
+        } else{
+            image9.setImageBitmap(locked);
         }
     }
 

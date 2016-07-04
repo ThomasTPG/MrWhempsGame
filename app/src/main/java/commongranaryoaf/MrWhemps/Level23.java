@@ -35,7 +35,7 @@ public class Level23 extends Sprite{
             super.createLevel(c);
             Coins = new CoinClass(c, spriteDimensions, CoinType.EVERYWHERE, context);
             drone1 = new Drone(cWidth,cHeight,context, spriteDimensions,1);
-            achievementUnlocked = FileTools.readSpecificAchievementFromFile(11,achievementdatafilePath);
+            achievementUnlocked = FileTools.readSpecificAchievementFromFile(15,achievementdatafilePath);
 
         }
         Coins.onDraw();
@@ -54,7 +54,7 @@ public class Level23 extends Sprite{
         drone1.onDraw(c, spriteX, spriteY);
         if(!achievementUnlocked){
             if(Coins.level23achievement()){
-                FileTools.writeAchievementToFile(11,achievementdatafilePath,achievementdatafile);
+                FileTools.writeAchievementToFile(15,achievementdatafilePath,achievementdatafile);
                 achievementUnlocked = true;
                 announceAchievement = true;
             }

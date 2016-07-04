@@ -51,6 +51,8 @@ public class GuardDrone {
     }
 
     public void initialisePosition(int initPos, int spriteInitX, int spriteInitY){
+        droneX = 0;
+        droneY = 0;
         double SECS = 0.3;
         alphaDif = (int) (MAXALPHA / (FPS* SECS));
         alpha = 0;
@@ -165,7 +167,6 @@ public class GuardDrone {
     public boolean checkLose(){
         int xDistance = Math.abs(droneX-spriteX);
         int yDistance = Math.abs(droneY-spriteY);
-        System.out.println("DRONE LOSE = " + (Math.pow(xDistance,2) + Math.pow(yDistance,2) < Math.pow(droneDimension/2 + spriteDimension/2,2)));
         return (Math.pow(xDistance,2) + Math.pow(yDistance,2) < Math.pow(droneDimension/2 + spriteDimension/2,2));
     }
 

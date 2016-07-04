@@ -35,7 +35,7 @@ public class Level8 extends Sprite{
             walls.initializePartialNormalWalls(20, 20);
             super.createLevel(c);
             Coins = new CoinClass(c, spriteDimensions, CoinType.EVERYWHERE, context);
-            achievementUnlocked = FileTools.readSpecificAchievementFromFile(9,achievementdatafilePath);
+            achievementUnlocked = FileTools.readSpecificAchievementFromFile(12,achievementdatafilePath);
 
         }
 
@@ -51,7 +51,7 @@ public class Level8 extends Sprite{
         Coins.checkCoins(spriteX, spriteY);
         if(!achievementUnlocked){
             if(Coins.level8achievement()){
-                FileTools.writeAchievementToFile(9,achievementdatafilePath,achievementdatafile);
+                FileTools.writeAchievementToFile(12,achievementdatafilePath,achievementdatafile);
                 achievementUnlocked = true;
                 announceAchievement = true;
             }

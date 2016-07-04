@@ -33,7 +33,7 @@ public class Level16 extends Sprite{
             walls.initializeHardMovingWall(100, 20, 0.2);
             super.createLevel(c);
             Coins = new CoinClass(c, spriteDimensions,CoinType.NORMAL, context);
-            achievementUnlocked = FileTools.readSpecificAchievementFromFile(12,achievementdatafilePath);
+            achievementUnlocked = FileTools.readSpecificAchievementFromFile(18,achievementdatafilePath);
         }
         Coins.onDraw();
         super.move(x);
@@ -49,7 +49,7 @@ public class Level16 extends Sprite{
         super.drawLowerBoundary(c);
         if(!achievementUnlocked){
             if(super.lvl16AchCount >= 6){
-                FileTools.writeAchievementToFile(12,achievementdatafilePath,achievementdatafile);
+                FileTools.writeAchievementToFile(18,achievementdatafilePath,achievementdatafile);
                 achievementUnlocked = true;
                 announceAchievement = true;
             }
