@@ -8,57 +8,51 @@ import java.io.File;
 /**
  * Created by Thomas on 06/02/2016.
  */
-public class Level23 extends Sprite{
+public class Level27 extends Sprite{
 
     CoinClass Coins;
     Walls walls;
     Context context;
+    LaserGates laserGate;
     Drone drone1;
-    String achievementfilename = "Achievement_data.txt";
-    File achievementdatafile;
-    String achievementdatafilePath;
-    boolean achievementUnlocked;
-    boolean announceAchievement = false;
 
-    public Level23(Context c, int level){
+    public Level27(Context c, int level){
         super(c,level);
         context = c;
-        achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
-        achievementdatafile = new File(achievementdatafilePath);
     }
 
     public void onDraw(Canvas c, float x){
         if(!levelCreated){
             walls = new Walls(c, level, context);
-            walls.initializeStopAndGoStationary(100, 100);
-            walls.setWallSpeedType(WallTypes.SQUAREROOTSPEED);
+            walls.initializePartialNormalWalls(40,40);
+            walls.initializeHardWallsPartial(10,20);
+            walls.initializeStopAndGoStationary(10,40);
+            walls.initializeNormalMovingWall(40,40,0.1);
+            walls.setWallSpeedType(WallTypes.CUBEROOTSPEED);
             super.createLevel(c);
-            Coins = new CoinClass(c, spriteDimensions, CoinType.EVERYWHERE, context);
+            Coins = new CoinClass(c, spriteDimensions, CoinType.NORMAL, context);
+            laserGate = new LaserGates(c,context, spriteDimensions);
+            laserGate.initializeLaserGate(30,60,30);
             drone1 = new Drone(cWidth,cHeight,context, spriteDimensions,1);
-            achievementUnlocked = FileTools.readSpecificAchievementFromFile(15,achievementdatafilePath);
-
         }
         Coins.onDraw();
         super.move(x);
         walls.updateWalls();
         walls.moveMovingWalls();
         walls.onDraw();
+        drone1.onDraw(c, spriteX, spriteY);
+        laserGate.onDraw(walls, spriteX, spriteY);
         checkSides();
         checkOrdinaryWalls();
+        super.checkOrdinaryPartialWalls(walls);
         super.checkStopAndGo(walls);
+        super.checkHardWalls(walls,walls.getWallHeight());
+        super.checkOrdinaryWalls(walls);
         super.onDraw(c, x);
         Coins.onDraw();
         Coins.checkMultiplier(walls.getSpeedMultiplier());
         Coins.checkCoins(spriteX, spriteY);
         super.drawLowerBoundary(c);
-        drone1.onDraw(c, spriteX, spriteY);
-        if(!achievementUnlocked){
-            if(Coins.level23achievement()){
-                FileTools.writeAchievementToFile(15,achievementdatafilePath,achievementdatafile);
-                achievementUnlocked = true;
-                announceAchievement = true;
-            }
-        };
     }
 
     public void checkOrdinaryWalls(){
@@ -78,18 +72,11 @@ public class Level23 extends Sprite{
     }
 
     public boolean getLose(){
-        return (super.getLose() || drone1.checkLose());
+        return (super.getLose() || laserGate.lose || drone1.checkLose());
     }
 
     public int getScore(){
         return Coins.getScore();
-    }
-
-    public int getAchievement(){
-        if (announceAchievement){
-            return 11;
-        }
-        return -1;
     }
 
     public float getSpeed() { return walls.wallSpeed; }

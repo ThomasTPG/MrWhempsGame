@@ -25,7 +25,7 @@ public class MainLevelSelect extends Activity {
     int purchasables = 50;
     String leveldatafilename = "Level_data.txt";
     Context context;
-    int numberOfLevels = 23;
+    int numberOfLevels = 30;
     int levelsUnlocked;
     int lengthStoredScore = 4;
     File leveldatafile;
@@ -36,12 +36,19 @@ public class MainLevelSelect extends Activity {
     int score;
     int multiplier;
     int achievement;
+    boolean achievementMaxCoinsUnlocked;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
         setUpFiles();
+        achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
+        achievementdatafile = new File(achievementdatafilePath);
+        achievementMaxCoinsUnlocked = FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath);
         int achievement = getIntent().getIntExtra("Achievement",-1);
         int previousLevel = getIntent().getIntExtra("Level",0);
         int win = getIntent().getIntExtra("Win",0);
@@ -57,6 +64,12 @@ public class MainLevelSelect extends Activity {
             BigInteger Bscore = BigInteger.valueOf(score);
             Bscore = Bmultiplier.multiply(Bscore);
             FileTools.writeCoinsToFile(Bscore,coindatafilePath,coindatafile);
+            if (!achievementMaxCoinsUnlocked){
+                if(FileTools.getYourCoins(coindatafilePath).equals(FileTools.getMaxCoins())){
+                    FileTools.writeAchievementToFile(14,achievementdatafilePath,achievementdatafile);
+                    achievement = 14;
+                }
+            }
             float timeRemaining = getIntent().getFloatExtra("TimeRemaining",0);
             final Intent scoreIntent = new Intent("thomas.SCORESCREEN");
             scoreIntent.putExtra("Score", score);

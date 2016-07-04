@@ -14,7 +14,8 @@ import android.graphics.Rect;
 public class Walls {
 
 
-    int wallHeight = 25;
+    int wallHeight;
+    double wallHeightFactor = 24.5;
     int walls = 4;
     // In each row of the wall array, we store the y value, the type of wall, the start and end x value, the movement direction, extra details column
     int wallAttributes = 6;
@@ -25,7 +26,6 @@ public class Walls {
     long startTime;
     long timeNow;
     Canvas canvas;
-    int level;
     double YdistanceDifference = 0;
     double XdistanceDifference = 0;
     int howManyTypes = 1;
@@ -50,13 +50,14 @@ public class Walls {
     int wallSpeedType;
     double wallXSpeed;
     int switchColours = 0;
+    int wallNumber = 0;
 
 
     public Walls(Canvas c, int ourlevel, Context context) {
-        level = ourlevel;
         canvas = c;
         screenWidth = canvas.getWidth();
         screenHeight = canvas.getHeight();
+        wallHeight = (int) (screenHeight / wallHeightFactor);
         normalWallBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.normalwall);
         hardWallBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.hardwall);
         stopAndGoBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.stopandgosheet);
@@ -78,7 +79,6 @@ public class Walls {
 
     public void setSpeedMultiplier(double sMult){
         speedMultiplier = sMult;
-        System.out.println(speedMultiplier);
     }
 
     public void setWallSpeedType(int type){
@@ -224,7 +224,6 @@ public class Walls {
                 break;
             case(WallTypes.SQUAREROOTSPEED):
                 wallSpeed = (float) (speedMultiplier * (1 + ( 0.4*Math.sqrt(timeElapsed / 100000000))));
-                System.out.println(wallSpeed);
                 break;
             default:
                 wallSpeed = (float) (1 + (0.4*Math.cbrt(timeElapsed / 100000000)));
@@ -277,6 +276,9 @@ public class Walls {
             yArray[0][2] = (int) randX;
             yArray[0][3] = (int) randX + movingHardWidth;
             yArray[0][4] = 2 * ((int) Math.round(randomVariable)) - 1;
+            //We store how many hard partial walls have passed here (for the acheivement in level 16)
+            yArray[0][5] = wallNumber;
+            wallNumber = wallNumber + 1;
         } else if (randomVariable < (double) ( staticSandGPercentage + movingHardWallPercentage + hardWallPartialPercentage + movingNormalWallPercentage + hardWallCompletePercentage + partialNormalWallPercentage)/100) {
             yArray[0][1] = WallTypes.STOPANDGOSTATIONARY;
             double randX = Math.random() * (100 - staticSandGWidth);

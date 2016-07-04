@@ -30,6 +30,8 @@ public class Drone {
     int bitmapHeight;
     float startTime = 0;
     int spriteDimension;
+    int eyeCount = 0;
+    int whichEye;
 
     public Drone(int canvasWidth, int canvasHeight, Context context, int spriteDim, int initPos){
         droneImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.dronesheet);
@@ -84,7 +86,6 @@ public class Drone {
     }
 
     public void onDraw(Canvas c, int x, int y){
-        System.out.println("dronedir = " + droneDirection);
         spriteX = x;
         spriteY = y;
         if (huntingWait) {
@@ -96,37 +97,47 @@ public class Drone {
         move();
         droneCollision();
         position = new Rect(droneX -droneDimension/2, droneY -droneDimension / 2, droneX + droneDimension / 2, droneY + droneDimension/2);
+        eyeCount ++;
+        if (eyeCount%40 < 10){
+            whichEye = 2;
+        } else if(eyeCount%40 < 20){
+            whichEye = 1;
+        } else if(eyeCount%40 < 30){
+            whichEye = 3;
+        } else{
+            whichEye = 1;
+        }
         switch (droneDirection){
             case(1):
                 if (hunting || huntingWait){
-                    whichImage = new Rect(0,0,bitmapWidth/4,bitmapHeight/2);
+                    whichImage = new Rect((4*whichEye-4) * bitmapWidth/12,0,(4*whichEye - 3) * bitmapWidth/12,bitmapHeight/2);
                 }
                 else{
-                    whichImage = new Rect(0,bitmapHeight/2,bitmapWidth/4,bitmapHeight);
+                    whichImage = new Rect((4*whichEye-4) * bitmapWidth/12,bitmapHeight/2,(4*whichEye-3) * bitmapWidth/12,bitmapHeight);
                 }
                 break;
             case(2):
-                if(hunting || huntingWait){
-                    whichImage = new Rect(bitmapWidth/4,0,bitmapWidth/2,bitmapHeight/2);
+                if (hunting || huntingWait){
+                    whichImage = new Rect((4*whichEye-3) * bitmapWidth/12,0,(4*whichEye - 2) * bitmapWidth/12,bitmapHeight/2);
                 }
                 else{
-                    whichImage = new Rect(bitmapWidth/4,bitmapHeight/2,bitmapWidth/2,bitmapHeight);
+                    whichImage = new Rect((4*whichEye-3) * bitmapWidth/12,bitmapHeight/2,(4*whichEye-2) * bitmapWidth/12,bitmapHeight);
                 }
                 break;
             case(3):
                 if (hunting || huntingWait){
-                    whichImage = new Rect(bitmapWidth/2,0,3*bitmapWidth/4,bitmapHeight/2);
+                    whichImage = new Rect((4*whichEye-2) * bitmapWidth/12,0,(4*whichEye - 1) * bitmapWidth/12,bitmapHeight/2);
                 }
                 else{
-                    whichImage = new Rect(bitmapWidth/2,bitmapHeight/2,3*bitmapWidth/4,bitmapHeight);
+                    whichImage = new Rect((4*whichEye-2) * bitmapWidth/12,bitmapHeight/2,(4*whichEye-1) * bitmapWidth/12,bitmapHeight);
                 }
                 break;
             case(4):
                 if (hunting || huntingWait){
-                    whichImage = new Rect(3*bitmapWidth/4,0,bitmapWidth,bitmapHeight/2);
+                    whichImage = new Rect((4*whichEye-1) * bitmapWidth/12,0,(4*whichEye) * bitmapWidth/12,bitmapHeight/2);
                 }
                 else{
-                    whichImage = new Rect(3*bitmapWidth/4,bitmapHeight/2,bitmapWidth,bitmapHeight);
+                    whichImage = new Rect((4*whichEye-1) * bitmapWidth/12,bitmapHeight/2,(4*whichEye) * bitmapWidth/12,bitmapHeight);
                 }
                 break;
             default:
@@ -185,20 +196,26 @@ public class Drone {
 
     public void huntPlayer(){
         if (Math.abs(spriteX-droneX)<droneDimension){
+            //Check if we are above/below the drone
             hunting = true;
             if (spriteY > droneY){
+                //If we are below, move down
                 droneDirection = 3;
             }
             else{
+                //If we are above, move the drone up
                 droneDirection = 1;
             }
         }
         if (Math.abs(spriteY-droneY)<droneDimension){
+            //Check if we are to the left or right of the drone
             hunting = true;
             if (spriteX > droneX){
+                //Move right
                 droneDirection = 2;
             }
             else{
+                //Move left
                 droneDirection = 4;
             }
         }
@@ -258,12 +275,21 @@ public class Drone {
     public boolean checkLose(){
         int xDistance = Math.abs(droneX-spriteX);
         int yDistance = Math.abs(droneY-spriteY);
-        if (Math.pow(xDistance,2) + Math.pow(yDistance,2) < Math.pow(droneDimension/2 + spriteDimension/2,2)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (Math.pow(xDistance,2) + Math.pow(yDistance,2) < Math.pow(droneDimension/2 + spriteDimension/2,2));
+
     }
+
+    public int getDroneX(){
+        return droneX;
+    }
+
+    public int getDroneY(){
+        return droneY;
+    }
+
+    public int getDroneDimension(){
+        return droneDimension;
+    }
+
 
 }

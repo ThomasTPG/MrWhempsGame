@@ -163,6 +163,7 @@ public class GameMain extends Activity implements View.OnTouchListener{
 
         }
         menuIntent.putExtra("Score", score);
+        getAchievement();
         menuIntent.putExtra("Achievement", achievement);
 
         gameView.onPause();

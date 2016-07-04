@@ -31,6 +31,10 @@ public class Sprite{
     boolean levelCreated = false;
     int cWidth;
     int cHeight;
+    int lvl16AchCount = -1;
+    int lvl16AchPreviousWall = -10;
+    String coindatafilename = "Coin_data.txt";
+    String coindatafilePath;
 
 
     int level;
@@ -39,7 +43,23 @@ public class Sprite{
 
 
     public Sprite(Context context,int ourLevel) {
-        character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite1);
+        coindatafilePath = context.getFilesDir() + "/" + coindatafilename;
+        int costume = FileTools.readCostumeFromFile(coindatafilePath);
+        switch (costume){
+            case(0):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite_moustache);
+                break;
+            case(1):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite_newspaper);
+                break;
+            case(2):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite_blacktie);
+                break;
+            default:
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite1);
+                break;
+
+        }
         bitmapWidth = character.getWidth();
         bitmapHeight = character.getHeight();
         spriteX =0;
@@ -48,6 +68,7 @@ public class Sprite{
         xSpeed = 0;
         level = ourLevel;
         levelSpecifics = new LevelSpecifics(level);
+
 
     }
 
@@ -267,7 +288,20 @@ public class Sprite{
                             if ((wallArray[ii][0] + wallHeight > spriteY - spriteDimensions/2) && (wallArray[ii][0] + wallHeight < spriteY)){
                                 spriteY = wallArray[ii][0] + wallHeight + spriteDimensions/2;
                                 inAir = false;
+                                if (wallArray[ii][5] == lvl16AchPreviousWall + 1){
+
+                                    lvl16AchCount++;
+                                    lvl16AchPreviousWall++;
+                                } else if (wallArray[ii][5] == lvl16AchPreviousWall){
+
+                                }
+                                else {
+                                    lvl16AchCount = 1;
+                                    lvl16AchPreviousWall = wallArray[ii][5];
+
+                                }
                             }
+
                         }
                         break;
                     default:
@@ -276,6 +310,7 @@ public class Sprite{
 
             }
         }
+
     }
 
     public void checkSides(){
@@ -298,7 +333,6 @@ public class Sprite{
             spriteY = spriteDimensions/2+gravity;
         }
     }
-
 
     public boolean getLose(){
         return lose;

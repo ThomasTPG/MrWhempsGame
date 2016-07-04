@@ -198,6 +198,32 @@ public class CoinClass {
         return false;
     }
 
+    public boolean level11achievement(){
+        if (coinArray[2][2] == 0){
+            if (coinArray[3][3] == 1){
+                if (coinArray[6][6] == 1){
+                    if (coinArray[7][7] == 0){
+                        int[][] testArray = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+                                             {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+                                             {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+                                             {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+                        if (Arrays.deepEquals(testArray,coinArray)){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean level17achievement(){
         if (coinArray[1][1] == 0){
             if (coinArray[0][0] == 1){
@@ -227,8 +253,8 @@ public class CoinClass {
     public boolean level23achievement(){
         if (coinArray[6][0] == 0){
             if (coinArray[7][0] == 1){
-                if (coinArray[4][0] == 0){
-                    if (coinArray[3][0] == 1){
+                if (coinArray[3][0] == 0){
+                    if (coinArray[2][0] == 1){
                         int[][] testArray = {{1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
                                              {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
                                              {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
@@ -239,6 +265,59 @@ public class CoinClass {
                                              {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
                                              {1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
                                              {1, 1, 1, 0, 0, 0, 0, 1, 1, 1}};
+                        if (Arrays.deepEquals(testArray,coinArray)){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean level28achievement(){
+        if (coinArray[0][4] == 1){
+            if (coinArray[0][5] == 0){
+                if (coinArray[9][4] == 1){
+                    if (coinArray[9][5] == 0){
+                        int[][] testArray = {{1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+                                             {1, 1, 1, 1, 1, 0, 0, 0, 0, 0}};
+                        if (Arrays.deepEquals(testArray,coinArray)){
+                            return true;
+                        }
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean level30achievement(){
+        if (coinArray[3][0] == 1){
+            if (coinArray[4][0] == 0){
+                if (coinArray[5][0] == 0){
+                    if (coinArray[6][0] == 1){
+                        //Annoyingly, we print the coin array transpose to the one beneath - can't be bothered to fix right now
+                        int[][] testArray = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
                         if (Arrays.deepEquals(testArray,coinArray)){
                             return true;
                         }

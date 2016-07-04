@@ -117,6 +117,29 @@ public class FileTools {
 
     }
 
+
+    static public int readCostumeFromFile(String filePath){
+        String fileStored;
+        try {
+            FileInputStream ourFile = new FileInputStream(new File(filePath));
+            InputStreamReader reader = new InputStreamReader(ourFile);
+            char[] buffer = new char[maxCoins.length() + 1 + 4*12];
+            reader.read(buffer);
+            fileStored = new String(buffer);
+        } catch (Exception e){
+            e.printStackTrace();
+            fileStored = "Error";
+        }
+        String[] splitFile1 = fileStored.split("=");
+        String[] splitItems = splitFile1[1].split("-");
+        for (int ii = 12; ii < 24; ii++){
+            if (splitItems[ii].contains("2")){
+                return (ii - 12);
+            }
+        }
+        return -1;
+    }
+
     static public String getYourCoins(String filePath){
         return FileTools.coinFormatter(FileTools.readCoinsFromFile(filePath).substring(0,12));
     }
@@ -193,6 +216,10 @@ public class FileTools {
             }
             writeToFile(achData,file);
         }
+    }
+
+    static public String getMaxCoins(){
+        return maxCoins;
     }
 
 }

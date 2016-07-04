@@ -44,6 +44,7 @@ public class AchievementDetails extends Activity {
 
     public void setImage(){
         ImageView achievementImage = (ImageView) findViewById(R.id.achievementIcon);
+        TextView title = (TextView) findViewById(R.id.title);
         TextView description = (TextView) findViewById(R.id.description);
 
         switch (page){
@@ -57,6 +58,7 @@ public class AchievementDetails extends Activity {
                             bronze1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(bronze1);
+                        title.setText(this.getString(R.string.bronze1_title));
                         description.setText(this.getString(R.string.bronze1_description));
                         break;
                     case(2):
@@ -67,6 +69,7 @@ public class AchievementDetails extends Activity {
                             bronze2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(bronze2);
+                        title.setText(this.getString(R.string.bronze2_title));
                         description.setText(this.getString(R.string.bronze2_description));
                         break;
                     case(3):
@@ -77,6 +80,7 @@ public class AchievementDetails extends Activity {
                             bronze3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(bronze3);
+                        title.setText(this.getString(R.string.bronze3_title));
                         description.setText(this.getString(R.string.bronze3_description));
                         break;
                     case(4):
@@ -87,6 +91,7 @@ public class AchievementDetails extends Activity {
                             silver1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(silver1);
+                        title.setText(this.getString(R.string.silver1_title));
                         description.setText(this.getString(R.string.silver1_description));
                         break;
                     case(5):
@@ -97,6 +102,7 @@ public class AchievementDetails extends Activity {
                             silver2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(silver2);
+                        title.setText(this.getString(R.string.silver2_title));
                         description.setText(this.getString(R.string.silver2_description));
                         break;
                     case(6):
@@ -107,6 +113,7 @@ public class AchievementDetails extends Activity {
                             silver3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(silver3);
+                        title.setText(this.getString(R.string.silver3_title));
                         description.setText(this.getString(R.string.silver3_description));
                         break;
                     case(7):
@@ -117,6 +124,7 @@ public class AchievementDetails extends Activity {
                             gold1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(gold1);
+                        title.setText(this.getString(R.string.gold1_title));
                         description.setText(this.getString(R.string.gold1_description));
                         break;
                     case(8):
@@ -127,6 +135,7 @@ public class AchievementDetails extends Activity {
                             gold2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(gold2);
+                        title.setText(this.getString(R.string.gold2_title));
                         description.setText(this.getString(R.string.gold2_description));
                         break;
                     case(9):
@@ -137,37 +146,8 @@ public class AchievementDetails extends Activity {
                             gold3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
                         }
                         achievementImage.setImageBitmap(gold3);
+                        title.setText(this.getString(R.string.gold3_title));
                         description.setText(this.getString(R.string.gold3_description));
-                        break;
-                    case(10):
-                        Bitmap art1;
-                        if(FileTools.readSpecificAchievementFromFile(9,achievementdatafilePath)){
-                            art1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart1);
-                        } else{
-                            art1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
-                        }
-                        achievementImage.setImageBitmap(art1);
-                        description.setText(this.getString(R.string.art1_description));
-                        break;
-                    case(11):
-                        Bitmap art2;
-                        if(FileTools.readSpecificAchievementFromFile(10,achievementdatafilePath)){
-                            art2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart2);
-                        } else{
-                            art2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
-                        }
-                        achievementImage.setImageBitmap(art2);
-                        description.setText(this.getString(R.string.art2_description));
-                        break;
-                    case(12):
-                        Bitmap art3;
-                        if(FileTools.readSpecificAchievementFromFile(11,achievementdatafilePath)){
-                            art3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart3);
-                        } else{
-                            art3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
-                        }
-                        achievementImage.setImageBitmap(art3);
-                        description.setText(this.getString(R.string.art3_description));
                         break;
 
 
@@ -176,19 +156,103 @@ public class AchievementDetails extends Activity {
             case(1):
                 switch (item){
                     case(1):
-                        Bitmap facialhair = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_moustache_button);
-                        achievementImage.setImageBitmap(facialhair);
-                        description.setText(this.getString(R.string.facial_hair_description));
+                        Bitmap art1;
+                        if(FileTools.readSpecificAchievementFromFile(12,achievementdatafilePath)){
+                            art1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart1);
+                        } else{
+                            art1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(art1);
+                        title.setText(this.getString(R.string.art1_title));
+                        description.setText(this.getString(R.string.art1_description));
                         break;
                     case(2):
-                        Bitmap newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_newspaper_button);
-                        achievementImage.setImageBitmap(newspaper);
-                        description.setText(this.getString(R.string.newspaper_description));
+                        Bitmap art2;
+                        if(FileTools.readSpecificAchievementFromFile(13,achievementdatafilePath)){
+                            art2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart2);
+                        } else{
+                            art2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(art2);
+                        title.setText(this.getString(R.string.art2_title));
+                        description.setText(this.getString(R.string.art2_description));
                         break;
                     case(3):
-                        Bitmap blacktie = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_blacktie_button);
-                        achievementImage.setImageBitmap(blacktie);
-                        description.setText(this.getString(R.string.black_tie_description));
+                        Bitmap art3;
+                        if(FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
+                            art3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart3);
+                        } else{
+                            art3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(art3);
+                        title.setText(this.getString(R.string.art3_title));
+                        description.setText(this.getString(R.string.art3_description));
+                        break;
+                    case(4):
+                        Bitmap art4;
+                        if(FileTools.readSpecificAchievementFromFile(15,achievementdatafilePath)){
+                            art4 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart4);
+                        } else{
+                            art4 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(art4);
+                        title.setText(this.getString(R.string.art4_title));
+                        description.setText(this.getString(R.string.art4_description));
+                        break;
+                    case(5):
+                        Bitmap art5;
+                        if(FileTools.readSpecificAchievementFromFile(16,achievementdatafilePath)){
+                            art5 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart5);
+                        } else{
+                            art5 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(art5);
+                        title.setText(this.getString(R.string.art5_title));
+                        description.setText(this.getString(R.string.art5_description));
+                        break;
+                    case(6):
+                        Bitmap art6;
+                        if(FileTools.readSpecificAchievementFromFile(17,achievementdatafilePath)){
+                            art6 = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementart6);
+                        } else{
+                            art6 = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(art6);
+                        title.setText(this.getString(R.string.art6_title));
+                        description.setText(this.getString(R.string.art6_description));
+                        break;
+                    case(7):
+                        Bitmap underCoverPlatforms;
+                        if(FileTools.readSpecificAchievementFromFile(18,achievementdatafilePath)){
+                            underCoverPlatforms = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementplatforms16);
+                        } else{
+                            underCoverPlatforms = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(underCoverPlatforms);
+                        title.setText(this.getString(R.string.under_hard_platform_title));
+                        description.setText(this.getString(R.string.under_hard_platform_description));
+                        break;
+                    case(8):
+                        Bitmap droneCollision;
+                        if(FileTools.readSpecificAchievementFromFile(19,achievementdatafilePath)){
+                            droneCollision = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementdrones22);
+                        } else{
+                            droneCollision = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(droneCollision);
+                        title.setText(this.getString(R.string.drone_collision_title));
+                        description.setText(this.getString(R.string.drone_collision_description));
+                        break;
+                    case(9):
+                        Bitmap maxCoins;
+                        if(FileTools.readSpecificAchievementFromFile(20,achievementdatafilePath)){
+                            maxCoins = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementmaxcoins);
+                        } else{
+                            maxCoins = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(maxCoins);
+                        title.setText(this.getString(R.string.max_currency_title));
+                        description.setText(this.getString(R.string.max_currency_description));
                         break;
 
                 }

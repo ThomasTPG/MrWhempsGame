@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,13 +39,20 @@ public class InfiniteLevelSelect extends Activity {
     int goldCount = 0;
     int silverCount = 0;
     int bronzeCount = 0;
+    boolean achievementMaxCoinsUnlocked;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
+    boolean achievementAnnounce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         context = getApplicationContext();
         setUpFiles();
+        achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
+        achievementdatafile = new File(achievementdatafilePath);
+        achievementMaxCoinsUnlocked = FileTools.readSpecificAchievementFromFile(20,achievementdatafilePath);
         levelsUnlocked = readLevelFromFile();
         int previousLevel = getIntent().getIntExtra("Level",0);
         int score;
@@ -57,7 +65,13 @@ public class InfiniteLevelSelect extends Activity {
             BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
             BigInteger Bscore = BigInteger.valueOf(score);
             Bscore = Bmultiplier.multiply(Bscore);
-            FileTools.writeCoinsToFile(Bscore,coindatafilePath,coindatafile);
+            FileTools.writeCoinsToFile(Bscore, coindatafilePath, coindatafile);
+            if (!achievementMaxCoinsUnlocked){
+                if(FileTools.getYourCoins(coindatafilePath).equals(FileTools.getMaxCoins())){
+                    FileTools.writeAchievementToFile(20,achievementdatafilePath,achievementdatafile);
+                    achievement = 20;
+                }
+            }
             int previousScore = readScoreFromFile(previousLevel);
             if (score>previousScore){
                 writeScoresFileData(previousLevel, score);
@@ -67,7 +81,7 @@ public class InfiniteLevelSelect extends Activity {
             scoreIntent.putExtra("Mode",1);
             scoreIntent.putExtra("PreviousScore",previousScore);
             scoreIntent.putExtra("CompletedLevel",previousLevel);
-            scoreIntent.putExtra("Achievement",achievement);
+            scoreIntent.putExtra("Achievement", achievement);
             startActivity(scoreIntent);
 
         }
@@ -197,7 +211,7 @@ public class InfiniteLevelSelect extends Activity {
             } else if (readScoreFromFile(ii) >= challengeScores.challengeScoreMedium()){
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
                 silverCount++;
-            } else if (readScoreFromFile(ii) > 0){
+            } else if (readScoreFromFile(ii) > challengeScores.challengeScoreEasy()){
                 horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
                 bronzeCount++;
             } else{
@@ -219,12 +233,76 @@ public class InfiniteLevelSelect extends Activity {
 
         // Display the view
         setContentView(v);
+        checkAchievements();
+    }
+
+    public void checkAchievements(){
+
+        //Check bronze achievements
+        if(!FileTools.readSpecificAchievementFromFile(0,achievementdatafilePath)){
+            if (bronzeCount + silverCount + goldCount >= 10){
+                FileTools.writeAchievementToFile(0,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(1,achievementdatafilePath)){
+            if (bronzeCount + silverCount + goldCount>= 20){
+                FileTools.writeAchievementToFile(1,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(2,achievementdatafilePath)){
+            if (bronzeCount +silverCount+goldCount>= 30){
+                FileTools.writeAchievementToFile(2,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        //Check silver achievements
+        if(!FileTools.readSpecificAchievementFromFile(3,achievementdatafilePath)){
+            if (silverCount +goldCount>= 10){
+                FileTools.writeAchievementToFile(3,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(4,achievementdatafilePath)){
+            if (silverCount+goldCount >= 20){
+                FileTools.writeAchievementToFile(4,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(5,achievementdatafilePath)){
+            if (silverCount +goldCount>= 30){
+                FileTools.writeAchievementToFile(5,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        //Check gold achievements
+        if(!FileTools.readSpecificAchievementFromFile(6,achievementdatafilePath)){
+            if (goldCount >= 10){
+                FileTools.writeAchievementToFile(6,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(7,achievementdatafilePath)){
+            if (goldCount >= 20){
+                FileTools.writeAchievementToFile(7,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if(!FileTools.readSpecificAchievementFromFile(8,achievementdatafilePath)){
+            if (goldCount >= 30){
+                FileTools.writeAchievementToFile(8,achievementdatafilePath,achievementdatafile);
+                achievementAnnounce = true;
+            }
+        }
+        if (achievementAnnounce){
+            Toast.makeText(this, getResources().getString(R.string.achievement_announcement), Toast.LENGTH_LONG).show();
+        }
     }
 
     public int readLevelFromFile(){
         String fileStored = readDataFromFile();
         String[] data;
-        System.out.println(fileStored);
 
         if (fileStored != "Error"){
             data = fileStored.split("=");
@@ -282,7 +360,6 @@ public class InfiniteLevelSelect extends Activity {
         String[] scores;
         String[] data;
         if (fileStored != "Error"){
-            System.out.println(fileStored);
             data = fileStored.split("=");
             scores = data[1].split("-");
             return Integer.parseInt(scores[level -1]);
@@ -322,7 +399,6 @@ public class InfiniteLevelSelect extends Activity {
         //for (int i = 0; i<numberOfLevels; i++){
           //  defaultFileContent = defaultFileContent + "0000-";
         //}
-        System.out.println(defaultFileContent);
         FileTools.writeToFile(defaultFileContent, leveldatafile);
 
     }

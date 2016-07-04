@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.util.logging.Level;
@@ -32,6 +33,7 @@ public class ScoreScreen extends Activity {
     String coindatafilePath;
     int multiplier;
     LevelSpecifics data;
+    int achievements;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class ScoreScreen extends Activity {
         mode = getIntent().getIntExtra("Mode", 0);
         ll = (LinearLayout) findViewById(R.id.mainlayoutscorescreen);
         completedLevel = getIntent().getIntExtra("CompletedLevel",1);
+        achievements = getIntent().getIntExtra("Achievement",-1);
         data = new LevelSpecifics(completedLevel);
         data2 = new LevelTimer(completedLevel);
         bonusLvl = data.isBonusLevel();
@@ -61,6 +64,9 @@ public class ScoreScreen extends Activity {
             score = getIntent().getIntExtra("Score", 0);
             previousScore = getIntent().getIntExtra("PreviousScore", 0);
             writeInfiniteScoreScreen();
+        }
+        if (achievements >= 0){
+            Toast.makeText(this, getResources().getString(R.string.achievement_announcement), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -166,17 +172,18 @@ public class ScoreScreen extends Activity {
         TextView medalHeader = new TextView(this);
         medalHeader.setGravity(Gravity.CENTER);
         medalHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
+        int maxScore = Math.max(score, previousScore);
 
-        if (previousScore >= data.challengeScoreHard()){
+        if (maxScore >= data.challengeScoreHard()){
             medalHeader.setText("\nMedal: Gold");
         }
-        else if (previousScore >= data.challengeScoreMedium()){
+        else if (maxScore >= data.challengeScoreMedium()){
             medalHeader.setText("\nMedal: Silver\nNext medal at score: " + data.challengeScoreHard());
         }
-        else if (previousScore > 0){
+        else if (maxScore > data.challengeScoreEasy()){
             medalHeader.setText("\nMedal: Bronze\nNext medal at score: " + data.challengeScoreMedium());
         } else{
-            medalHeader.setText("\nMedal: None\nNext medal at score: 1");
+            medalHeader.setText("\nMedal: None\nNext medal at score: " + data.challengeScoreEasy());
         }
         mainScoreScreen.addView(medalHeader);
 
