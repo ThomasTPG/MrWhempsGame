@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.io.File;
@@ -31,6 +33,14 @@ public class Achievements extends Activity{
         achievementdatafile = new File(achievementdatafilePath);
         page = getIntent().getIntExtra("Page",0);
         setImageButtons();
+
+        //Create the background
+        LinearLayout main_layout = (LinearLayout) findViewById(R.id.achievements_background);
+        main_layout.setBackgroundResource(R.drawable.animated_menu_background);
+
+        AnimationDrawable frameAnimation = (AnimationDrawable) main_layout.getBackground();
+
+        frameAnimation.start();
     }
 
     public Bitmap produceScaledImage(int id){

@@ -22,7 +22,7 @@
             android:name="commongranaryoaf.MrWhemps.GameMain"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="thomas.GAMEMAIN" />
 
@@ -33,7 +33,7 @@
             android:name="commongranaryoaf.MrWhemps.Settings"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="thomas.SETTINGS" />
 
@@ -44,7 +44,7 @@
             android:name="commongranaryoaf.MrWhemps.Shop"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="thomas.SHOP" />
 
@@ -55,7 +55,7 @@
             android:name="commongranaryoaf.MrWhemps.Achievements"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="thomas.ACHIEVEMENTS" />
 
@@ -66,7 +66,7 @@
             android:name="commongranaryoaf.MrWhemps.MainMenu"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="thomas.MAINMENU" />
 
@@ -77,7 +77,7 @@
             android:name="commongranaryoaf.MrWhemps.MainLevelSelect"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="thomas.MAINLEVELSELECT" />
 
@@ -88,7 +88,7 @@
             android:name="commongranaryoaf.MrWhemps.InfiniteLevelSelect"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="thomas.INFINITELEVELSELECT" />
 

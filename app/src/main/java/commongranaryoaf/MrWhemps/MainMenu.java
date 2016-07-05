@@ -2,8 +2,10 @@ package commongranaryoaf.MrWhemps;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,14 @@ public class MainMenu extends Activity {
 
         setUpFiles();
         coins.setText("Coins: " + FileTools.getYourCoins(coindatafilePath));
+
+        //Create the background
+        LinearLayout main_layout = (LinearLayout) findViewById(R.id.main_menu_background);
+        main_layout.setBackgroundResource(R.drawable.animated_menu_background);
+
+        AnimationDrawable frameAnimation = (AnimationDrawable) main_layout.getBackground();
+
+        frameAnimation.start();
     }
 
     private void setUpFiles(){
