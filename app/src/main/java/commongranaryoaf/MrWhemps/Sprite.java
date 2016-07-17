@@ -47,13 +47,31 @@ public class Sprite{
         int costume = FileTools.readCostumeFromFile(coindatafilePath);
         switch (costume){
             case(0):
-                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite_moustache);
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.bronze_costume);
                 break;
             case(1):
-                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite_newspaper);
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.silver_costume);
                 break;
             case(2):
-                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite_blacktie);
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_costume);
+                break;
+            case(3):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite_newspaper);
+                break;
+            case(4):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.cubist_costume);
+                break;
+            case(5):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.cyborg_costume);
+                break;
+            case(6):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_costume);
+                break;
+            case(7):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.star_man_costume);
+                break;
+            case(8):
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.wealthy_costume);
                 break;
             default:
                 character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sprite1);

@@ -3,12 +3,16 @@ package commongranaryoaf.MrWhemps;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.util.logging.Level;
 
 /**
  * Created by Thomas on 07/02/2016.
@@ -44,6 +49,7 @@ public class InfiniteLevelSelect extends Activity {
     File achievementdatafile;
     String achievementdatafilePath;
     boolean achievementAnnounce = false;
+    LevelView levelSelectView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +91,7 @@ public class InfiniteLevelSelect extends Activity {
             startActivity(scoreIntent);
 
         }
+
         setUpView();
 
     }
@@ -102,12 +109,8 @@ public class InfiniteLevelSelect extends Activity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.level_select_content, null);
 
-        // Find the ScrollView
-        ScrollView sv = (ScrollView) v.findViewById(R.id.scrollView1);
-
         // Create a LinearLayout element
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout ll = (LinearLayout) v.findViewById(R.id.level_list);
 
         //Add the back button
 
@@ -168,8 +171,7 @@ public class InfiniteLevelSelect extends Activity {
                     ll.addView(levelHeader);
                     break;
             }
-            LinearLayout horizontalLayout = new LinearLayout(this);
-            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+
 
             Button newButton = new Button(this);
             switch(ii){
@@ -201,31 +203,38 @@ public class InfiniteLevelSelect extends Activity {
             TextView score = new TextView(this);
             score.setText("Highscore = " + readScoreFromFile(ii));
 
+            RelativeLayout relativeLayout = new RelativeLayout(this);
 
-            horizontalLayout.addView(newButton);
-            horizontalLayout.addView(score);
+
+            RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            buttonParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+            newButton.setLayoutParams(buttonParams);
+            relativeLayout.addView(newButton);
+
+            RelativeLayout.LayoutParams scoreParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            scoreParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+            score.setLayoutParams(scoreParams);
+            relativeLayout.addView(score);
+
             LevelSpecifics challengeScores = new LevelSpecifics(ii);
             if (readScoreFromFile(ii) >= challengeScores.challengeScoreHard()){
-                horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.gold));
+                //horizontalLayout.setBackgroundResource(R.drawable.gold_background);
                 goldCount++;
             } else if (readScoreFromFile(ii) >= challengeScores.challengeScoreMedium()){
-                horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
+                relativeLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
                 silverCount++;
             } else if (readScoreFromFile(ii) > challengeScores.challengeScoreEasy()){
-                horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
+                relativeLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
                 bronzeCount++;
             } else{
-                horizontalLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+                relativeLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
             }
 
 
-            ll.addView(horizontalLayout);
+            ll.addView(relativeLayout);
 
 
         }
-
-        // Add the LinearLayout element to the ScrollView
-        sv.addView(ll);
 
         bronzeMedals.setText("Bronze: " + bronzeCount);
         silverMedals.setText("Silver: " + silverCount);
@@ -233,6 +242,8 @@ public class InfiniteLevelSelect extends Activity {
 
         // Display the view
         setContentView(v);
+
+        //Check achievements unlocked
         checkAchievements();
     }
 
@@ -410,7 +421,11 @@ public class InfiniteLevelSelect extends Activity {
         finish();
     }
 
+
 }
+
+
+
 
 
 

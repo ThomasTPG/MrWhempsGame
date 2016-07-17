@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,6 +31,10 @@ public class ShopDetails extends Activity {
     File coindatafile;
     String coindatafilename = "Coin_data.txt";
     String coindatafilePath;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
+
     String StrCost;
     BigInteger IntCost;
     BigInteger IntyourCoins;
@@ -39,6 +44,8 @@ public class ShopDetails extends Activity {
         super.onCreate(savedInstanceState);
         coindatafilePath = getFilesDir() + "/" + coindatafilename;
         coindatafile = new File(coindatafilePath);
+        achievementdatafilePath = getFilesDir() + "/" + achievementfilename;
+        achievementdatafile = new File(achievementdatafilePath);
         setContentView(R.layout.shop_details_layout);
         page = getIntent().getIntExtra("Page",0);
         item = getIntent().getIntExtra("Image",1);
@@ -120,29 +127,115 @@ public class ShopDetails extends Activity {
             case(1):
                 switch (item){
                     case(1):
-                        Bitmap facialhair = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_moustache_button);
-                        imageToBuy.setImageBitmap(facialhair);
-                        description.setText(this.getString(R.string.facial_hair_description));
-                        StrCost = this.getString(R.string.facial_hair_cost);
+                        Bitmap bronze;
+                        if(FileTools.readSpecificAchievementFromFile(0,achievementdatafilePath)){
+                            bronze = BitmapFactory.decodeResource(this.getResources(), R.drawable.bronze_costume_icon);
+                        } else{
+                            bronze = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(bronze);
+                        description.setText(this.getString(R.string.bronze_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.bronze1_title));
+                        StrCost = this.getString(R.string.bronze_cost);
                         break;
                     case(2):
-                        Bitmap newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_newspaper_button);
-                        imageToBuy.setImageBitmap(newspaper);
-                        description.setText(this.getString(R.string.newspaper_description));
-                        requirements.setText("Achievements required: " + this.getString(R.string.under_hard_platform_title));
-                        StrCost = this.getString(R.string.newspaper_cost);
+                        Bitmap silver;
+                        if(FileTools.readSpecificAchievementFromFile(4,achievementdatafilePath)){
+                            silver = BitmapFactory.decodeResource(this.getResources(), R.drawable.silver_costume_icon);
+                        } else{
+                            silver = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(silver);
+                        description.setText(this.getString(R.string.silver_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.silver2_title));
+                        StrCost = this.getString(R.string.silver_cost);
                         break;
                     case(3):
-                        Bitmap blacktie = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_blacktie_button);
-                        imageToBuy.setImageBitmap(blacktie);
-                        description.setText(this.getString(R.string.black_tie_description));
-                        StrCost = this.getString(R.string.black_tie_cost);
+                        Bitmap gold;
+                        if(FileTools.readSpecificAchievementFromFile(8,achievementdatafilePath)){
+                            gold = BitmapFactory.decodeResource(this.getResources(), R.drawable.gold_costume_icon);
+                        } else{
+                            gold = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(gold);
+                        description.setText(this.getString(R.string.gold_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.gold3_title));
+                        StrCost = this.getString(R.string.gold_cost);
                         break;
-
+                    case(4):
+                        Bitmap newspaper;
+                        if(FileTools.readSpecificAchievementFromFile(26,achievementdatafilePath)){
+                            newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_newspaper_button);
+                        } else{
+                            newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(newspaper);
+                        description.setText(this.getString(R.string.newspaper_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.great_hurdler_title));
+                        StrCost = this.getString(R.string.newspaper_cost);
+                        break;
+                    case(5):
+                        Bitmap cubist;
+                        if(FileTools.readSpecificAchievementFromFile(15,achievementdatafilePath)){
+                            cubist = BitmapFactory.decodeResource(this.getResources(), R.drawable.cubist_costume_icon);
+                        } else{
+                            cubist = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(cubist);
+                        description.setText(this.getString(R.string.cubist_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.art4_title));
+                        StrCost = this.getString(R.string.cubist_cost);
+                        break;
+                    case(6):
+                        Bitmap cyborg;
+                        if(FileTools.readSpecificAchievementFromFile(19,achievementdatafilePath)){
+                            cyborg = BitmapFactory.decodeResource(this.getResources(), R.drawable.cyborg_costume_icon);
+                        } else{
+                            cyborg = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(cyborg);
+                        description.setText(this.getString(R.string.cyborg_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.drone_collision_title));
+                        StrCost = this.getString(R.string.cyborg_cost);
+                        break;
+                    case(7):
+                        Bitmap neon;
+                        if(FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
+                            neon = BitmapFactory.decodeResource(this.getResources(), R.drawable.neon_costume_icon);
+                        } else{
+                            neon = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(neon);
+                        description.setText(this.getString(R.string.neon_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.art3_title));
+                        StrCost = this.getString(R.string.neon_cost);
+                        break;
+                    case(8):
+                        Bitmap starman;
+                        if(FileTools.readSpecificAchievementFromFile(16,achievementdatafilePath)){
+                            starman = BitmapFactory.decodeResource(this.getResources(), R.drawable.starman_costume_icon);
+                        } else{
+                            starman = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(starman);
+                        description.setText(this.getString(R.string.star_man_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.art5_title));
+                        StrCost = this.getString(R.string.star_man_cost);
+                        break;
+                    case(9):
+                        Bitmap wealthy;
+                        if(FileTools.readSpecificAchievementFromFile(20,achievementdatafilePath)){
+                            wealthy = BitmapFactory.decodeResource(this.getResources(), R.drawable.wealthy_costume_icon);
+                        } else{
+                            wealthy = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                        }
+                        imageToBuy.setImageBitmap(wealthy);
+                        description.setText(this.getString(R.string.wealthy_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.max_currency_title));
+                        StrCost = this.getString(R.string.wealthy_cost);
+                        break;
                 }
                 break;
-
-
         }
         cost.setText("Cost: " + StrCost);
         IntCost = new BigInteger(StrCost);
@@ -150,12 +243,11 @@ public class ShopDetails extends Activity {
         Button buyFromShop = (Button) findViewById(R.id.buyfromshop);
         switch (checkItemBought()){
             case 0:
-                if (IntyourCoins.compareTo(IntCost) != -1){
+                if (achievementVerified(index)){
                     buyFromShop.setText("Buy");
                 } else{
-                    buyFromShop.setText("Not enough coins");
+                    buyFromShop.setText("Locked");
                 }
-
                 break;
             case 1:
                 buyFromShop.setText("Activate");
@@ -216,6 +308,59 @@ public class ShopDetails extends Activity {
         return 2;
     }
 
+    public boolean achievementVerified(int index){
+        switch(index){
+            case(12):
+                if (FileTools.readSpecificAchievementFromFile(0,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(13):
+                if (FileTools.readSpecificAchievementFromFile(4,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(14):
+                if (FileTools.readSpecificAchievementFromFile(8,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(15):
+                if (FileTools.readSpecificAchievementFromFile(26,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(16):
+                if (FileTools.readSpecificAchievementFromFile(15,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(17):
+                if (FileTools.readSpecificAchievementFromFile(19,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(18):
+                if (FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(19):
+                if (FileTools.readSpecificAchievementFromFile(16,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            case(20):
+                if (FileTools.readSpecificAchievementFromFile(20,achievementdatafilePath)){
+                    return true;
+                }
+                break;
+            default:
+                return true;
+        }
+        return false;
+    }
+
     public void setItemBought(){
         //Returns 0 is not purchased
         //Returns 1 if purchased but not activated
@@ -228,8 +373,10 @@ public class ShopDetails extends Activity {
                     writeNewItem("1");
                     BigInteger minus1 = BigInteger.valueOf(-1);
                     FileTools.writeCoinsToFile(IntCost.multiply(minus1), coindatafilePath, coindatafile);
+                    Toast.makeText(this, getResources().getString(R.string.buy_announcement), Toast.LENGTH_LONG).show();
                 } else{
                     writeNewItem("0");
+                    Toast.makeText(this, getResources().getString(R.string.cannot_afford_announcement), Toast.LENGTH_LONG).show();
                 }
                 break;
             case 1:

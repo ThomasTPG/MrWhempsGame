@@ -2,6 +2,9 @@
     <string name="app_name">Mr Whemps</string>
     <string name="action_settings">Settings</string>
     <string name="quitting_warning">Press back again to exit</string>
+    <string name="achievement_instructions">Tap on an icon for details.</string>
+    <string name="back_to_menu">Back to menu</string>
+
     <string name="x2_coin_desription">Multiplies the number of coins earned in a level by two. Stacks with other multipliers.</string>
     <string name="x3_coin_desription">Multiplies the number of coins earned in a level by three. Stacks with other multipliers.</string>
     <string name="x4_coin_desription">Multiplies the number of coins earned in a level by four. Stacks with other multipliers.</string>
@@ -11,21 +14,34 @@
     <string name="x10_coin_desription">Multiplies the number of coins earned in a level by ten. Stacks with other multipliers.</string>
     <string name="x20_coin_desription">Multiplies the number of coins earned in a level by twenty. Stacks with other multipliers.</string>
     <string name="x50_coin_desription">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
-    <string name="facial_hair_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
-    <string name="newspaper_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
-    <string name="black_tie_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
-    <string name="x2_coin_cost">5</string>
-    <string name="x3_coin_cost">5</string>
-    <string name="x4_coin_cost">5</string>
-    <string name="x5_coin_cost">5</string>
-    <string name="x6_coin_cost">5</string>
-    <string name="x8_coin_cost">5</string>
-    <string name="x10_coin_cost">5</string>
-    <string name="x20_coin_cost">5</string>
-    <string name="x50_coin_cost">5</string>
-    <string name="facial_hair_cost">5</string>
-    <string name="newspaper_cost">5</string>
-    <string name="black_tie_cost">5</string>
+    <string name="x2_coin_cost"> 10000</string>
+    <string name="x3_coin_cost"> 20000</string>
+    <string name="x4_coin_cost"> 60000</string>
+    <string name="x5_coin_cost"> 250000</string>
+    <string name="x6_coin_cost"> 1500000</string>
+    <string name="x8_coin_cost"> 10000000</string>
+    <string name="x10_coin_cost">100000000</string>
+    <string name="x20_coin_cost">1000000000</string>
+    <string name="x50_coin_cost">20000000000</string>
+
+    <string name="bronze_costume_description">Melt down your bronze medals to create a classy costume.</string>
+    <string name="silver_costume_description">Melt down your silver medals to create a swanky outfit.</string>
+    <string name="gold_costume_description">Melt down your gold medals to become a fashion god.</string>
+    <string name="newspaper_costume_description">.</string>
+    <string name="cubist_costume_description">Become at one with Picasso.</string>
+    <string name="cyborg_costume_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
+    <string name="neon_costume_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
+    <string name="star_man_costume_description">There\'s a starman waiting in the sky.</string>
+    <string name="wealthy_costume_description">Big spender - you have money to burn. Why not buy golden cowboy boots?</string>
+    <string name="bronze_cost">50000</string>
+    <string name="silver_cost">5000000</string>
+    <string name="gold_cost">500000000</string>
+    <string name="newspaper_cost">50000</string>
+    <string name="cubist_cost">100000</string>
+    <string name="cyborg_cost">100000</string>
+    <string name="neon_cost">1000000</string>
+    <string name="star_man_cost">50000</string>
+    <string name="wealthy_cost">999999999999</string>
 
     <string name="bronze1_description">Get 10 bronze medals in infinite mode.</string>
     <string name="bronze2_description">Get 20 bronze medals in infinite mode.</string>
@@ -42,6 +58,9 @@
     <string name="art4_description">On level 23 collect all the coins apart from a 3x3 square in each corner.</string>
     <string name="art5_description">On level 28 collect only the coins in the bottom half of the screen.</string>
     <string name="art6_description">On level 30 collect only a strip of 2 coins up the centre.</string>
+    <string name="fourdrones_description">On level 26 activate four drones at once.</string>
+    <string name="terrible_hurdler_description">On level 25 break 15 consecutive laser gates.</string>
+    <string name="great_hurdler_description">On level 24 leave 5 consecutive walls unbroken.</string>
     <string name="under_hard_platform_description">On level 16 headbutt the underside of 6 consecutive platforms.</string>
     <string name="drone_collision_description">On level 22 get the three drones to collide at once.</string>
     <string name="max_currency_description">Max out the coin counter.</string>
@@ -61,10 +80,15 @@
     <string name="art4_title">Cubist</string>
     <string name="art5_title">Starry night</string>
     <string name="art6_title">Vitruvian alien</string>
+    <string name="fourdrones_title">Four Drones</string>
+    <string name="terrible_hurdler_title">Terrible Hurdler</string>
+    <string name="great_hurdler_title">Great Hurdler</string>
     <string name="under_hard_platform_title">Undercover</string>
     <string name="drone_collision_title">Collision Course</string>
     <string name="max_currency_title">A Wealthy Alien</string>
 
     <string name="achievement_announcement">Achievement unlocked!</string>
+    <string name="buy_announcement">Item bought</string>
+    <string name="cannot_afford_announcement">Not enough coins</string>
     <string name="no_requirements">Achievements required: None</string>
 </resources>

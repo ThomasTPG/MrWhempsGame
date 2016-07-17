@@ -257,8 +257,43 @@ public class AchievementDetails extends Activity {
 
                 }
                 break;
+            case(2):
+                switch (item) {
+                    case (1):
+                        Bitmap fourDrones;
+                        if (FileTools.readSpecificAchievementFromFile(24, achievementdatafilePath)) {
+                            fourDrones = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementfourdrones);
+                        } else {
+                            fourDrones = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(fourDrones);
+                        title.setText(this.getString(R.string.fourdrones_title));
+                        description.setText(this.getString(R.string.fourdrones_description));
+                        break;
+                    case (2):
+                        Bitmap terribleHurdler;
+                        if (FileTools.readSpecificAchievementFromFile(25, achievementdatafilePath)) {
+                            terribleHurdler = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementterriblehurdler);
+                        } else {
+                            terribleHurdler = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(terribleHurdler);
+                        title.setText(this.getString(R.string.terrible_hurdler_title));
+                        description.setText(this.getString(R.string.terrible_hurdler_description));
+                        break;
+                    case (3):
+                        Bitmap greatHurdler;
+                        if (FileTools.readSpecificAchievementFromFile(26, achievementdatafilePath)) {
+                            greatHurdler = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievementconsecutivedrones);
+                        } else {
+                            greatHurdler = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(greatHurdler);
+                        title.setText(this.getString(R.string.great_hurdler_title));
+                        description.setText(this.getString(R.string.great_hurdler_description));
+                        break;
 
-
+                }
         }
 
     }

@@ -41,6 +41,8 @@ public class LaserGates {
     boolean drone3running = false;
     boolean drone4running = false;
     boolean lose = false;
+    int consecutiveDrones = 0;
+    int consecutiveClear = 0;
 
     public LaserGates(Canvas c, Context context, int spriteDimension) {
         spriteDim = spriteDimension;
@@ -79,6 +81,16 @@ public class LaserGates {
             }
         } else{
             if (newGate){
+                if(yArray[3][3] == 1){
+                    if (yArray[3][4] == 0 ){
+                        //We have not hit a wall
+                        consecutiveDrones = 0;
+                        consecutiveClear ++;
+                    }
+                    else {
+                        consecutiveClear = 0;
+                    }
+                }
                 for (int jj = numberGates-1; jj > 0; jj--){
                     for (int kk = 1; kk < gateAttributes; kk++){
                         //If we have a new gate, we move the old gates down in the array
@@ -147,6 +159,7 @@ public class LaserGates {
                              (spriteX - spriteDim/2 < yArray[ii][1]*screenWidth/100 && spriteX + spriteDim/2 >yArray[ii][2]*screenWidth/100 )){
                         //We are alligned in the x direction
                         yArray[ii][4] = 1;
+                        consecutiveDrones ++;
                         return true;
                     }
                 }
@@ -199,6 +212,18 @@ public class LaserGates {
             lose = (lose || drone4.checkLose());
             drone4running = drone4.active;
         }
+    }
+
+    public boolean check4drones(){
+        return ( drone1running && drone2running && drone3running && drone4running);
+    }
+
+    public boolean checkConsecutiveWalls24(){
+        return (consecutiveClear  >= 5);
+    }
+
+    public boolean checkConsecutiveWalls25(){
+        return (consecutiveDrones >= 15);
     }
 
 }

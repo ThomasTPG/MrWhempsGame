@@ -9,35 +9,35 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15">
+        android:layout_weight="0.1">
     </RelativeLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_weight="0.8"
         android:weightSum="1">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.15">
+            android:layout_weight="0.1">
         </RelativeLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="0.8"
             android:id="@+id/mainlayoutscorescreen"
             android:background="@color/aquamarine"
-            android:weightSum="1">
+            android:weightSum="15.5">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.4">
+                android:layout_weight="9">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                 android:id="@+id/description"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:layout_weight="0.1"
+                android:layout_weight="2"
                 />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:id="@+id/cost"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:layout_weight="0.1"
+                android:layout_weight="0.5"
                 />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:id="@+id/requirement"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:layout_weight="0.1"
+                android:layout_weight="1"
                 />
 
             <TextView
@@ -86,13 +86,13 @@
                 android:id="@+id/yourcoins"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:layout_weight="0.1"
+                android:layout_weight="0.5"
                 />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.2">
+                android:layout_weight="2.5">
 
                 <Button
                     android:id="@+id/backtoshop"
@@ -126,7 +126,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.15">
+            android:layout_weight="0.1">
         </RelativeLayout>
 
     </LinearLayout>
@@ -134,7 +134,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15">
+        android:layout_weight="0.1">
     </RelativeLayout>
 
 </LinearLayout>

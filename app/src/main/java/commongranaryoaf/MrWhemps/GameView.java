@@ -65,7 +65,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public void initializeBackgrounds(){
-        space = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.space);
+        space = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.space3);
         background1 = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.background1);
         background2 = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.background2);
         background3 = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.background3);
@@ -245,7 +245,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
                     onDrawMethod.invoke(ourLevel, c, spriteX);
                     score = (int) getScoreMethod.invoke(ourLevel);
                     speed = (float) getSpeedMethod.invoke(ourLevel);
-                    if (level == 8 || level == 11 || level == 16 || level == 17 || level == 22 || level == 23 || level == 28 || level == 30){
+                    if (level == 8 || level == 11 || level == 16 || level == 17 || level == 22 || level == 23 || level == 24 || level == 25 || level==26 || level == 28 || level == 30){
                         getAchievementMethod = ourLevelClass.getDeclaredMethod("getAchievement");
                         achievement = (int) getAchievementMethod.invoke(ourLevel);
                     }

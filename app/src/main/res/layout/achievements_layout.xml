@@ -5,27 +5,49 @@
     android:id="@+id/achievements_background"
     android:weightSum="1">
 
-    <Button
-        android:id="@+id/backfromshop"
-        android:text="BACK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:weightSum="6">
+        android:weightSum="13">
+
+        <Button
+            android:id="@+id/backfromshop"
+            android:text="@string/back_to_menu"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/main_menu_font_size"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/achievement_banner"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="@dimen/header_font_size"
+            android:gravity="center_horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/achievement_instructions"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/main_menu_font_size"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
 
         <RelativeLayout
             android:orientation="horizontal"
-            android:id="@+id/imageViewBound"
+            android:id="@+id/rel1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -59,8 +81,9 @@
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:id="@+id/rel2"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -94,8 +117,9 @@
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:id="@+id/rel3"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -130,7 +154,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -165,30 +189,32 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next page"
+                android:background="@drawable/ic_arrow_forward_white_24dp"
                 android:id="@+id/nextpagebutton"
                 android:onClick="onClick"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/page_number"
+                android:textSize="@dimen/main_menu_font_size"
+                android:textColor="@color/white"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Previous page"
+                android:background="@drawable/ic_arrow_back_white_24dp"
                 android:id="@+id/preivouspagebutton"
                 android:onClick="onClick"
                 android:layout_alignParentBottom="true"

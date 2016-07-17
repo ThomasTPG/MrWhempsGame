@@ -14,10 +14,17 @@ public class Level26 extends Sprite{
     Walls walls;
     Context context;
     LaserGates laserGate;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
+    boolean achievementUnlocked;
+    boolean announceAchievement = false;
 
     public Level26(Context c, int level){
         super(c,level);
         context = c;
+        achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
+        achievementdatafile = new File(achievementdatafilePath);
     }
 
     public void onDraw(Canvas c, float x){
@@ -29,6 +36,7 @@ public class Level26 extends Sprite{
             Coins = new CoinClass(c, spriteDimensions, CoinType.NORMAL, context);
             laserGate = new LaserGates(c,context, spriteDimensions);
             laserGate.initializeLaserGate(100,20,10);
+            achievementUnlocked = FileTools.readSpecificAchievementFromFile(24,achievementdatafilePath);
         }
         Coins.onDraw();
         super.move(x);
@@ -44,6 +52,13 @@ public class Level26 extends Sprite{
         Coins.checkMultiplier(walls.getSpeedMultiplier());
         Coins.checkCoins(spriteX, spriteY);
         super.drawLowerBoundary(c);
+        if(!achievementUnlocked){
+            if(laserGate.check4drones()){
+                FileTools.writeAchievementToFile(24,achievementdatafilePath,achievementdatafile);
+                achievementUnlocked = true;
+                announceAchievement = true;
+            }
+        };
     }
 
     public void checkOrdinaryWalls(){
@@ -60,6 +75,13 @@ public class Level26 extends Sprite{
 
     public void jump(){
         super.jump();
+    }
+
+    public int getAchievement(){
+        if (announceAchievement){
+            return 24;
+        }
+        return -1;
     }
 
     public boolean getLose(){

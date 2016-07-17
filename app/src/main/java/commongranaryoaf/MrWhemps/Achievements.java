@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -20,10 +21,12 @@ public class Achievements extends Activity{
 
     int buttonHeight = 0;
     int page;
-    int numberOfPages = 2;
+    int numberOfPages = 3;
     String achievementfilename = "Achievement_data.txt";
     File achievementdatafile;
     String achievementdatafilePath;
+    int numberOfAch = 21;
+    int numberUnlocked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class Achievements extends Activity{
         setContentView(R.layout.achievements_layout);
         achievementdatafilePath = getFilesDir() + "/" + achievementfilename;
         achievementdatafile = new File(achievementdatafilePath);
+        countAchievements();
         page = getIntent().getIntExtra("Page",0);
         setImageButtons();
 
@@ -46,7 +50,7 @@ public class Achievements extends Activity{
     public Bitmap produceScaledImage(int id){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds= true;
-        BitmapFactory.decodeResource(this.getResources(),id,options);
+        BitmapFactory.decodeResource(this.getResources(), id, options);
 
         int sampleSize = 1;
         int height = options.outHeight;
@@ -61,6 +65,10 @@ public class Achievements extends Activity{
     }
 
     public void setImageButtons(){
+        TextView ach_banner = (TextView) findViewById(R.id.achievement_banner);
+        ach_banner.setText("Achievements unlocked: " + numberUnlocked + "/" + numberOfAch);
+        TextView pageNumber = (TextView) findViewById(R.id.page_number);
+        pageNumber.setText("Page " + (page + 1) + " of 3");
         switch(page){
             case 0:
                 loadPage0();
@@ -68,12 +76,21 @@ public class Achievements extends Activity{
             case 1:
                 loadPage1();
                 break;
+            case 2:
+                loadPage2();
+                break;
         }
 
     }
 
     public void loadPage0(){
         Bitmap locked = produceScaledImage(R.drawable.lockedachievement);
+        RelativeLayout rel1 = (RelativeLayout) findViewById(R.id.rel1);
+        RelativeLayout rel2 = (RelativeLayout) findViewById(R.id.rel2);
+        RelativeLayout rel3 = (RelativeLayout) findViewById(R.id.rel3);
+        rel1.setBackgroundColor(getResources().getColor(R.color.achievement_background));
+        rel2.setBackgroundColor(getResources().getColor(R.color.achievement_background));
+        rel3.setBackgroundColor(getResources().getColor(R.color.achievement_background));
 
         //Bronze1 Achievement
         ImageView image1 = (ImageView) findViewById(R.id.achievementView1);
@@ -159,6 +176,13 @@ public class Achievements extends Activity{
 
     public void loadPage1(){
         Bitmap locked = produceScaledImage(R.drawable.lockedachievement);
+        RelativeLayout rel1 = (RelativeLayout) findViewById(R.id.rel1);
+        RelativeLayout rel2 = (RelativeLayout) findViewById(R.id.rel2);
+        RelativeLayout rel3 = (RelativeLayout) findViewById(R.id.rel3);
+        rel1.setBackgroundColor(getResources().getColor(R.color.achievement_background));
+        rel2.setBackgroundColor(getResources().getColor(R.color.achievement_background));
+        rel3.setBackgroundColor(getResources().getColor(R.color.achievement_background));
+
 
         //Art1 Achievement (lvl 8)
         ImageView image1 = (ImageView) findViewById(R.id.achievementView1);
@@ -223,7 +247,7 @@ public class Achievements extends Activity{
             image7.setImageBitmap(locked);
         }
 
-        //Lvl22 platforms Achievement
+        //Lvl22 drones Achievement
         ImageView image8 = (ImageView) findViewById(R.id.achievementView8);
         if (FileTools.readSpecificAchievementFromFile(19,achievementdatafilePath)){
             Bitmap droneCollision = produceScaledImage(R.drawable.achievementdrones22);
@@ -240,6 +264,61 @@ public class Achievements extends Activity{
         } else{
             image9.setImageBitmap(locked);
         }
+    }
+
+    public void loadPage2(){
+        Bitmap locked = produceScaledImage(R.drawable.lockedachievement);
+        RelativeLayout rel1 = (RelativeLayout) findViewById(R.id.rel1);
+        RelativeLayout rel2 = (RelativeLayout) findViewById(R.id.rel2);
+        RelativeLayout rel3 = (RelativeLayout) findViewById(R.id.rel3);
+        rel1.setBackgroundColor(getResources().getColor(R.color.achievement_background));
+        rel2.setBackgroundColor(getResources().getColor(R.color.transparent));
+        rel3.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+        //four_drones Achievement (lvl 26)
+        ImageView image1 = (ImageView) findViewById(R.id.achievementView1);
+        if (FileTools.readSpecificAchievementFromFile(24,achievementdatafilePath)){
+            Bitmap fourDrones = produceScaledImage(R.drawable.achievementfourdrones);
+            image1.setImageBitmap(fourDrones);
+        } else{
+            image1.setImageBitmap(locked);
+        }
+
+        //15 consecutive walls Achievement (lvl 25)
+        ImageView image2 = (ImageView) findViewById(R.id.achievementView2);
+        if (FileTools.readSpecificAchievementFromFile(25,achievementdatafilePath)){
+            Bitmap consecutiveDrones = produceScaledImage(R.drawable.achievementterriblehurdler);
+            image2.setImageBitmap(consecutiveDrones);
+        } else{
+            image2.setImageBitmap(locked);
+        }
+
+        //5 consecutive walls Achievement (lvl 24)
+        ImageView image3 = (ImageView) findViewById(R.id.achievementView3);
+        if (FileTools.readSpecificAchievementFromFile(26,achievementdatafilePath)){
+            Bitmap consecutiveWalls = produceScaledImage(R.drawable.achievementconsecutivedrones);
+            image3.setImageBitmap(consecutiveWalls);
+        } else{
+            image3.setImageBitmap(locked);
+        }
+
+        ImageView image4 = (ImageView) findViewById(R.id.achievementView4);
+        image4.setImageResource(R.color.transparent);
+
+        ImageView image5 = (ImageView) findViewById(R.id.achievementView5);
+        image5.setImageResource(R.color.transparent);
+
+        ImageView image6 = (ImageView) findViewById(R.id.achievementView6);
+        image6.setImageResource(R.color.transparent);
+
+        ImageView image7 = (ImageView) findViewById(R.id.achievementView7);
+        image7.setImageResource(R.color.transparent);
+
+        ImageView image8 = (ImageView) findViewById(R.id.achievementView8);
+        image8.setImageResource(R.color.transparent);
+
+        ImageView image9 = (ImageView) findViewById(R.id.achievementView9);
+        image9.setImageResource(R.color.transparent);
     }
 
     public void onClick(View v){
@@ -333,10 +412,34 @@ public class Achievements extends Activity{
         finish();
     }
 
+    public void countAchievements(){
+        //Count page 1 achievements
+        for (int ii = 0; ii<9;ii++){
+            if (FileTools.readSpecificAchievementFromFile(ii,achievementdatafilePath)){
+                numberUnlocked ++;
+            }
+        }
+
+        //Count page 2 achievements
+        for (int ii = 12; ii<21;ii++){
+            if (FileTools.readSpecificAchievementFromFile(ii,achievementdatafilePath)){
+                numberUnlocked ++;
+            }
+        }
+
+        //Count page 3 achievements
+        for (int ii = 24; ii<27;ii++){
+            if (FileTools.readSpecificAchievementFromFile(ii,achievementdatafilePath)){
+                numberUnlocked ++;
+            }
+        }
+    }
+
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        RelativeLayout relLay = (RelativeLayout) findViewById(R.id.imageViewBound);
+        RelativeLayout relLay = (RelativeLayout) findViewById(R.id.rel1);
         buttonHeight = relLay.getHeight();
         setImageButtons();
     }

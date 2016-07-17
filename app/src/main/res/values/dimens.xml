@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="tutorial_font_size">14dp</dimen>
+    <dimen name="main_menu_font_size">18dp</dimen>
+    <dimen name="header_font_size">20dp</dimen>
 </resources>

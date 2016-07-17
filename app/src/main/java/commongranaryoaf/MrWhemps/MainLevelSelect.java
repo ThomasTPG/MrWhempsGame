@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -96,12 +97,9 @@ public class MainLevelSelect extends Activity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.level_select_content, null);
 
-        // Find the ScrollView
-        ScrollView sv = (ScrollView) v.findViewById(R.id.scrollView1);
-
         // Create a LinearLayout element
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout ll = (LinearLayout) v.findViewById(R.id.level_list);
+
 
         Button backToMenu = new Button(this);
         backToMenu.setText("Back");
@@ -129,7 +127,7 @@ public class MainLevelSelect extends Activity {
                     break;
                 case(4):
                     progress = Math.min(numberOfLevelsShown-4,5);
-                    levelHeader.setText("Moving Platforms " + progress +"/5");
+                    levelHeader.setText("Moving Platforms " + progress + "/5");
                     ll.addView(levelHeader);
                     break;
                 case(9):
@@ -138,14 +136,16 @@ public class MainLevelSelect extends Activity {
                     ll.addView(levelHeader);
                     break;
                 case(18):
-                    progress = Math.min(numberOfLevelsShown-18,5);
-                    levelHeader.setText("Drones " + progress +"/5");
+                    progress = Math.min(numberOfLevelsShown-18,6);
+                    levelHeader.setText("Drones " + progress +"/6");
+                    ll.addView(levelHeader);
+                    break;
+                case(24):
+                    progress = Math.min(numberOfLevelsShown-24,7);
+                    levelHeader.setText("Laser walls " + progress +"/7");
                     ll.addView(levelHeader);
                     break;
             }
-            //Add the level select button
-            LinearLayout horizontalLayout = new LinearLayout(this);
-            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
 
             Button newButton = new Button(this);
             switch(ii){
@@ -157,6 +157,15 @@ public class MainLevelSelect extends Activity {
                     break;
                 case(17):
                     newButton.setText("Level 17: Bonus Level 3");
+                    break;
+                case(23):
+                    newButton.setText("Level 23: Bonus Level 4");
+                    break;
+                case(28):
+                    newButton.setText("Level 28: Bonus Level 5");
+                    break;
+                case(30):
+                    newButton.setText("Level 30: Bonus Level 6");
                     break;
                 default:
                     newButton.setText("Level" + ii);
@@ -173,12 +182,17 @@ public class MainLevelSelect extends Activity {
                     finish();
                 }
             });
-            horizontalLayout.addView(newButton);
-            ll.addView(horizontalLayout);
-        }
 
-        // Add the LinearLayout element to the ScrollView
-        sv.addView(ll);
+            RelativeLayout relativeLayout = new RelativeLayout(this);
+
+
+            RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            buttonParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+            newButton.setLayoutParams(buttonParams);
+            relativeLayout.addView(newButton);
+
+            ll.addView(relativeLayout);
+        }
 
         // Display the view
         setContentView(v);
