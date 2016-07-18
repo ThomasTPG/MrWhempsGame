@@ -21,10 +21,11 @@ public class storyMain extends Activity implements View.OnTouchListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gameview_content);
+        setContentView(R.layout.storyview_content);
         storyNumber = getIntent().getIntExtra("StoryNumber", 1);
 
-        storyView = (StoryView) findViewById(R.id.gameviewsurface);
+        storyView = (StoryView) findViewById(R.id.storyviewsurface);
+
         storyView.setOnTouchListener(this);
         storyView.setStory(storyNumber);
         running = true;
@@ -84,7 +85,7 @@ public class storyMain extends Activity implements View.OnTouchListener{
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch(v.getId()){
-            case (R.id.gameviewsurface):
+            case (R.id.storyviewsurface):
                 if (event.getAction() == MotionEvent.ACTION_DOWN){
                     storyView.nextImage();
                 }

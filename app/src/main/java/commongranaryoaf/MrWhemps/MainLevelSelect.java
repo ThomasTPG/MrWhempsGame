@@ -100,98 +100,15 @@ public class MainLevelSelect extends Activity {
         // Create a LinearLayout element
         LinearLayout ll = (LinearLayout) v.findViewById(R.id.level_list);
 
+        addBackButton(ll);
 
-        Button backToMenu = new Button(this);
-        backToMenu.setText("Back");
-        backToMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        ll.addView(backToMenu);
         int numberOfLevelsShown = Math.min(levelsUnlocked,numberOfLevels);
 
         for (int ii = 1; ii<= numberOfLevelsShown; ii++){
-            //Add the level header
-            TextView levelHeader = new TextView(this);
-            TextView description = new TextView(this);
-            int progress;
-            switch (ii){
-                case(1):
-                    progress = Math.min(numberOfLevelsShown-1, 3);
-                    levelHeader.setText("Starting Out " + progress + "/3");
-                    description.setText("Easy levels to begin with.");
-                    ll.addView(levelHeader);
-                    ll.addView(description);
-                    break;
-                case(4):
-                    progress = Math.min(numberOfLevelsShown-4,5);
-                    levelHeader.setText("Moving Platforms " + progress + "/5");
-                    ll.addView(levelHeader);
-                    break;
-                case(9):
-                    progress = Math.min(numberOfLevelsShown-9,9);
-                    levelHeader.setText("Hard Platforms" + progress +"/9");
-                    ll.addView(levelHeader);
-                    break;
-                case(18):
-                    progress = Math.min(numberOfLevelsShown-18,6);
-                    levelHeader.setText("Drones " + progress +"/6");
-                    ll.addView(levelHeader);
-                    break;
-                case(24):
-                    progress = Math.min(numberOfLevelsShown-24,7);
-                    levelHeader.setText("Laser walls " + progress +"/7");
-                    ll.addView(levelHeader);
-                    break;
-            }
 
-            Button newButton = new Button(this);
-            switch(ii){
-                case(8):
-                    newButton.setText("Level 8: Bonus Level 1");
-                    break;
-                case(11):
-                    newButton.setText("Level 11: Bonus Level 2");
-                    break;
-                case(17):
-                    newButton.setText("Level 17: Bonus Level 3");
-                    break;
-                case(23):
-                    newButton.setText("Level 23: Bonus Level 4");
-                    break;
-                case(28):
-                    newButton.setText("Level 28: Bonus Level 5");
-                    break;
-                case(30):
-                    newButton.setText("Level 30: Bonus Level 6");
-                    break;
-                default:
-                    newButton.setText("Level" + ii);
-                    break;
-            }
-            final int levelSelected = ii;
-            newButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final Intent levelIntent = new Intent("thomas.GAMEMAIN");
-                    levelIntent.putExtra("Level", levelSelected);
-                    levelIntent.putExtra("Mode", 0);
-                    startActivity(levelIntent);
-                    finish();
-                }
-            });
-
-            RelativeLayout relativeLayout = new RelativeLayout(this);
-
-
-            RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            buttonParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-            newButton.setLayoutParams(buttonParams);
-            relativeLayout.addView(newButton);
-
-            ll.addView(relativeLayout);
+            addLevelHeader(ll, numberOfLevelsShown,ii);
+            addStoryButton(ll, ii);
+            addLevelButtons(ll,ii);
         }
 
         // Display the view
@@ -279,6 +196,127 @@ public class MainLevelSelect extends Activity {
         startActivity(levelIntent);
         finish();
     }
+
+    public void addLevelButtons(LinearLayout ll, int ii){
+
+        Button newButton = new Button(this);
+        switch(ii){
+            case(8):
+                newButton.setText("Level 8: Bonus Level 1");
+                break;
+            case(11):
+                newButton.setText("Level 11: Bonus Level 2");
+                break;
+            case(17):
+                newButton.setText("Level 17: Bonus Level 3");
+                break;
+            case(23):
+                newButton.setText("Level 23: Bonus Level 4");
+                break;
+            case(28):
+                newButton.setText("Level 28: Bonus Level 5");
+                break;
+            case(30):
+                newButton.setText("Level 30: Bonus Level 6");
+                break;
+            default:
+                newButton.setText("Level" + ii);
+                break;
+        }
+        final int levelSelected = ii;
+        newButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent levelIntent = new Intent("thomas.GAMEMAIN");
+                levelIntent.putExtra("Level", levelSelected);
+                levelIntent.putExtra("Mode", 0);
+                startActivity(levelIntent);
+                finish();
+            }
+        });
+
+        RelativeLayout relativeLayout = new RelativeLayout(this);
+
+
+        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        buttonParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        newButton.setLayoutParams(buttonParams);
+        relativeLayout.addView(newButton);
+
+        ll.addView(relativeLayout);
+    }
+
+    public void addLevelHeader(LinearLayout ll, int numberOfLevelsShown, int ii){
+        //Add the level header
+        TextView levelHeader = new TextView(this);
+        TextView description = new TextView(this);
+        int progress;
+        switch (ii){
+            case(1):
+                progress = Math.min(numberOfLevelsShown-1, 3);
+                levelHeader.setText("Starting Out " + progress + "/3");
+                description.setText("Easy levels to begin with.");
+                ll.addView(levelHeader);
+                ll.addView(description);
+                break;
+            case(4):
+                progress = Math.min(numberOfLevelsShown-4,5);
+                levelHeader.setText("Moving Platforms " + progress + "/5");
+                ll.addView(levelHeader);
+                break;
+            case(9):
+                progress = Math.min(numberOfLevelsShown-9,9);
+                levelHeader.setText("Hard Platforms" + progress +"/9");
+                ll.addView(levelHeader);
+                break;
+            case(18):
+                progress = Math.min(numberOfLevelsShown-18,6);
+                levelHeader.setText("Drones " + progress +"/6");
+                ll.addView(levelHeader);
+                break;
+            case(24):
+                progress = Math.min(numberOfLevelsShown-24,7);
+                if (levelsUnlocked > 30){
+                    progress = 7;
+                }
+                levelHeader.setText("Laser walls " + progress +"/7");
+                ll.addView(levelHeader);
+                break;
+        }
+    }
+
+    public void addBackButton(LinearLayout ll){
+        Button backToMenu = new Button(this);
+        backToMenu.setText("Back");
+        backToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        ll.addView(backToMenu);
+    }
+
+    public void addStoryButton(LinearLayout ll, int ii){
+        switch (ii){
+            case (2):
+                Button startStory = new Button(this);
+                startStory.setText("Back");
+                startStory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Intent storyIntent = new Intent("thomas.STORYMAIN");
+                        storyIntent.putExtra("StoryNumber", 1);
+                        startActivity(storyIntent);
+                        finish();
+                    }
+                });
+                ll.addView(startStory);
+                break;
+
+        }
+    }
+
 }
 
 

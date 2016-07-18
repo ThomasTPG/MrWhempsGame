@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
@@ -25,6 +26,13 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
     int storyNumber;
     boolean stop = false;
     boolean storyEnded = false;
+    Bitmap storyBoard;
+    int storyBoardWidth;
+    int storyBoardHeight;
+    int framesAcross;
+    int framesDown;
+    int storyLength;
+    int page = 1;
 
     public StoryView(Context context) {
         super(context);
@@ -32,7 +40,7 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public StoryView(Context context, AttributeSet attrs){
-        super(context,attrs);
+        super(context, attrs);
         constructor();
     }
 
@@ -42,13 +50,19 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     private void constructor(){
+        storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story1);
+        storyBoardWidth = storyBoard.getWidth();
+        storyBoardHeight = storyBoard.getHeight();
+
         holder = getHolder();
         holder.addCallback(this);
+
         thread = new GameThread(this.getContext());
     }
 
     public void setStory(int story){
         storyNumber = story;
+        getStoryDetails();
     }
 
     public void onPause(){
@@ -100,17 +114,33 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
 
     }
 
-    public void nextImage(){
+    public void getStoryDetails(){
+        switch (storyNumber){
+            case(1):
+                storyLength = 6;
+                framesAcross = 3;
+                framesDown = 2;
+                break;
 
+        }
+    }
+
+    public void nextImage(){
+        if(page == storyLength){
+            running = false;
+            stop = true;
+        }
+        page++;
     }
 
     public class GameThread extends Thread{
-        boolean running;
         long timeBefore;
         long difference;
         int fps = 20;
         long timeNow;
         Context c;
+        Rect screen;
+        Rect whichPanel;
 
         public GameThread(Context context){
             c = context;
@@ -135,6 +165,9 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
                     }
 
                     Canvas c = holder.lockCanvas();
+                    whichPanel= new Rect(0,0,storyBoardWidth/3,storyBoardHeight/2);
+                    screen = new Rect(0,0,c.getWidth(),c.getHeight());
+                    c.drawBitmap(storyBoard, whichPanel, screen, null);
 
 
 

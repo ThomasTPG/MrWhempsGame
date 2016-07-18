@@ -30,6 +30,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="commongranaryoaf.MrWhemps.storyMain"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="thomas.STORYMAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="commongranaryoaf.MrWhemps.Settings"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
