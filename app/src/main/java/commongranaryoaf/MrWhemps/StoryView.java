@@ -33,6 +33,8 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
     int framesDown;
     int storyLength;
     int page = 1;
+    int movementCount = 0;
+    int MAX_MOVEMENT = 20;
 
     public StoryView(Context context) {
         super(context);
@@ -121,6 +123,21 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
                 framesAcross = 3;
                 framesDown = 2;
                 break;
+            case(2):
+                storyLength = 6;
+                framesAcross = 3;
+                framesDown = 2;
+                break;
+            case(3):
+                storyLength = 2;
+                framesAcross = 2;
+                framesDown = 1;
+                break;
+            case(4):
+                storyLength = 2;
+                framesAcross = 2;
+                framesDown = 1;
+                break;
 
         }
     }
@@ -130,17 +147,26 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
             running = false;
             stop = true;
         }
-        page++;
+        if (movementCount == MAX_MOVEMENT){
+            page++;
+            movementCount = 0;
+        }
+
     }
 
     public class GameThread extends Thread{
         long timeBefore;
         long difference;
-        int fps = 20;
+        int fps = MAX_MOVEMENT;
         long timeNow;
         Context c;
         Rect screen;
         Rect whichPanel;
+
+        int currentAcross;
+        int previousAcross;
+        int currentDown;
+        int previousDown;
 
         public GameThread(Context context){
             c = context;
@@ -149,6 +175,31 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
 
         public void setRunning(boolean b){
             running = b;
+        }
+
+        public void getCurrentPreviousCoords(){
+            currentAcross = ((page - 1)% framesAcross);
+            currentDown = ((page - 1) / framesAcross);
+            if (page > 1){
+                previousAcross = ((page  - 2)% framesAcross);
+                previousDown = ((page - 2) / framesAcross);
+            } else{
+                previousAcross = 0;
+                previousDown = 0;
+            }
+
+        }
+
+        public Rect whichFrame(){
+            getCurrentPreviousCoords();
+            float percentMoved = (float) movementCount/MAX_MOVEMENT;
+            int left = Math.round((previousAcross + (currentAcross - previousAcross) * percentMoved)* storyBoardWidth/framesAcross);
+            int up = Math.round((previousDown + (currentDown - previousDown) * percentMoved)* storyBoardHeight/framesDown);
+            int right = left + storyBoardWidth/framesAcross;
+            int down = up + storyBoardHeight/framesDown;
+            whichPanel= new Rect(left,up,right,down);
+            System.out.println(percentMoved);
+            return whichPanel;
         }
 
         @Override
@@ -165,12 +216,12 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
                     }
 
                     Canvas c = holder.lockCanvas();
-                    whichPanel= new Rect(0,0,storyBoardWidth/3,storyBoardHeight/2);
+                    whichPanel= whichFrame();
+                    if (movementCount < 20){
+                        movementCount ++;
+                    }
                     screen = new Rect(0,0,c.getWidth(),c.getHeight());
                     c.drawBitmap(storyBoard, whichPanel, screen, null);
-
-
-
 
                     holder.unlockCanvasAndPost(c);
                     if (storyEnded){

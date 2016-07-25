@@ -6,4 +6,7 @@
     <dimen name="tutorial_font_size">14dp</dimen>
     <dimen name="main_menu_font_size">18dp</dimen>
     <dimen name="header_font_size">20dp</dimen>
+
+    <dimen name="score_screen_header">14dp</dimen>
+    <dimen name="score_screen_sub_header">12dp</dimen>
 </resources>

@@ -78,6 +78,7 @@ public class ScoreScreen extends Activity {
         TextView level = new TextView(this);
         level.setGravity(Gravity.CENTER);
         level.setTextColor(ContextCompat.getColor(this, R.color.black));
+        level.setTextSize(getResources().getDimension(R.dimen.score_screen_header));
         level.setText("Level " + completedLevel);
         mainScoreScreen.addView(level);
 
@@ -85,6 +86,7 @@ public class ScoreScreen extends Activity {
 
         TextView status = new TextView(this);
         status.setGravity(Gravity.CENTER);
+        status.setTextSize(getResources().getDimension(R.dimen.score_screen_sub_header));
         status.setTextColor(ContextCompat.getColor(this, R.color.black));
         switch (win) {
             case (1):
@@ -106,16 +108,34 @@ public class ScoreScreen extends Activity {
         TextView coinHeader = new TextView(this);
         coinHeader.setGravity(Gravity.CENTER);
         coinHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
+        coinHeader.setTextSize(getResources().getDimension(R.dimen.score_screen_sub_header));
+        coinHeader.setText("\nCoins");
+        mainScoreScreen.addView(coinHeader);
+
+        TextView coinData = new TextView(this);
+        coinData.setGravity(Gravity.CENTER);
+        coinData.setTextColor(ContextCompat.getColor(this, R.color.black));
+
+
         BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
         BigInteger Bscore = BigInteger.valueOf(coinsCollected);
         Bscore = Bmultiplier.multiply(Bscore);
-        coinHeader.setText("\nCoins\nCoins collected: " + coinsCollected + "\nMultiplier: x" + multiplier + "\nMultiplied Coins: " + Bscore);
-        mainScoreScreen.addView(coinHeader);
+        coinData.setText("\nCoins collected: " + coinsCollected + "\nMultiplier: x" + multiplier + "\nMultiplied Coins: " + Bscore);
+        mainScoreScreen.addView(coinData);
 
-        addRetryButton();
+        if (win == 1){
+            if (completedLevel < 30){
+                addNextLevelButton();
+            }
+        }
+        else{
+            addRetryButton();
+        }
+
 
         Button backToMenu = new Button(this);
         backToMenu.setText("Back to level select");
+        backToMenu.setTextSize(getResources().getDimension(R.dimen.score_screen_header));
         backToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +155,7 @@ public class ScoreScreen extends Activity {
         TextView level = new TextView(this);
         level.setGravity(Gravity.CENTER);
         level.setTextColor(ContextCompat.getColor(this, R.color.black));
+        level.setTextSize(getResources().getDimension(R.dimen.score_screen_header));
         level.setText("Level " + completedLevel);
         mainScoreScreen.addView(level);
 
@@ -142,6 +163,7 @@ public class ScoreScreen extends Activity {
         TextView hiscoreHeader = new TextView(this);
         hiscoreHeader.setGravity(Gravity.CENTER);
         hiscoreHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
+        hiscoreHeader.setTextSize(getResources().getDimension(R.dimen.score_screen_sub_header));
 
         if (score > previousScore) {
             hiscoreHeader.setText("You beat your old highscore!");
@@ -162,16 +184,25 @@ public class ScoreScreen extends Activity {
         TextView coinHeader = new TextView(this);
         coinHeader.setGravity(Gravity.CENTER);
         coinHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
-        BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
-        BigInteger Bscore = BigInteger.valueOf(score);
-        Bscore = Bmultiplier.multiply(Bscore);
-        coinHeader.setText("\nCoins\nCoins collected: " + score + "\nMultiplier: x" + multiplier + "\nMultiplied Coins: " + Bscore);
+        coinHeader.setTextSize(getResources().getDimension(R.dimen.score_screen_sub_header));
+        coinHeader.setText("\nCoins");
         mainScoreScreen.addView(coinHeader);
+
+        TextView coinData = new TextView(this);
+        coinData.setGravity(Gravity.CENTER);
+        coinData.setTextColor(ContextCompat.getColor(this, R.color.black));
+
+        BigInteger Bmultiplier = BigInteger.valueOf(multiplier);
+        BigInteger Bscore = BigInteger.valueOf(coinsCollected);
+        Bscore = Bmultiplier.multiply(Bscore);
+        coinData.setText("\nCoins collected: " + coinsCollected + "\nMultiplier: x" + multiplier + "\nMultiplied Coins: " + Bscore);
+        mainScoreScreen.addView(coinData);
 
         //Add medal data
         TextView medalHeader = new TextView(this);
         medalHeader.setGravity(Gravity.CENTER);
         medalHeader.setTextColor(ContextCompat.getColor(this, R.color.black));
+        medalHeader.setTextSize(getResources().getDimension(R.dimen.score_screen_sub_header));
         int maxScore = Math.max(score, previousScore);
 
         if (maxScore >= data.challengeScoreHard()){
@@ -192,6 +223,7 @@ public class ScoreScreen extends Activity {
 
         Button backToMenu = new Button(this);
         backToMenu.setText("Back to level select");
+        backToMenu.setTextSize(getResources().getDimension(R.dimen.score_screen_header));
         backToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,6 +238,7 @@ public class ScoreScreen extends Activity {
     public void addRetryButton(){
         Button retryLevel = new Button(this);
         retryLevel.setText("Retry");
+        retryLevel.setTextSize(getResources().getDimension(R.dimen.score_screen_header));
         retryLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,6 +250,23 @@ public class ScoreScreen extends Activity {
             }
         });
         ll.addView(retryLevel);
+    }
+
+    public void addNextLevelButton(){
+        Button nextLevel = new Button(this);
+        nextLevel.setText("Next Level");
+        nextLevel.setTextSize(getResources().getDimension(R.dimen.score_screen_header));
+        nextLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent levelIntent = new Intent("thomas.GAMEMAIN");
+                levelIntent.putExtra("Level", completedLevel + 1);
+                levelIntent.putExtra("Mode", mode);
+                startActivity(levelIntent);
+                finish();
+            }
+        });
+        ll.addView(nextLevel);
     }
 
     @Override
