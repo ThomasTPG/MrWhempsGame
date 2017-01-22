@@ -52,10 +52,6 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     private void constructor(){
-        storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story1);
-        storyBoardWidth = storyBoard.getWidth();
-        storyBoardHeight = storyBoard.getHeight();
-
         holder = getHolder();
         holder.addCallback(this);
 
@@ -117,29 +113,35 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public void getStoryDetails(){
-        switch (storyNumber){
-            case(1):
+        switch (storyNumber) {
+            case (1):
+                storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story1);
                 storyLength = 6;
                 framesAcross = 3;
                 framesDown = 2;
                 break;
-            case(2):
+            case (2):
+                storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story2);
                 storyLength = 6;
                 framesAcross = 3;
                 framesDown = 2;
                 break;
-            case(3):
+            case (3):
+                storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story3);
                 storyLength = 2;
                 framesAcross = 2;
                 framesDown = 1;
                 break;
-            case(4):
+            case (4):
+                storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story4);
                 storyLength = 2;
                 framesAcross = 2;
                 framesDown = 1;
                 break;
-
         }
+        storyBoardWidth = storyBoard.getWidth();
+        storyBoardHeight = storyBoard.getHeight();
+
     }
 
     public void nextImage(){

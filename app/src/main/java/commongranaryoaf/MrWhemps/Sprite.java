@@ -35,6 +35,10 @@ public class Sprite{
     int lvl16AchPreviousWall = -10;
     String coindatafilename = "Coin_data.txt";
     String coindatafilePath;
+    Rect lowerBoundary;
+    Rect upperBoundary;
+    Bitmap lowerFlames;
+    Bitmap topFlames;
 
 
     int level;
@@ -78,6 +82,8 @@ public class Sprite{
                 break;
 
         }
+        lowerFlames = BitmapFactory.decodeResource(context.getResources(), R.drawable.bottomflame);
+        topFlames = BitmapFactory.decodeResource(context.getResources(),R.drawable.topflames);
         bitmapWidth = character.getWidth();
         bitmapHeight = character.getHeight();
         spriteX =0;
@@ -97,6 +103,9 @@ public class Sprite{
         cWidth = canvas.getWidth();
         cHeight = canvas.getHeight();
         spriteDimensions = cWidth/6;
+        lowerBoundary = new Rect(0, (int) (cHeight * 0.98), cWidth, cHeight);
+        upperBoundary = new Rect(0,0,cWidth,(int)(cHeight*0.02));
+
     }
 
     public void onDraw(Canvas canvas, float xFromTouch){
@@ -112,16 +121,12 @@ public class Sprite{
 
     public void drawLowerBoundary(Canvas canvas){
         //Draw at the bottom of the map to indicate danger
-        Paint redpaint = new Paint();
-        redpaint.setColor(Color.RED);
-        canvas.drawRect(0, (float) (cHeight * 0.98), cWidth, cHeight, redpaint);
+        canvas.drawBitmap(lowerFlames, null, lowerBoundary,null);
     }
 
     public void drawUpperBoundary(Canvas canvas){
         //Draw at the top of the map to indicate danger
-        Paint redpaint = new Paint();
-        redpaint.setColor(Color.RED);
-        canvas.drawRect(0,0,cWidth,(float)(cHeight*0.02),redpaint);
+        canvas.drawBitmap(topFlames, null, upperBoundary,null);
     }
 
     public void move(float xFromTouch){

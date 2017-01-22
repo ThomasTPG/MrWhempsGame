@@ -10,6 +10,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +32,7 @@ public class MainMenu extends Activity {
     String achievementdatafilePath;
     float startTime = 0;
     float timeElapsed = 0;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,9 @@ public class MainMenu extends Activity {
         setContentView(R.layout.main_menu_layout);
         TextView coins = (TextView) findViewById(R.id.cointextmainmenu);
 
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         setUpFiles();
         coins.setText("Coins: " + FileTools.getYourCoins(coindatafilePath));

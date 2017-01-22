@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.math.BigInteger;
 import java.util.logging.Level;
 
@@ -34,11 +37,17 @@ public class ScoreScreen extends Activity {
     int multiplier;
     LevelSpecifics data;
     int achievements;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_layout);
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         mode = getIntent().getIntExtra("Mode", 0);
         ll = (LinearLayout) findViewById(R.id.mainlayoutscorescreen);
         completedLevel = getIntent().getIntExtra("CompletedLevel",1);
@@ -48,6 +57,7 @@ public class ScoreScreen extends Activity {
         bonusLvl = data.isBonusLevel();
         coindatafilePath = getFilesDir() + "/" + coindatafilename;
         multiplier = FileTools.readMultiplierFromFile(coindatafilePath);
+        coinsCollected = getIntent().getIntExtra("Score", 0);
         //If mode = 0, we're on the main game
         if (mode == 0) {
             win = getIntent().getIntExtra("Win", 0);
@@ -56,7 +66,7 @@ public class ScoreScreen extends Activity {
             } else {
                 timeRemaining = 0;
             }
-            coinsCollected = getIntent().getIntExtra("Score", 0);
+
             writeMainScoreScreen();
         }
         //If mode = 1, we're on infinite mode

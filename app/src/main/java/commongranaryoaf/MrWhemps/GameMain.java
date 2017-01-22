@@ -7,6 +7,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 /**
  * Created by Thomas on 05/02/2016.
  */
@@ -16,7 +21,7 @@ public class GameMain extends Activity implements View.OnTouchListener{
     int level;
     TextView scoreboard;
     TextView timer;
-    float timeRemaining;
+    double timeRemaining;
     Thread scoreKeeper;
     boolean running;
     boolean ended;
@@ -28,11 +33,28 @@ public class GameMain extends Activity implements View.OnTouchListener{
     //A boolean which checks if we are on a bonus level
     boolean bonusLevel;
     int achievement = -1;
+    InterstitialAd mInterstitialAd;
+    boolean adShown = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameview_content);
+
+        mInterstitialAd = new InterstitialAd(getApplicationContext());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                quitAfterAd();
+            }
+        });
+
+        requestNewInterstitial();
+
         level = getIntent().getIntExtra("Level", 1);
         // mode =0 is normal, mode = 1 is infinite
         mode = getIntent().getIntExtra("Mode", 0);
@@ -68,12 +90,20 @@ public class GameMain extends Activity implements View.OnTouchListener{
                                 updateScore();
                                 if (lvlTimer.checkTimeUp()){
                                     win = 1;
-                                    gameExit();
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            gameExit();
+                                        }
+                                    });
                                 }
                             }
                         });
                         if(gameView.getLose()){
-                            gameExit();
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    gameExit();
+                                }
+                            });
                         }
 
                     }
@@ -101,12 +131,20 @@ public class GameMain extends Activity implements View.OnTouchListener{
                                 if ((score >= lvlTimer.getScoreLimit())){
                                     win = 1;
                                 }
-                                gameExit();
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        gameExit();
+                                    }
+                                });
                             }
                         }
                         else{
                             if (gameView.getLose()){
-                                gameExit();
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        gameExit();
+                                    }
+                                });
                             }
                         }
                     }
@@ -134,6 +172,14 @@ public class GameMain extends Activity implements View.OnTouchListener{
         timer.setText("Time remaining = " + timeRemaining);
     }
 
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("E7058BEECC773607F44055F079B22F7C")
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
+    }
+
     @Override
     protected void onPause() {
 
@@ -151,6 +197,7 @@ public class GameMain extends Activity implements View.OnTouchListener{
 
 
     private void gameExit(){
+
         final Intent menuIntent;
         System.out.println(mode);
         if (mode == 1){
@@ -159,7 +206,7 @@ public class GameMain extends Activity implements View.OnTouchListener{
         }
         else{
             menuIntent = new Intent("thomas.MAINLEVELSELECT");
-            menuIntent.putExtra("TimeRemaining",timeRemaining);
+            menuIntent.putExtra("TimeRemaining", (float) timeRemaining);
 
         }
         menuIntent.putExtra("Score", score);
@@ -171,13 +218,45 @@ public class GameMain extends Activity implements View.OnTouchListener{
         System.out.println("RUNNING" + running);
 
         if (!ended){
+            ended = true;
             menuIntent.putExtra("Level", level);
             menuIntent.putExtra("Win", win);
-            startActivity(menuIntent);
-            finish();
-            ended = true;
+            if (mInterstitialAd.isLoaded() && !adShown) {
+                adShown = true;
+                mInterstitialAd.show();
+            }
+            else
+            {
+                startActivity(menuIntent);
+                finish();
+            }
         }
 
+    }
+
+    private void quitAfterAd()
+    {
+        final Intent menuIntent;
+        System.out.println(mode);
+        if (mode == 1){
+            menuIntent = new Intent("thomas.INFINITELEVELSELECT");
+
+        }
+        else{
+            menuIntent = new Intent("thomas.MAINLEVELSELECT");
+            menuIntent.putExtra("TimeRemaining",(float) timeRemaining);
+
+        }
+        menuIntent.putExtra("Score", score);
+        getAchievement();
+        menuIntent.putExtra("Achievement", achievement);
+        menuIntent.putExtra("Level", level);
+        menuIntent.putExtra("Win", win);
+
+        gameView.onPause();
+        running = false;
+        startActivity(menuIntent);
+        finish();
     }
 
     @Override
@@ -194,8 +273,10 @@ public class GameMain extends Activity implements View.OnTouchListener{
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy(){
         super.onDestroy();
+        mInterstitialAd.setAdListener(null);
+        mInterstitialAd = null;
     }
 }
 

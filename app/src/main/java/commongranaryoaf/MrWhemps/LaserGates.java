@@ -171,9 +171,9 @@ public class LaserGates {
     public void activateDrone(){
         int randint;
         if (spriteY > screenHeight/2){
-            randint = (int) Math.ceil(Math.random() * 5);
+            randint = (int) Math.ceil(Math.random() * 3);
         } else{
-            randint = (int) Math.ceil(3 + Math.random() * 5);
+            randint = (int) Math.ceil(5 + Math.random() * 3);
         }
 
         if (!drone1running){

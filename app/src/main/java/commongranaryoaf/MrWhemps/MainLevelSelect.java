@@ -3,7 +3,9 @@ package commongranaryoaf.MrWhemps;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,17 +46,22 @@ public class MainLevelSelect extends Activity {
     String achievementfilename = "Achievement_data.txt";
     File achievementdatafile;
     String achievementdatafilePath;
+    ScrollView scrollView;
+    public static int scrollX = 0;
+    public static int scrollY = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
         setUpFiles();
+
         achievementdatafilePath = context.getFilesDir() + "/" + achievementfilename;
         achievementdatafile = new File(achievementdatafilePath);
         achievementMaxCoinsUnlocked = FileTools.readSpecificAchievementFromFile(14,achievementdatafilePath);
         int achievement = getIntent().getIntExtra("Achievement",-1);
         int previousLevel = getIntent().getIntExtra("Level",0);
+        System.err.println("prev" + previousLevel);
         int win = getIntent().getIntExtra("Win",0);
         levelsUnlocked = readLevelFromFile();
         if ((previousLevel == levelsUnlocked)  && win == 1){
@@ -72,6 +82,8 @@ public class MainLevelSelect extends Activity {
                 }
             }
             float timeRemaining = getIntent().getFloatExtra("TimeRemaining",0);
+            System.out.println("TIME REMAINING IS " + timeRemaining);
+
             final Intent scoreIntent = new Intent("thomas.SCORESCREEN");
             scoreIntent.putExtra("Score", score);
             scoreIntent.putExtra("Win",win);
@@ -82,7 +94,17 @@ public class MainLevelSelect extends Activity {
             scoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(scoreIntent);
         }
+
         setUpView();
+
+        //Create the background
+        LinearLayout main_layout = (LinearLayout) findViewById(R.id.level_select_background);
+        main_layout.setBackgroundResource(R.drawable.animated_menu_background);
+
+        AnimationDrawable frameAnimation = (AnimationDrawable) main_layout.getBackground();
+
+        frameAnimation.start();
+
     }
     private void setUpFiles(){
         leveldatafilePath = getFilesDir() + "/" + leveldatafilename;
@@ -97,6 +119,8 @@ public class MainLevelSelect extends Activity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.level_select_content, null);
 
+        scrollView = (ScrollView) v.findViewById(R.id.scrollView1);
+
         // Create a LinearLayout element
         LinearLayout ll = (LinearLayout) v.findViewById(R.id.level_list);
 
@@ -106,9 +130,9 @@ public class MainLevelSelect extends Activity {
 
         for (int ii = 1; ii<= numberOfLevelsShown; ii++){
 
-            addLevelHeader(ll, numberOfLevelsShown,ii);
+            addLevelHeader(ll, numberOfLevelsShown, ii);
             addStoryButton(ll, ii);
-            addLevelButtons(ll,ii);
+            addLevelButtons(ll, ii);
         }
 
         // Display the view
@@ -121,12 +145,10 @@ public class MainLevelSelect extends Activity {
                 final Intent levelIntent = new Intent("thomas.GAMEMAIN");
                 levelIntent.putExtra("Level", 1);
                 startActivity(levelIntent);
-                finish();
                 break;
             case (R.id.backfromlevels):
                 final Intent menuIntent = new Intent("thomas.MAINMENU");
                 startActivity(menuIntent);
-                finish();
             }
         }
 
@@ -194,7 +216,6 @@ public class MainLevelSelect extends Activity {
     public void onBackPressed() {
         final Intent levelIntent = new Intent("thomas.MAINMENU");
         startActivity(levelIntent);
-        finish();
     }
 
     public void addLevelButtons(LinearLayout ll, int ii){
@@ -231,7 +252,6 @@ public class MainLevelSelect extends Activity {
                 levelIntent.putExtra("Level", levelSelected);
                 levelIntent.putExtra("Mode", 0);
                 startActivity(levelIntent);
-                finish();
             }
         });
 
@@ -239,7 +259,7 @@ public class MainLevelSelect extends Activity {
 
 
         RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        buttonParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        buttonParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         newButton.setLayoutParams(buttonParams);
         relativeLayout.addView(newButton);
 
@@ -250,6 +270,10 @@ public class MainLevelSelect extends Activity {
         //Add the level header
         TextView levelHeader = new TextView(this);
         TextView description = new TextView(this);
+        levelHeader.setTextColor(getResources().getColor(R.color.white));
+        description.setTextColor(getResources().getColor(R.color.white));
+        levelHeader.setGravity(Gravity.CENTER_HORIZONTAL);
+        description.setGravity(Gravity.CENTER_HORIZONTAL);
         int progress;
         switch (ii){
             case(1):
@@ -287,7 +311,7 @@ public class MainLevelSelect extends Activity {
 
     public void addBackButton(LinearLayout ll){
         Button backToMenu = new Button(this);
-        backToMenu.setText("Back");
+        backToMenu.setText("Back to menu");
         backToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,17 +322,57 @@ public class MainLevelSelect extends Activity {
     }
 
     public void addStoryButton(LinearLayout ll, int ii){
+        Button startStory = new Button(this);
+        LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        buttonParams.gravity = Gravity.CENTER_HORIZONTAL;
+        startStory.setLayoutParams(buttonParams);
+        startStory.setGravity(Gravity.CENTER_HORIZONTAL);
+        startStory.setBackgroundDrawable(getResources().getDrawable(R.drawable.storybutton));
         switch (ii){
             case (2):
-                Button startStory = new Button(this);
-                startStory.setText("Back");
+                startStory.setText("Chapter 1");
                 startStory.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final Intent storyIntent = new Intent("thomas.STORYMAIN");
                         storyIntent.putExtra("StoryNumber", 1);
                         startActivity(storyIntent);
-                        finish();
+                    }
+                });
+                ll.addView(startStory);
+                break;
+            case (11):
+                startStory.setText("Chapter 2");
+                startStory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Intent storyIntent = new Intent("thomas.STORYMAIN");
+                        storyIntent.putExtra("StoryNumber", 2);
+                        startActivity(storyIntent);
+                    }
+                });
+                ll.addView(startStory);
+                break;
+            case (18):
+                startStory.setText("Chapter 3");
+                startStory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Intent storyIntent = new Intent("thomas.STORYMAIN");
+                        storyIntent.putExtra("StoryNumber", 3);
+                        startActivity(storyIntent);
+                    }
+                });
+                ll.addView(startStory);
+                break;
+            case (24):
+                startStory.setText("Chapter 4");
+                startStory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Intent storyIntent = new Intent("thomas.STORYMAIN");
+                        storyIntent.putExtra("StoryNumber", 4);
+                        startActivity(storyIntent);
                     }
                 });
                 ll.addView(startStory);
@@ -317,6 +381,26 @@ public class MainLevelSelect extends Activity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        scrollX = scrollView.getScrollX();
+        scrollY = scrollView.getScrollY();
+        System.out.println("LOCATION SCROLL" + scrollX);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("LOCATION SCROLL BACK" + scrollX);
+                scrollView.scrollTo(scrollX,scrollY);
+            }
+        });
+
+    }
 }
 
 

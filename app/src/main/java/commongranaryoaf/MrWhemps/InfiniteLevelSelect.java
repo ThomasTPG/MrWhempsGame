@@ -94,6 +94,14 @@ public class InfiniteLevelSelect extends Activity {
 
         setUpView();
 
+        //Create the background
+        LinearLayout main_layout = (LinearLayout) findViewById(R.id.level_select_background);
+        main_layout.setBackgroundResource(R.drawable.animated_menu_background);
+
+        AnimationDrawable frameAnimation = (AnimationDrawable) main_layout.getBackground();
+
+        frameAnimation.start();
+
     }
 
     private void setUpFiles(){
@@ -152,26 +160,6 @@ public class InfiniteLevelSelect extends Activity {
         //Add the levels, level headers etc
 
         for (int ii = 1; ii< levelsUnlocked; ii++){
-            TextView levelHeader = new TextView(this);
-            switch (ii){
-                case(1):
-                    levelHeader.setText("Starting Out");
-                    ll.addView(levelHeader);
-                    break;
-                case(4):
-                    levelHeader.setText("Moving Platforms");
-                    ll.addView(levelHeader);
-                    break;
-                case(8):
-                    levelHeader.setText("Hard Platforms");
-                    ll.addView(levelHeader);
-                    break;
-                case(18):
-                    levelHeader.setText("Drones");
-                    ll.addView(levelHeader);
-                    break;
-            }
-
 
             Button newButton = new Button(this);
             switch(ii){
@@ -183,6 +171,15 @@ public class InfiniteLevelSelect extends Activity {
                     break;
                 case(17):
                     newButton.setText("Level 17: Bonus Level 3");
+                    break;
+                case(23):
+                    newButton.setText("Level 23: Bonus Level 4");
+                    break;
+                case(28):
+                    newButton.setText("Level 28: Bonus Level 5");
+                    break;
+                case(30):
+                    newButton.setText("Level 30: Bonus Level 6");
                     break;
                 default:
                     newButton.setText("Level" + ii);
@@ -213,21 +210,25 @@ public class InfiniteLevelSelect extends Activity {
 
             RelativeLayout.LayoutParams scoreParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             scoreParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+            scoreParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
             score.setLayoutParams(scoreParams);
             relativeLayout.addView(score);
 
             LevelSpecifics challengeScores = new LevelSpecifics(ii);
-            if (readScoreFromFile(ii) >= challengeScores.challengeScoreHard()){
-                //horizontalLayout.setBackgroundResource(R.drawable.gold_background);
+            if (readScoreFromFile(ii) >= challengeScores.challengeScoreHard()) {
+                score.setBackgroundColor(getResources().getColor(R.color.gold));
+                score.setTextColor(getResources().getColor(R.color.black));
                 goldCount++;
-            } else if (readScoreFromFile(ii) >= challengeScores.challengeScoreMedium()){
-                relativeLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
+            } else if (readScoreFromFile(ii) >= challengeScores.challengeScoreMedium()) {
+                score.setBackgroundColor(ContextCompat.getColor(this, R.color.silver));
+                score.setTextColor(getResources().getColor(R.color.black));
                 silverCount++;
             } else if (readScoreFromFile(ii) > challengeScores.challengeScoreEasy()){
-                relativeLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
+                score.setBackgroundColor(ContextCompat.getColor(this, R.color.bronze));
+                score.setTextColor(getResources().getColor(R.color.black));
                 bronzeCount++;
-            } else{
-                relativeLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            } else {
+                score.setTextColor(getResources().getColor(R.color.white));
             }
 
 
@@ -237,8 +238,11 @@ public class InfiniteLevelSelect extends Activity {
         }
 
         bronzeMedals.setText("Bronze: " + bronzeCount);
+        bronzeMedals.setTextColor(getResources().getColor(R.color.black));
         silverMedals.setText("Silver: " + silverCount);
+        silverMedals.setTextColor(getResources().getColor(R.color.black));
         goldMedals.setText("Gold: " + goldCount);
+        goldMedals.setTextColor(getResources().getColor(R.color.black));
 
         // Display the view
         setContentView(v);

@@ -39,9 +39,9 @@ public class  LevelSpecifics {
             case(2):
                 return 400;
             case(3):
-                return 90;
+                return 100;
             case(4):
-                return 120;
+                return 200;
             case(5):
                 return 200;
             case(6):
@@ -80,6 +80,20 @@ public class  LevelSpecifics {
                 return 100;
             case(23):
                 return 500;
+            case(24):
+                return 300;
+            case(25):
+                return 150;
+            case(26):
+                return 150;
+            case(27):
+                return 200;
+            case(28):
+                return 250;
+            case(29):
+                return 100;
+            case(30):
+                return 200;
             default:
                 return 100;
         }
@@ -92,9 +106,9 @@ public class  LevelSpecifics {
             case(2):
                 return 800;
             case(3):
-                return 120;
+                return 150;
             case(4):
-                return 250;
+                return 400;
             case(5):
                 return 400;
             case(6):
@@ -133,6 +147,20 @@ public class  LevelSpecifics {
                 return 200;
             case(23):
                 return 1000;
+            case(24):
+                return 400;
+            case(25):
+                return 250;
+            case(26):
+                return 250;
+            case(27):
+                return 350;
+            case(28):
+                return 500;
+            case(29):
+                return 200;
+            case(30):
+                return 400;
             default:
                 return 100;
         }
@@ -145,9 +173,9 @@ public class  LevelSpecifics {
             case(2):
                 return 1400;
             case(3):
-                return 170;
+                return 200;
             case(4):
-                return 400;
+                return 800;
             case(5):
                 return 650;
             case(6):
@@ -186,6 +214,20 @@ public class  LevelSpecifics {
                 return 300;
             case(23):
                 return 1500;
+            case(24):
+                return 600;
+            case(25):
+                return 400;
+            case(26):
+                return 400;
+            case(27):
+                return 500;
+            case(28):
+                return 900;
+            case(29):
+                return 350;
+            case(30):
+                return 700;
             default:
                 return 100;
         }

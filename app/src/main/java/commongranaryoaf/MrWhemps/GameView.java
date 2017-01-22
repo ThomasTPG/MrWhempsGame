@@ -1,14 +1,18 @@
 package commongranaryoaf.MrWhemps;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -35,6 +39,8 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
     int bgroundDisplacement;
     int backgroundWidth;
     int backgroundHeight;
+    int width;
+    int height;
     Bitmap background1;
     Bitmap background2;
     Bitmap background3;
@@ -44,31 +50,76 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     public GameView(Context context) {
         super(context);
-        constructor();
+        constructor(context);
     }
 
     public GameView(Context context, AttributeSet attrs){
         super(context,attrs);
-        constructor();
+        constructor(context);
     }
 
     public GameView(Context context, AttributeSet attrs, int defStyle){
         super(context, attrs, defStyle);
-        constructor();
+        constructor(context);
     }
 
-    private void constructor(){
+    private void constructor(Context context){
         holder = getHolder();
         holder.addCallback(this);
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        width = size.x;
+        height = size.y;
         initializeBackgrounds();
         thread = new GameThread(this.getContext());
     }
 
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
     public void initializeBackgrounds(){
-        space = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.space3);
-        background1 = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.background1);
-        background2 = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.background2);
-        background3 = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.background3);
+        space = decodeSampledBitmapFromResource(this.getContext().getResources(), R.drawable.space3,width,height);
+        background1 = decodeSampledBitmapFromResource(this.getContext().getResources(), R.drawable.background1,width,height);
+        background2 = decodeSampledBitmapFromResource(this.getContext().getResources(), R.drawable.background2,width,height);
+        background3 = decodeSampledBitmapFromResource(this.getContext().getResources(), R.drawable.background3,width,height);
         backgroundList[0] = background1;
         backgroundList[1] = background2;
         backgroundList[2] = background3;

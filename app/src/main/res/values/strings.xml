@@ -1,4 +1,6 @@
 <resources>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
     <string name="app_name">Mr Whemps</string>
     <string name="action_settings">Settings</string>
     <string name="quitting_warning">Press back again to exit</string>
@@ -27,20 +29,20 @@
     <string name="bronze_costume_description">Melt down your bronze medals to create a classy costume.</string>
     <string name="silver_costume_description">Melt down your silver medals to create a swanky outfit.</string>
     <string name="gold_costume_description">Melt down your gold medals to become a fashion god.</string>
-    <string name="newspaper_costume_description">.</string>
-    <string name="cubist_costume_description">Become at one with Picasso.</string>
-    <string name="cyborg_costume_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
-    <string name="neon_costume_description">Multiplies the number of coins earned in a level by fifty. Stacks with other multipliers.</string>
-    <string name="star_man_costume_description">There\'s a starman waiting in the sky.</string>
+    <string name="newspaper_costume_description">Sneaky and subtle.</string>
+    <string name="cubist_costume_description">A work of art.</string>
+    <string name="cyborg_costume_description">Turn yourself into a cyborg for purely cosmetic reasons.</string>
+    <string name="neon_costume_description">Very vintage.</string>
+    <string name="star_man_costume_description">Be a starman.</string>
     <string name="wealthy_costume_description">Big spender - you have money to burn. Why not buy golden cowboy boots?</string>
     <string name="bronze_cost">50000</string>
     <string name="silver_cost">5000000</string>
     <string name="gold_cost">500000000</string>
-    <string name="newspaper_cost">50000</string>
+    <string name="newspaper_cost">500000</string>
     <string name="cubist_cost">100000</string>
     <string name="cyborg_cost">100000</string>
     <string name="neon_cost">1000000</string>
-    <string name="star_man_cost">50000</string>
+    <string name="star_man_cost">5000000</string>
     <string name="wealthy_cost">999999999999</string>
 
     <string name="bronze1_description">Get 10 bronze medals in infinite mode.</string>

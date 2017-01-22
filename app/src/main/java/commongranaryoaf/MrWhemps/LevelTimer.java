@@ -8,6 +8,7 @@ public class LevelTimer {
     float timeElapsed;
     float timeLimit;
     int level;
+    boolean running = true;
 
     public LevelTimer(int level){
         this.level = level;
@@ -19,9 +20,23 @@ public class LevelTimer {
         startTime = System.nanoTime();
     }
 
-    public float getTimeRemaining(){
-        timeElapsed = (System.nanoTime() - startTime)/1000000000;
-        return (timeLimit - timeElapsed);
+    public void pause()
+    {
+        running = false;
+    }
+
+    public double getTimeRemaining(){
+        if (running)
+        {
+            timeElapsed = (System.nanoTime() - startTime)/1000000000;
+        }
+        else
+        {
+            timeElapsed = Math.max(timeElapsed,0);
+        }
+        double timeRemaining = timeLimit - timeElapsed;
+        timeRemaining = Math.round(timeRemaining*10) / 10.0;
+        return (timeRemaining);
     }
 
     public boolean checkTimeUp(){

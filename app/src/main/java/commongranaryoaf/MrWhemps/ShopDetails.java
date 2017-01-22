@@ -247,6 +247,7 @@ public class ShopDetails extends Activity {
                     buyFromShop.setText("Buy");
                 } else{
                     buyFromShop.setText("Locked");
+                    description.setText("Unlock achievement for details");
                 }
                 break;
             case 1:

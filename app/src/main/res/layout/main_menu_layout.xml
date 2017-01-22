@@ -1,71 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_menu_background"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/startbutton"
-        android:text="Start Main Game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="@dimen/main_menu_font_size"
-        android:onClick="onClick"
-        android:layout_above="@+id/startinfinitebutton"
-        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/startinfinitebutton"
-        android:text="Start Infinite Mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/main_menu_font_size"
-        android:gravity="center"
-        android:onClick="onClick"
-        android:layout_above="@+id/achievementmenu"
-        android:layout_centerHorizontal="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_menu_background"
+        >
 
-    <Button
-        android:id="@+id/settingsmenu"
-        android:text="Settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="@dimen/main_menu_font_size"
-        android:onClick="onClick"
-        android:layout_below="@+id/shopmenu"
-        android:layout_centerHorizontal="true" />/>
+        <Button
+            android:id="@+id/startbutton"
+            android:text="Start Main Game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/main_menu_font_size"
+            android:onClick="onClick"
+            android:layout_above="@+id/startinfinitebutton"
+            android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/shopmenu"
-        android:text="Shop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="onClick"
-        android:textSize="@dimen/main_menu_font_size"
-        android:layout_below="@+id/achievementmenu"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/startinfinitebutton"
+            android:text="Start Infinite Mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/main_menu_font_size"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:layout_above="@+id/achievementmenu"
+            android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/achievementmenu"
-        android:text="Achievements"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="@dimen/main_menu_font_size"
-        android:onClick="onClick"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/settingsmenu"
+            android:text="Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/main_menu_font_size"
+            android:onClick="onClick"
+            android:layout_below="@+id/shopmenu"
+            android:layout_centerHorizontal="true" />/>
 
-    <TextView
-        android:id="@+id/cointextmainmenu"
+        <Button
+            android:id="@+id/shopmenu"
+            android:text="Shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:textSize="@dimen/main_menu_font_size"
+            android:layout_below="@+id/achievementmenu"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/achievementmenu"
+            android:text="Achievements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/main_menu_font_size"
+            android:onClick="onClick"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/cointextmainmenu"
+            android:textColor="@color/gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/main_menu_font_size"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/main_menu_font_size"
-        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+
 
 
 </RelativeLayout>

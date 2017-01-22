@@ -1,9 +1,12 @@
 package commongranaryoaf.MrWhemps;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 /**
  * Created by Thomas on 06/02/2016.
@@ -19,12 +22,16 @@ public class Level1 extends Sprite{
     boolean stageComplete = true;
     String AdviceString;
     int score = 0;
+    Bitmap pointer;
+    int whichPointerInt = 1;
+    int count = 0;
 
     public Level1(Context c, int level){
         super(c, level);
         context = c;
         bgroundColour.setColor(Color.WHITE);
         textColour.setColor(Color.BLACK);
+        pointer = BitmapFactory.decodeResource(context.getResources(), R.drawable.pointer_sheet);
     }
 
     public void onDraw(Canvas c, float x){
@@ -99,7 +106,6 @@ public class Level1 extends Sprite{
         String[] words = AdviceString.split(" ");
         String currentLine = "";
         int y = (int) (5*cHeight/10 - 1.3*(textColour.ascent() + textColour.descent()));
-        System.out.println(stage);
         for (int ii = 0; ii < words.length; ii++){
             if (textColour.measureText(currentLine  + words[ii] + " ") < cWidth/2){
                 currentLine = currentLine + words[ii]+ " ";
@@ -112,6 +118,14 @@ public class Level1 extends Sprite{
         }
         c.drawText(currentLine,cWidth/2,y,textColour);
         y -= 2.6*(textColour.ascent() + textColour.descent());
+        Rect whichPointer = new Rect((pointer.getWidth()/3) * (whichPointerInt - 1), 0, (pointer.getWidth()/3) * (whichPointerInt), pointer.getHeight());
+
+        count ++;
+        if (count > 10)
+        {
+            count = 0;
+            whichPointerInt = ((whichPointerInt + 1) % 3) + 1;
+        }
         switch (stage){
             case(1):
                 c.drawText("Coins remaining: " + Math.max((50 - score)/10, 0), cWidth / 2, y, textColour);
@@ -124,16 +138,19 @@ public class Level1 extends Sprite{
                 break;
             case(4):
                 if ((Math.abs(cHeight*0.75 - spriteDimensions/2 - spriteY) < 3) && (readyToJump)){
-                    c.drawCircle(cWidth / 3, cHeight / 2, cWidth / 20, bgroundColour);
+                    Rect pointer_location = new Rect(cWidth/3 - cWidth/20, cHeight/2 - cWidth/20, cWidth/3 + cWidth/20, cHeight/2 + cWidth/20);
+                    c.drawBitmap(pointer, whichPointer, pointer_location, null);
                 }
                 if ((Math.abs(cHeight*0.5 - spriteDimensions/2 - spriteY) < cHeight*0.1)){
-                    c.drawCircle(cWidth/10, 4*cHeight/10,cWidth/20,bgroundColour);
+                    Rect pointer_location = new Rect(cWidth/10 - cWidth/20, 4*cHeight/10 - cWidth/20, cWidth/10 + cWidth/20, 4*cHeight/10 + cWidth/20);
+                    c.drawBitmap(pointer, whichPointer, pointer_location, null);
                 }
                 c.drawText("Coins remaining: " + Math.max((120-score)/10,0),cWidth/2,y,textColour);
                 break;
             case(5):
                 if ((Math.abs(cHeight*0.5 - spriteDimensions/2 - spriteY) < 3) && (readyToJump)){
-                    c.drawCircle(9*cWidth / 10, cHeight / 20, cWidth / 20, bgroundColour);
+                    Rect pointer_location = new Rect(9*cWidth/10 - cWidth/20, cHeight/20 - cWidth/20, 9*cWidth/10 + cWidth/20, cHeight/20 + cWidth/20);
+                    c.drawBitmap(pointer, whichPointer, pointer_location, null);
                 }
                 c.drawText("Coins remaining: " + Math.max((130-score)/10,0),cWidth/2,y,textColour);
                 break;
@@ -142,10 +159,12 @@ public class Level1 extends Sprite{
                 break;
             case(7):
                 if ((Math.abs(cHeight*0.5 - spriteDimensions/2 - spriteY) < 3) && (readyToJump)){
-                    c.drawCircle(1*cWidth / 10, cHeight / 20, cWidth / 20, bgroundColour);
+                    Rect pointer_location = new Rect(cWidth/10 - cWidth/20, cHeight/20 - cWidth/20, cWidth/10 + cWidth/20, cHeight/20 + cWidth/20);
+                    c.drawBitmap(pointer, whichPointer, pointer_location, null);
                 }
                 if ((Math.abs(cHeight*0.1 - spriteDimensions/2 - spriteY) < cHeight * 0.2)){
-                    c.drawCircle(9*cWidth / 10, cHeight / 20, cWidth / 20, bgroundColour);
+                    Rect pointer_location = new Rect(9*cWidth/10 - cWidth/20, cHeight/20 - cWidth/20, 9*cWidth/10 + cWidth/20, cHeight/20 + cWidth/20);
+                    c.drawBitmap(pointer, whichPointer,pointer_location,null);
                 }
                 c.drawText("Coins remaining: " + Math.max((150-score)/10,0),cWidth/2,y,textColour);
                 break;
