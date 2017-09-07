@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
 /**
  * Created by Thomas on 09/02/2016.
  */
-class GameView extends SurfaceView implements SurfaceHolder.Callback{
+public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     GameThread thread;
     SurfaceHolder holder;

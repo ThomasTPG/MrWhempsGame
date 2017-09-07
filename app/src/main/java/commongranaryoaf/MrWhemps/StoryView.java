@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 /**
  * Created by Thomas on 09/02/2016.
  */
-class StoryView extends SurfaceView implements SurfaceHolder.Callback{
+public class StoryView extends SurfaceView implements SurfaceHolder.Callback{
 
     GameThread thread;
     SurfaceHolder holder;
@@ -137,6 +137,18 @@ class StoryView extends SurfaceView implements SurfaceHolder.Callback{
                 storyLength = 2;
                 framesAcross = 2;
                 framesDown = 1;
+                break;
+            case (5):
+                storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story6);
+                storyLength = 6;
+                framesAcross = 3;
+                framesDown = 2;
+                break;
+            case (6):
+                storyBoard = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.story5);
+                storyLength = 6;
+                framesAcross = 3;
+                framesDown = 2;
                 break;
         }
         storyBoardWidth = storyBoard.getWidth();

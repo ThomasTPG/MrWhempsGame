@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import java.io.File;
+
 /**
  * Created by Thomas on 06/02/2016.
  */
@@ -25,10 +27,21 @@ public class Level1 extends Sprite{
     Bitmap pointer;
     int whichPointerInt = 1;
     int count = 0;
+    String filenameSetting = "settings.txt";
+    File fileSettings;
+    String fileLevelPath;
+    boolean jumpOnRelease = false;
 
     public Level1(Context c, int level){
         super(c, level);
         context = c;
+        fileLevelPath = context.getFilesDir() + "/" + filenameSetting;
+        fileSettings = new File(fileLevelPath);
+        FileTools fileTools = new FileTools();
+        if (fileTools.readSettingsFromFile(fileLevelPath).equals(FileTools.jumpOnRelease))
+        {
+            jumpOnRelease = true;
+        }
         bgroundColour.setColor(Color.WHITE);
         textColour.setColor(Color.BLACK);
         pointer = BitmapFactory.decodeResource(context.getResources(), R.drawable.pointer_sheet);
@@ -69,7 +82,14 @@ public class Level1 extends Sprite{
                 break;
             case(2):
                 Coins.coinTutorial(9,7);
-                AdviceString = "When you take your finger off the screen, Mr Whemps will jump. Collect 5 more coins.";
+                if (jumpOnRelease)
+                {
+                    AdviceString = "When you take your finger off the screen, Mr Whemps will jump. Collect 5 more coins.";
+                }
+                else
+                {
+                    AdviceString = "When you tap your finger on the screen, Mr Whemps will jump. Collect 5 more coins.";
+                }
                 break;
             case(3):
                 Coins.coinTutorial(0,6);
@@ -77,10 +97,10 @@ public class Level1 extends Sprite{
                 break;
             case(4):
                 Coins.coinTutorial(0,3);
-                AdviceString = "You cannot jump through this next type of platform. Jump around it instead.";
+                AdviceString = "You cannot jump through this next type of platform. Jump around it instead. Try tapping quickly on the guide dots.";
                 break;
             case(5):
-                Coins.coinTutorial(9,1);
+                Coins.coinTutorial(5,1);
                 AdviceString = "Jump to get the next coin. Tap on the guide dot.";
                 break;
             case(6):
@@ -88,7 +108,7 @@ public class Level1 extends Sprite{
                 AdviceString = "Jump to get the next coin. Tap on the guide dot.";
                 break;
             case(7):
-                Coins.coinTutorial(9,1);
+                Coins.coinTutorial(5,1);
                 AdviceString = "The top wall has changed and you now can't jump through it. Get the final coin.";
                 break;
             case(8):
@@ -98,6 +118,7 @@ public class Level1 extends Sprite{
     }
 
     public void stageSpecifics(Canvas c){
+        c.drawRect(cWidth / 2 - 5, cHeight / 2 - 5, cWidth, 7 * cHeight / 10 + 5, textColour);
         c.drawRect(cWidth / 2, cHeight / 2, cWidth, 7 * cHeight / 10, bgroundColour);
         textColour.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.tutorial_font_size));
         final float densityMultiplier = context.getResources().getDisplayMetrics().density;
@@ -149,7 +170,7 @@ public class Level1 extends Sprite{
                 break;
             case(5):
                 if ((Math.abs(cHeight*0.5 - spriteDimensions/2 - spriteY) < 3) && (readyToJump)){
-                    Rect pointer_location = new Rect(9*cWidth/10 - cWidth/20, cHeight/20 - cWidth/20, 9*cWidth/10 + cWidth/20, cHeight/20 + cWidth/20);
+                    Rect pointer_location = new Rect(9*cWidth/20 - cWidth/20, cHeight/20 - cWidth/20, 9*cWidth/20 + cWidth/20, cHeight/20 + cWidth/20);
                     c.drawBitmap(pointer, whichPointer, pointer_location, null);
                 }
                 c.drawText("Coins remaining: " + Math.max((130-score)/10,0),cWidth/2,y,textColour);
@@ -163,7 +184,7 @@ public class Level1 extends Sprite{
                     c.drawBitmap(pointer, whichPointer, pointer_location, null);
                 }
                 if ((Math.abs(cHeight*0.1 - spriteDimensions/2 - spriteY) < cHeight * 0.2)){
-                    Rect pointer_location = new Rect(9*cWidth/10 - cWidth/20, cHeight/20 - cWidth/20, 9*cWidth/10 + cWidth/20, cHeight/20 + cWidth/20);
+                    Rect pointer_location = new Rect(9*cWidth/20 - cWidth/20,cHeight/20 - cWidth/20, 9*cWidth/20 + cWidth/20, cHeight/20 + cWidth/20);
                     c.drawBitmap(pointer, whichPointer,pointer_location,null);
                 }
                 c.drawText("Coins remaining: " + Math.max((150-score)/10,0),cWidth/2,y,textColour);

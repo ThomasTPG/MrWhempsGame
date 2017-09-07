@@ -229,6 +229,9 @@ public class Walls {
                 wallSpeed = (float) (1 + (0.4*Math.cbrt(timeElapsed / 100000000)));
                 break;
         }
+        //scale
+        wallSpeed = (int) Math.ceil((double) (wallSpeed * screenHeight)/(double) 720);
+        System.out.println("WIDTH" + screenWidth);
     }
 
     public void createNewWall(){
@@ -296,7 +299,10 @@ public class Walls {
     }
 
     public void moveMovingWalls(){
+        //scale for screen
+        wallXSpeed = (int) Math.ceil((double) (wallXSpeed * screenWidth)/(double) 480);
         double wallXSpeedCorrected = wallXSpeed;
+
         //Correction for only being able to move integer pixels
         XdistanceDifference = XdistanceDifference + wallXSpeedCorrected - Math.floor(wallXSpeedCorrected);
 
@@ -341,8 +347,8 @@ public class Walls {
         yArray[2][2] = 0;
         yArray[2][3] = 20;
         yArray[1][1]= WallTypes.NORMALPARTIAL;
-        yArray[1][2] = 80;
-        yArray[1][3] = 100;
+        yArray[1][2] = 40;
+        yArray[1][3] = 60;
         yArray[0][1]= WallTypes.NORMALPARTIAL;
         yArray[0][2] = 0;
         yArray[0][3] = 0;
