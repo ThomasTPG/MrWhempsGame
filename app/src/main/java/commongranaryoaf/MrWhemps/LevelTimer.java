@@ -71,6 +71,43 @@ public class LevelTimer {
             case(14):
                 timeLimit = 40;
                 break;
+            case(15):
+                timeLimit = 30;
+                break;
+            case(16):
+                timeLimit = 40;
+                break;
+            case(17):
+                timeLimit = 40;
+                break;
+            case(18):
+                timeLimit = 40;
+                break;
+            case(19):
+                timeLimit = 40;
+                break;
+            case(20):
+                timeLimit = 40;
+                break;
+            case(21):
+                timeLimit = 40;
+                break;
+            case(24):
+                timeLimit = 40;
+                break;
+            case(25):
+                timeLimit = 40;
+                break;
+            case(26):
+                timeLimit = 40;
+                break;
+            case(27):
+                timeLimit = 40;
+                break;
+            case(29):
+                timeLimit = 40;
+                break;
+            
             default:
                 timeLimit = 20;
                 break;

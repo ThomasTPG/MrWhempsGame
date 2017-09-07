@@ -25,7 +25,7 @@ public class Achievements extends Activity{
     String achievementfilename = "Achievement_data.txt";
     File achievementdatafile;
     String achievementdatafilePath;
-    int numberOfAch = 21;
+    int numberOfAch = 24;
     int numberUnlocked = 0;
 
     @Override
@@ -40,7 +40,7 @@ public class Achievements extends Activity{
 
         //Create the background
         LinearLayout main_layout = (LinearLayout) findViewById(R.id.achievements_background);
-        main_layout.setBackgroundResource(R.drawable.animated_menu_background);
+        main_layout.setBackgroundResource(R.drawable.animated_shop_background);
 
         AnimationDrawable frameAnimation = (AnimationDrawable) main_layout.getBackground();
 
@@ -303,13 +303,28 @@ public class Achievements extends Activity{
         }
 
         ImageView image4 = (ImageView) findViewById(R.id.achievementView4);
-        image4.setImageResource(R.color.transparent);
+        if (FileTools.readSpecificAchievementFromFile(27,achievementdatafilePath)){
+            Bitmap level10 = produceScaledImage(R.drawable.achievement_10);
+            image4.setImageBitmap(level10);
+        } else{
+            image4.setImageBitmap(locked);
+        }
 
         ImageView image5 = (ImageView) findViewById(R.id.achievementView5);
-        image5.setImageResource(R.color.transparent);
+        if (FileTools.readSpecificAchievementFromFile(28,achievementdatafilePath)){
+            Bitmap level20 = produceScaledImage(R.drawable.achievement_20);
+            image5.setImageBitmap(level20);
+        } else{
+            image5.setImageBitmap(locked);
+        }
 
         ImageView image6 = (ImageView) findViewById(R.id.achievementView6);
-        image6.setImageResource(R.color.transparent);
+        if (FileTools.readSpecificAchievementFromFile(29,achievementdatafilePath)){
+            Bitmap level30 = produceScaledImage(R.drawable.achievement_30);
+            image6.setImageBitmap(level30);
+        } else{
+            image6.setImageBitmap(locked);
+        }
 
         ImageView image7 = (ImageView) findViewById(R.id.achievementView7);
         image7.setImageResource(R.color.transparent);
@@ -428,7 +443,7 @@ public class Achievements extends Activity{
         }
 
         //Count page 3 achievements
-        for (int ii = 24; ii<27;ii++){
+        for (int ii = 24; ii<30;ii++){
             if (FileTools.readSpecificAchievementFromFile(ii,achievementdatafilePath)){
                 numberUnlocked ++;
             }

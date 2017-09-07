@@ -45,7 +45,7 @@ public class GuardDrone {
         cWidth = canvas.getWidth();
         cHeight = canvas.getHeight();
         c = canvas;
-        droneSpeed = 8;
+        droneSpeed = (int) Math.ceil((double) (cWidth + cHeight)/(double) 150);
         spriteDimension = spriteDim;
         droneDimension = cWidth/12;
     }

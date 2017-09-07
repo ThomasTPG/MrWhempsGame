@@ -2,9 +2,11 @@ package commongranaryoaf.MrWhemps;
 
 import android.content.Context;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
@@ -17,6 +19,9 @@ public class FileTools {
     static int achievements = 50;
     static int purchasables = 50;
     static String maxCoins = "999999999999";
+    static String jumpOnUp = "JumpOnUp";
+    static String jumpOnRelease = "JumpOnRelease";
+    static int adRate = 3;
 
     static public void writeToFile(String string, File file ){
         try {
@@ -138,6 +143,64 @@ public class FileTools {
             }
         }
         return -1;
+    }
+
+    static public String readSettingsFromFile(String filePath){
+        String line = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)));
+            line = reader.readLine();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+       return line;
+    }
+
+    static public boolean getIsAdToBeShownFromFile(File file)
+    {
+        boolean toShow = true;
+        if (!file.exists())
+        {
+            FileTools.writeToFile("1", file);
+        }
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            if (line != null)
+            {
+                int ad = Integer.parseInt(line);
+
+                if (ad % adRate != 0)
+                {
+                    toShow = false;
+                }
+                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                writer.write(Integer.toString(ad+1));
+                writer.close();
+                reader.close();
+            }
+            else
+            {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                writer.write(1);
+                writer.close();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            file.delete();
+            FileTools.writeToFile("1", file);
+        }
+        return toShow;
+    }
+
+    static void forceAdNext(File file)
+    {
+        try {
+            file.delete();
+            FileTools.writeToFile("0", file);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     static public String getYourCoins(String filePath){

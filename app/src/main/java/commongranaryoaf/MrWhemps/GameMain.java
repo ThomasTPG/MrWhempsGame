@@ -12,6 +12,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
+import java.io.File;
+
 /**
  * Created by Thomas on 05/02/2016.
  */
@@ -35,6 +37,16 @@ public class GameMain extends Activity implements View.OnTouchListener{
     int achievement = -1;
     InterstitialAd mInterstitialAd;
     boolean adShown = false;
+    LevelSpecifics levelSpecifics;
+    String filenameSetting = "settings.txt";
+    File fileSettings;
+    String fileLevelPath;
+    String filenameAds = "ads.txt";
+    File fileads;
+    String fileadsPath;
+    FileTools fileTools;
+    boolean jumpOnRelease = true;
+    boolean adIsDue = false;
 
 
     @Override
@@ -43,7 +55,7 @@ public class GameMain extends Activity implements View.OnTouchListener{
         setContentView(R.layout.gameview_content);
 
         mInterstitialAd = new InterstitialAd(getApplicationContext());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-9475682357088401/1183500378");
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -56,6 +68,8 @@ public class GameMain extends Activity implements View.OnTouchListener{
         requestNewInterstitial();
 
         level = getIntent().getIntExtra("Level", 1);
+        levelSpecifics = new LevelSpecifics(level);
+
         // mode =0 is normal, mode = 1 is infinite
         mode = getIntent().getIntExtra("Mode", 0);
         LevelSpecifics data = new LevelSpecifics(level);
@@ -70,6 +84,16 @@ public class GameMain extends Activity implements View.OnTouchListener{
         timer = (TextView) findViewById(R.id.timer);
         gameView.setOnTouchListener(this);
         gameView.setLevel(level);
+        fileLevelPath = getFilesDir() + "/" + filenameSetting;
+        fileSettings = new File(fileLevelPath);
+        fileTools = new FileTools();
+        fileadsPath = getFilesDir() + "/" + filenameAds;
+        fileads = new File(fileadsPath);
+        adIsDue = fileTools.getIsAdToBeShownFromFile(fileads);
+        if (!fileTools.readSettingsFromFile(fileLevelPath).equals(FileTools.jumpOnRelease))
+        {
+            jumpOnRelease = false;
+        }
         running = true;
         ended = false;
         System.out.println("Created");
@@ -157,6 +181,26 @@ public class GameMain extends Activity implements View.OnTouchListener{
 
     public void updateScore(){
         score = gameView.getScore();
+        if (mode == 1)
+        {
+            if (score < levelSpecifics.challengeScoreEasy())
+            {
+                scoreboard.setTextColor(getResources().getColor(R.color.white));
+            }
+            else if (score < levelSpecifics.challengeScoreMedium())
+            {
+                scoreboard.setTextColor(getResources().getColor(R.color.bronze));
+            }
+            else if (score < levelSpecifics.challengeScoreHard())
+            {
+                scoreboard.setTextColor(getResources().getColor(R.color.silver));
+            }
+            else
+            {
+                scoreboard.setTextColor(getResources().getColor(R.color.gold));
+            }
+
+        }
         scoreboard.setText("Score: " + score + "   Level: " + level);
     }
 
@@ -221,15 +265,30 @@ public class GameMain extends Activity implements View.OnTouchListener{
             ended = true;
             menuIntent.putExtra("Level", level);
             menuIntent.putExtra("Win", win);
-            if (mInterstitialAd.isLoaded() && !adShown) {
-                adShown = true;
-                mInterstitialAd.show();
+            if (adIsDue)
+            {
+                if (mInterstitialAd.isLoaded() && !adShown) {
+                    adShown = true;
+                    mInterstitialAd.show();
+                    System.out.println("ADZ SHOWN");
+                }
+                else
+                {
+                    System.out.println("ADZ NOT SHOWN");
+                    if (!adShown)
+                    {
+                        fileTools.forceAdNext(fileads);
+                    }
+                    startActivity(menuIntent);
+                    finish();
+                }
             }
             else
             {
                 startActivity(menuIntent);
                 finish();
             }
+
         }
 
     }
@@ -264,8 +323,17 @@ public class GameMain extends Activity implements View.OnTouchListener{
             gameView.setSpriteX(event.getX());
             switch(v.getId()){
                 case (R.id.gameviewsurface):
-                    if (event.getAction() == MotionEvent.ACTION_UP){
-                        gameView.spriteJump();
+                    if (jumpOnRelease)
+                    {
+                        if (event.getAction() == MotionEvent.ACTION_UP){
+                            gameView.spriteJump();
+                        }
+                    }
+                    else
+                    {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN){
+                            gameView.spriteJump();
+                        }
                     }
                     break;
             }

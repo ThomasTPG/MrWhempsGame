@@ -96,7 +96,7 @@ public class InfiniteLevelSelect extends Activity {
 
         //Create the background
         LinearLayout main_layout = (LinearLayout) findViewById(R.id.level_select_background);
-        main_layout.setBackgroundResource(R.drawable.animated_menu_background);
+        main_layout.setBackgroundResource(R.drawable.animated_shop_background);
 
         AnimationDrawable frameAnimation = (AnimationDrawable) main_layout.getBackground();
 

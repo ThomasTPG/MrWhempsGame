@@ -52,7 +52,7 @@ public class Shop extends Activity {
 
         //Create the background
         LinearLayout main_layout = (LinearLayout) findViewById(R.id.shop_background);
-        main_layout.setBackgroundResource(R.drawable.animated_menu_background);
+        main_layout.setBackgroundResource(R.drawable.animated_shop_background);
 
         AnimationDrawable frameAnimation = (AnimationDrawable) main_layout.getBackground();
 
@@ -277,7 +277,7 @@ public class Shop extends Activity {
         //Newspaper costume
         ImageView image4 = (ImageView) findViewById(R.id.imageView4);
         image4.clearColorFilter();
-        if (FileTools.readSpecificAchievementFromFile(26,achievementdatafilePath)){
+        if (FileTools.readSpecificAchievementFromFile(18,achievementdatafilePath)){
             Bitmap newspaper = produceScaledImage(R.drawable.costume_newspaper_button);
             image4.setImageBitmap(newspaper);
         } else{
@@ -346,12 +346,12 @@ public class Shop extends Activity {
 
         }
 
-        //Starman costume
+        //6 arm costume
         ImageView image8 = (ImageView) findViewById(R.id.imageView8);
         image8.clearColorFilter();
-        if (FileTools.readSpecificAchievementFromFile(16,achievementdatafilePath)){
-            Bitmap starman = produceScaledImage(R.drawable.starman_costume_icon);
-            image8.setImageBitmap(starman);
+        if (FileTools.readSpecificAchievementFromFile(29,achievementdatafilePath)){
+            Bitmap sixarms = produceScaledImage(R.drawable.six_arm_icon);
+            image8.setImageBitmap(sixarms);
         } else{
             image8.setImageBitmap(locked);
         }

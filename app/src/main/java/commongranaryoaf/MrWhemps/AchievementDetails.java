@@ -292,6 +292,39 @@ public class AchievementDetails extends Activity {
                         title.setText(this.getString(R.string.great_hurdler_title));
                         description.setText(this.getString(R.string.great_hurdler_description));
                         break;
+                    case (4):
+                        Bitmap oneDown;
+                        if (FileTools.readSpecificAchievementFromFile(27, achievementdatafilePath)) {
+                            oneDown = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievement_10);
+                        } else {
+                            oneDown = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(oneDown);
+                        title.setText(this.getString(R.string.one_saved_title));
+                        description.setText(this.getString(R.string.one_saved_description));
+                        break;
+                    case (5):
+                        Bitmap twoDown;
+                        if (FileTools.readSpecificAchievementFromFile(28, achievementdatafilePath)) {
+                            twoDown = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievement_20);
+                        } else {
+                            twoDown = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(twoDown);
+                        title.setText(this.getString(R.string.two_saved_title));
+                        description.setText(this.getString(R.string.two_saved_description));
+                        break;
+                    case (6):
+                        Bitmap threeDown;
+                        if (FileTools.readSpecificAchievementFromFile(29, achievementdatafilePath)) {
+                            threeDown = BitmapFactory.decodeResource(this.getResources(), R.drawable.achievement_30);
+                        } else {
+                            threeDown = BitmapFactory.decodeResource(this.getResources(), R.drawable.lockedachievement);
+                        }
+                        achievementImage.setImageBitmap(threeDown);
+                        title.setText(this.getString(R.string.three_saved_title));
+                        description.setText(this.getString(R.string.three_saved_description));
+                        break;
 
                 }
         }

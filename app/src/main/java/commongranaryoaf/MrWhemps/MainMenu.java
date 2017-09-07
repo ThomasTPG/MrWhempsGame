@@ -26,6 +26,9 @@ public class MainMenu extends Activity {
 
     String coindatafilename = "Coin_data.txt";
     String achievementfilename = "Achievement_data.txt";
+    String filenameSetting = "settings.txt";
+    File fileSettings;
+    String fileSettingsPath;
     File coindatafile;
     File achievementdatafile;
     String coindatafilePath;
@@ -42,7 +45,9 @@ public class MainMenu extends Activity {
         TextView coins = (TextView) findViewById(R.id.cointextmainmenu);
 
         mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("E7058BEECC773607F44055F079B22F7C")
+                .build();
         mAdView.loadAd(adRequest);
 
         setUpFiles();
@@ -62,6 +67,8 @@ public class MainMenu extends Activity {
         achievementdatafilePath = getFilesDir() + "/" + achievementfilename;
         coindatafile = new File(coindatafilePath);
         achievementdatafile = new File(achievementdatafilePath);
+        fileSettingsPath = getFilesDir() + "/" + filenameSetting;
+        fileSettings = new File(fileSettingsPath);
         checkFileExists();
     }
 
@@ -79,6 +86,10 @@ public class MainMenu extends Activity {
 
         }else{
             System.out.println("File Exists");
+        }
+        if (!fileSettings.exists())
+        {
+            FileTools.writeToFile(FileTools.jumpOnRelease, fileSettings);
         }
     }
 

@@ -39,6 +39,7 @@ public class Sprite{
     Rect upperBoundary;
     Bitmap lowerFlames;
     Bitmap topFlames;
+    private Bitmap topSprite;
 
 
     int level;
@@ -72,7 +73,7 @@ public class Sprite{
                 character = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_costume);
                 break;
             case(7):
-                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.star_man_costume);
+                character = BitmapFactory.decodeResource(context.getResources(), R.drawable.sixarmcostume);
                 break;
             case(8):
                 character = BitmapFactory.decodeResource(context.getResources(), R.drawable.wealthy_costume);
@@ -82,6 +83,7 @@ public class Sprite{
                 break;
 
         }
+        topSprite = Bitmap.createBitmap(character, 0, 0, character.getWidth(), character.getHeight()/3);
         lowerFlames = BitmapFactory.decodeResource(context.getResources(), R.drawable.bottomflame);
         topFlames = BitmapFactory.decodeResource(context.getResources(),R.drawable.topflames);
         bitmapWidth = character.getWidth();
@@ -99,9 +101,12 @@ public class Sprite{
     public void createLevel(Canvas canvas){
         spriteX = canvas.getWidth()/2;
         spriteY = canvas.getHeight()/2;
+        System.out.println(canvas.getHeight() + "HEIGHT");
         levelCreated = true;
         cWidth = canvas.getWidth();
         cHeight = canvas.getHeight();
+        gravity = (int) Math.floor((double)cHeight/(double) 48);
+        jumpFactor = (int) Math.floor((double) cHeight/(double) 144);
         spriteDimensions = cWidth/6;
         lowerBoundary = new Rect(0, (int) (cHeight * 0.98), cWidth, cHeight);
         upperBoundary = new Rect(0,0,cWidth,(int)(cHeight*0.02));

@@ -164,14 +164,14 @@ public class ShopDetails extends Activity {
                         break;
                     case(4):
                         Bitmap newspaper;
-                        if(FileTools.readSpecificAchievementFromFile(26,achievementdatafilePath)){
+                        if(FileTools.readSpecificAchievementFromFile(18,achievementdatafilePath)){
                             newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.costume_newspaper_button);
                         } else{
                             newspaper = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
                         }
                         imageToBuy.setImageBitmap(newspaper);
                         description.setText(this.getString(R.string.newspaper_costume_description));
-                        requirements.setText("Achievements required: " + this.getString(R.string.great_hurdler_title));
+                        requirements.setText("Achievements required: " + this.getString(R.string.under_hard_platform_title));
                         StrCost = this.getString(R.string.newspaper_cost);
                         break;
                     case(5):
@@ -211,16 +211,16 @@ public class ShopDetails extends Activity {
                         StrCost = this.getString(R.string.neon_cost);
                         break;
                     case(8):
-                        Bitmap starman;
-                        if(FileTools.readSpecificAchievementFromFile(16,achievementdatafilePath)){
-                            starman = BitmapFactory.decodeResource(this.getResources(), R.drawable.starman_costume_icon);
+                        Bitmap sixarms;
+                        if(FileTools.readSpecificAchievementFromFile(29,achievementdatafilePath)){
+                            sixarms = BitmapFactory.decodeResource(this.getResources(), R.drawable.six_arm_icon);
                         } else{
-                            starman = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
+                            sixarms = BitmapFactory.decodeResource(this.getResources(), R.drawable.locked_costume);
                         }
-                        imageToBuy.setImageBitmap(starman);
-                        description.setText(this.getString(R.string.star_man_costume_description));
-                        requirements.setText("Achievements required: " + this.getString(R.string.art5_title));
-                        StrCost = this.getString(R.string.star_man_cost);
+                        imageToBuy.setImageBitmap(sixarms);
+                        description.setText(this.getString(R.string.six_arm_costume_description));
+                        requirements.setText("Achievements required: " + this.getString(R.string.three_saved_title));
+                        StrCost = this.getString(R.string.six_arm_cost);
                         break;
                     case(9):
                         Bitmap wealthy;
@@ -327,7 +327,7 @@ public class ShopDetails extends Activity {
                 }
                 break;
             case(15):
-                if (FileTools.readSpecificAchievementFromFile(26,achievementdatafilePath)){
+                if (FileTools.readSpecificAchievementFromFile(18,achievementdatafilePath)){
                     return true;
                 }
                 break;
@@ -347,7 +347,8 @@ public class ShopDetails extends Activity {
                 }
                 break;
             case(19):
-                if (FileTools.readSpecificAchievementFromFile(16,achievementdatafilePath)){
+                //six arms
+                if (FileTools.readSpecificAchievementFromFile(29,achievementdatafilePath)){
                     return true;
                 }
                 break;
