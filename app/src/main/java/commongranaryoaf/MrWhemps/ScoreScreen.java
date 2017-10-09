@@ -14,7 +14,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.games.Games;
+import com.google.example.games.basegameutils.BaseGameActivity;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.util.logging.Level;
 
@@ -38,6 +41,9 @@ public class ScoreScreen extends Activity {
     LevelSpecifics data;
     int achievements;
     private AdView mAdView;
+    String achievementfilename = "Achievement_data.txt";
+    File achievementdatafile;
+    String achievementdatafilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +84,7 @@ public class ScoreScreen extends Activity {
         if (achievements >= 0){
             Toast.makeText(this, getResources().getString(R.string.achievement_announcement), Toast.LENGTH_LONG).show();
         }
+
     }
 
     private void writeMainScoreScreen() {
@@ -220,6 +227,7 @@ public class ScoreScreen extends Activity {
         }
         else if (maxScore >= data.challengeScoreMedium()){
             medalHeader.setText("\nMedal: Silver\nNext medal at score: " + data.challengeScoreHard());
+
         }
         else if (maxScore > data.challengeScoreEasy()){
             medalHeader.setText("\nMedal: Bronze\nNext medal at score: " + data.challengeScoreMedium());
@@ -312,4 +320,6 @@ public class ScoreScreen extends Activity {
         super.onDestroy();
 
     }
+
+
 }

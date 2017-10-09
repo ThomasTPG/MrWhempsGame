@@ -1,35 +1,33 @@
 {
   "project_info": {
-    "project_number": "113547431407",
-    "firebase_url": "https://mr-whemps.firebaseio.com",
-    "project_id": "mr-whemps",
-    "storage_bucket": "mr-whemps.appspot.com"
+    "project_number": "391546171182",
+    "project_id": "mr-whemps-70141841"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:113547431407:android:af27dba1f91fd0e8",
+        "mobilesdk_app_id": "1:391546171182:android:5de8da2041fbb718",
         "android_client_info": {
           "package_name": "commongranaryoaf.MrWhemps"
         }
       },
       "oauth_client": [
         {
-          "client_id": "113547431407-nt3bs0bjqb897luvm2jaob7n71d4hvog.apps.googleusercontent.com",
+          "client_id": "391546171182-71dp6tsb2ukvdac15drnuor0aorgk4ni.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "391546171182-k0lhooo24p4c4lefeg4ins31lg99q6fn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "commongranaryoaf.MrWhemps",
-            "certificate_hash": "E85AAD5C75820307BB546266CD5EB09FE170B7D3"
+            "certificate_hash": "76ab4dffdf8d08f40680cfd02e165f7469ab91f0"
           }
-        },
-        {
-          "client_id": "113547431407-776fnu57kk7b4mr1q3pahqgptjtveasq.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbIQQ5E4dsoAND6N2QxWd4q1DS14J9Hms"
+          "current_key": "AIzaSyAW9VM-8LHgmJT6DlZaA2z3qdvPxCkbwW0"
         }
       ],
       "services": {
@@ -37,16 +35,50 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "113547431407-776fnu57kk7b4mr1q3pahqgptjtveasq.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391546171182:android:5ee67accbd0e5763",
+        "android_client_info": {
+          "package_name": "commongranaryoaf.MrWhemps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391546171182-um5rrromtvffhoat5b5qjufcacr1mv1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "commongranaryoaf.MrWhemps",
+            "certificate_hash": "76ab4dffdf8d08f40680cfd02e165f7469ab91f0"
+          }
+        },
+        {
+          "client_id": "391546171182-71dp6tsb2ukvdac15drnuor0aorgk4ni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW9VM-8LHgmJT6DlZaA2z3qdvPxCkbwW0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
         }
       }
     }

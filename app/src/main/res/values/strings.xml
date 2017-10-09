@@ -1,4 +1,31 @@
 <resources>
+    <string name="app_id">391546171182</string>
+    <string name="ach_bronze1_id">CgkIrt7hz7ILEAIQAA</string>
+    <string name="ach_bronze2_id">CgkIrt7hz7ILEAIQAQ</string>
+    <string name="ach_bronze3_id">CgkIrt7hz7ILEAIQAg</string>
+    <string name="ach_silver1_id">CgkIrt7hz7ILEAIQBA</string>
+    <string name="ach_silver2_id">CgkIrt7hz7ILEAIQBQ</string>
+    <string name="ach_silver3_id">CgkIrt7hz7ILEAIQBg</string>
+    <string name="ach_gold1_id">CgkIrt7hz7ILEAIQBw</string>
+    <string name="ach_gold2_id">CgkIrt7hz7ILEAIQCA</string>
+    <string name="ach_gold3_id">CgkIrt7hz7ILEAIQCQ</string>
+    <string name="ach_oldmaster">CgkIrt7hz7ILEAIQCg</string>
+    <string name="ach_scream">CgkIrt7hz7ILEAIQCw</string>
+    <string name="ach_pop">CgkIrt7hz7ILEAIQDA</string>
+    <string name="ach_cubist">CgkIrt7hz7ILEAIQDQ</string>
+    <string name="ach_starry">CgkIrt7hz7ILEAIQDg</string>
+    <string name="ach_vitr">CgkIrt7hz7ILEAIQDw</string>
+    <string name="ach_under">CgkIrt7hz7ILEAIQEA</string>
+    <string name="ach_coll">CgkIrt7hz7ILEAIQEQ</string>
+    <string name="ach_wealth">CgkIrt7hz7ILEAIQEg</string>
+    <string name="ach_four">CgkIrt7hz7ILEAIQEw</string>
+    <string name="ach_terr">CgkIrt7hz7ILEAIQFA</string>
+    <string name="ach_great">CgkIrt7hz7ILEAIQFQ</string>
+    <string name="ach_one">CgkIrt7hz7ILEAIQFg</string>
+    <string name="ach_two">CgkIrt7hz7ILEAIQFw</string>
+    <string name="ach_three">CgkIrt7hz7ILEAIQGA</string>
+
+
     <string name="banner_ad_unit_id">ca-app-pub-9475682357088401/7776828885</string>
 
     <string name="app_name">Mr. Whemps: Jump</string>

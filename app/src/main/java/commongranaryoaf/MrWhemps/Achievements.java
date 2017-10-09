@@ -420,13 +420,6 @@ public class Achievements extends Activity{
         startActivity(details);
     }
 
-    @Override
-    public void onBackPressed() {
-        final Intent levelIntent = new Intent("thomas.MAINMENU");
-        startActivity(levelIntent);
-        finish();
-    }
-
     public void countAchievements(){
         //Count page 1 achievements
         for (int ii = 0; ii<9;ii++){
